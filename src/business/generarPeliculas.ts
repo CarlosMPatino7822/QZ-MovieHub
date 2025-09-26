@@ -12,10 +12,10 @@ export function generarPeliculas(): Pelicula[] {
             "Inglés",
             ["Español", "Francés", "Italiano"],
             ["Español", "Francés", "Italiano", "Portugués"],
-            "https://upload.wikimedia.org/wikipedia/en/1/1c/Godfather_ver1.jpg", // El Padrino
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy0rVPvCfkTXyDY39-5NmH0gdYa7bU9h8mNQ&s",
             "Drama",
             "Francis Ford Coppola",
-            175
+            175 
         ),
         new Pelicula(
             "Inception",
@@ -25,7 +25,7 @@ export function generarPeliculas(): Pelicula[] {
             "Inglés",
             ["Español", "Francés", "Alemán", "Japonés"],
             ["Español", "Francés", "Alemán", "Japonés", "Coreano"],
-            "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_SY679_.jpg", // Inception
+            "https://play-lh.googleusercontent.com/buKf27Hxendp3tLNpNtP3E-amP0o4yYV-SGKyS2u-Y3GdGRTyfNCIT5WAVs2OudOz6so5K1jtYdAUKI9nw8",
             "Ciencia Ficción",
             "Christopher Nolan",
             148
@@ -38,7 +38,7 @@ export function generarPeliculas(): Pelicula[] {
             "Inglés",
             ["Español", "Francés", "Portugués", "Italiano"],
             ["Español", "Francés", "Portugués", "Italiano", "Alemán"],
-            "https://m.media-amazon.com/images/I/81v+QFQpKPL._AC_SY679_.jpg", // Coco
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiWcgIg5K--d6FU9eD1Qo4VorLa9AaC0eunQ&s",
             "Animación",
             "Lee Unkrich",
             105
@@ -51,7 +51,7 @@ export function generarPeliculas(): Pelicula[] {
             "Coreano",
             ["Inglés", "Español", "Francés"],
             ["Inglés", "Español", "Francés", "Japonés", "Chino"],
-            "https://m.media-amazon.com/images/I/91KkWf50SoL._AC_SY679_.jpg", // Parasite
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTHqERudQeMKbEpp97lLK_unmW1aJZLdP_-A&s",
             "Thriller",
             "Bong Joon-ho",
             132
@@ -64,7 +64,7 @@ export function generarPeliculas(): Pelicula[] {
             "Inglés",
             ["Español", "Francés", "Alemán", "Italiano", "Portugués"],
             ["Español", "Francés", "Alemán", "Italiano", "Portugués", "Japonés"],
-            "https://m.media-amazon.com/images/I/81ExhpBEbHL._AC_SY679_.jpg", // Avengers: Endgame
+            "https://images.justwatch.com/poster/139509768/s166/vengadores-endgame",
             "Acción",
             "Anthony Russo, Joe Russo",
             181
@@ -77,7 +77,7 @@ export function generarPeliculas(): Pelicula[] {
             "Japonés",
             ["Inglés", "Español", "Francés", "Alemán"],
             ["Inglés", "Español", "Francés", "Alemán", "Coreano"],
-            "https://m.media-amazon.com/images/I/51Qvs9i5a%2BL._AC_.jpg", // Spirited Away
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYHhC_D4Go2WigKSjRPW52g8XwIX-mpfSLnA&s",
             "Animación",
             "Hayao Miyazaki",
             125
