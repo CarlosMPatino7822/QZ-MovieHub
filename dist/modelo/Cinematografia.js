@@ -61,20 +61,44 @@ export class Cinematografia {
     }
     // Métodos adicionales
     agregarDoblaje(idioma) {
-        if (!this.doblajes.includes(idioma)) {
+        let existe = false;
+        for (let i = 0; i < this.doblajes.length; i++) {
+            if (this.doblajes[i] === idioma) {
+                existe = true;
+                break;
+            }
+        }
+        if (!existe) {
             this.doblajes.push(idioma);
         }
     }
     agregarSubtitulo(idioma) {
-        if (!this.subtitulos.includes(idioma)) {
+        let existe = false;
+        for (let i = 0; i < this.subtitulos.length; i++) {
+            if (this.subtitulos[i] === idioma) {
+                existe = true;
+                break;
+            }
+        }
+        if (!existe) {
             this.subtitulos.push(idioma);
         }
     }
     tieneDoblaje(idioma) {
-        return this.doblajes.includes(idioma);
+        for (let i = 0; i < this.doblajes.length; i++) {
+            if (this.doblajes[i] === idioma) {
+                return true;
+            }
+        }
+        return false;
     }
     tieneSubtitulo(idioma) {
-        return this.subtitulos.includes(idioma);
+        for (let i = 0; i < this.subtitulos.length; i++) {
+            if (this.subtitulos[i] === idioma) {
+                return true;
+            }
+        }
+        return false;
     }
     resumen() {
         return `${this.nombre} (${this.fechaDePublicacion}) - ${this.descripcion}`;

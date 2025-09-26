@@ -1,10 +1,12 @@
 import { Cinematografia } from "./Cinematografia";
 export class Pelicula extends Cinematografia {
-    constructor(nombre, fechaDePublicacion, restriccionDeEdad, descripcion, idiomaOriginal, doblajes, subtitulos, imagen, genero, director, duracion) {
+    constructor(nombre, fechaDePublicacion, restriccionDeEdad, descripcion, idiomaOriginal, doblajes, subtitulos, imagen, genero, director, duracion, premios = [], actores = []) {
         super(nombre, fechaDePublicacion, restriccionDeEdad, descripcion, idiomaOriginal, doblajes, subtitulos, imagen);
         this.director = director;
         this.duracion = duracion;
         this.genero = genero;
+        this.premios = premios;
+        this.actores = actores;
     }
     // Getters
     getGenero() {
@@ -16,6 +18,12 @@ export class Pelicula extends Cinematografia {
     getDuracion() {
         return this.duracion;
     }
+    getPremios() {
+        return this.premios;
+    }
+    getActores() {
+        return this.actores;
+    }
     // Setters
     setGenero(genero) {
         this.genero = genero;
@@ -26,27 +34,47 @@ export class Pelicula extends Cinematografia {
     setDuracion(duracion) {
         this.duracion = duracion;
     }
-    //metodos aducionales
-    reproducir() {
-        console.log(`Reproduciendo la película: ${this.nombre}`);
+    setPremios(premios) {
+        this.premios = premios;
     }
-    agregarDoblaje(idioma) {
-        if (!this.doblajes.includes(idioma)) {
-            this.doblajes.push(idioma);
+    setActores(actores) {
+        this.actores = actores;
+    }
+    esGanadoraDePremio(premio) {
+        if (!Array.isArray(this.premios))
+            return false;
+        for (let i = 0; i < this.premios.length; i++) {
+            if (this.premios[i] === premio) {
+                return true;
+            }
+        }
+        return false;
+    }
+    agregarActor(actor) {
+        if (!Array.isArray(this.actores)) {
+            this.actores = [];
+        }
+        let existe = false;
+        for (let i = 0; i < this.actores.length; i++) {
+            if (this.actores[i] === actor) {
+                existe = true;
+                break;
+            }
+        }
+        if (!existe) {
+            this.actores.push(actor);
         }
     }
-    agregarSubtitulo(idioma) {
-        if (!this.subtitulos.includes(idioma)) {
-            this.subtitulos.push(idioma);
-        }
+    // Método 3: Devuelve la duración en horas
+    calcularDuracionEnHoras() {
+        return this.duracion / 60;
     }
-    tieneDoblaje(idioma) {
-        return this.doblajes.includes(idioma);
+    // Método 4: Verifica si la película fue dirigida por un director específico
+    esDelDirector(director) {
+        return this.director === director;
     }
-    tieneSubtitulo(idioma) {
-        return this.subtitulos.includes(idioma);
-    }
-    resumen() {
-        return `${this.nombre} (${this.fechaDePublicacion}) - ${this.descripcion}`;
+    // Método 5: Devuelve el género principal de la película
+    obtenerGeneroPrincipal() {
+        return this.genero;
     }
 }

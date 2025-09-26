@@ -2,13 +2,12 @@ import { Pelicula } from "../modelo/Pelicula";
 import { generarPeliculas } from "./generarPeliculas";
 export function MostrarPelicula() {
     console.log("Mostrando peliculas");
-    const contenedor = document.getElementById('contenedor-Peliculas');
+    const contenedor = document.getElementById('contenedor');
     if (contenedor !== null) {
         contenedor.innerHTML = "";
-    }
-    const peliculas = generarPeliculas();
-    peliculas.forEach((pelicula) => {
-        contenedor.innerHTML += `<div class="pelicula">
+        const peliculas = generarPeliculas();
+        peliculas.forEach((pelicula) => {
+            contenedor.innerHTML += `<div class="pelicula">
           <img src="${pelicula.getImagen()}" alt="${pelicula.getNombre()}">
           <div>
             <h2>${pelicula.getNombre()}</h2>
@@ -20,5 +19,6 @@ export function MostrarPelicula() {
             <p><strong>Subtítulos:</strong> ${pelicula.getSubtitulos().join(", ")}</p>
           </div>
         </div>`;
-    });
+        });
+    }
 }

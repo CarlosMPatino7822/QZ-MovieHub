@@ -114,7 +114,14 @@ export class Serie extends Cinematografia {
 
     // 2. Agregar un actor principal
     public agregarActorPrincipal(actor: string): void {
-        if (!this.actoresPrincipales.includes(actor)) {
+        let existe = false;
+        for (let i = 0; i < this.actoresPrincipales.length; i++) {
+            if (this.actoresPrincipales[i] === actor) {
+                existe = true;
+                break;
+            }
+        }
+        if (!existe) {
             this.actoresPrincipales.push(actor);
         }
     }
