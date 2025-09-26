@@ -2,12 +2,18 @@ import { Pelicula } from "../modelo/Pelicula.js";
 import { generarPeliculas } from "./generarPeliculas.js";
 export function MostrarPelicula() {
     console.log("Mostrando peliculas");
-    const contenedor = document.getElementById('contenedor');
-    if (contenedor !== null) {
-        contenedor.innerHTML = "";
-        const peliculas = generarPeliculas();
-        peliculas.forEach((pelicula) => {
-            contenedor.innerHTML += `<div class="pelicula">
+    console.log("sigue el proceso");
+    const contenedor = document.getElementById("contenedor-Peliculas");
+    if (!contenedor) {
+        console.error("No se encontró el contenedor con id='contenedor-Peliculas'");
+        return;
+    }
+    contenedor.innerHTML = "";
+    console.log("Contenedor encontrado");
+    contenedor.innerHTML = "";
+    const peliculas = generarPeliculas();
+    peliculas.forEach((pelicula) => {
+        contenedor.innerHTML += `<div class="pelicula">
           <img src="${pelicula.getImagen()}" alt="${pelicula.getNombre()}">
           <div>
             <h2>${pelicula.getNombre()}</h2>
@@ -19,7 +25,9 @@ export function MostrarPelicula() {
             <p><strong>Subtítulos:</strong> ${pelicula.getSubtitulos().join(", ")}</p>
           </div>
         </div>`;
-        });
+    });
+    if (contenedor != null) {
+        console.log("contenedor llenito");
     }
 }
 // Agregar el evento al botón para mostrar las películas

@@ -12,7 +12,7 @@ export function generarPeliculas(): Pelicula[] {
             "Inglés",
             ["Español", "Francés", "Italiano"],
             ["Español", "Francés", "Italiano", "Portugués"],
-            "/images/el-padrino.jpg",
+            "https://upload.wikimedia.org/wikipedia/en/1/1c/Godfather_ver1.jpg", // El Padrino
             "Drama",
             "Francis Ford Coppola",
             175
@@ -25,7 +25,7 @@ export function generarPeliculas(): Pelicula[] {
             "Inglés",
             ["Español", "Francés", "Alemán", "Japonés"],
             ["Español", "Francés", "Alemán", "Japonés", "Coreano"],
-            "/images/inception.jpg",
+            "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_SY679_.jpg", // Inception
             "Ciencia Ficción",
             "Christopher Nolan",
             148
@@ -38,7 +38,7 @@ export function generarPeliculas(): Pelicula[] {
             "Inglés",
             ["Español", "Francés", "Portugués", "Italiano"],
             ["Español", "Francés", "Portugués", "Italiano", "Alemán"],
-            "/images/coco.jpg",
+            "https://m.media-amazon.com/images/I/81v+QFQpKPL._AC_SY679_.jpg", // Coco
             "Animación",
             "Lee Unkrich",
             105
@@ -51,7 +51,7 @@ export function generarPeliculas(): Pelicula[] {
             "Coreano",
             ["Inglés", "Español", "Francés"],
             ["Inglés", "Español", "Francés", "Japonés", "Chino"],
-            "/images/parasite.jpg",
+            "https://m.media-amazon.com/images/I/91KkWf50SoL._AC_SY679_.jpg", // Parasite
             "Thriller",
             "Bong Joon-ho",
             132
@@ -64,7 +64,7 @@ export function generarPeliculas(): Pelicula[] {
             "Inglés",
             ["Español", "Francés", "Alemán", "Italiano", "Portugués"],
             ["Español", "Francés", "Alemán", "Italiano", "Portugués", "Japonés"],
-            "/images/avengers-endgame.jpg",
+            "https://m.media-amazon.com/images/I/81ExhpBEbHL._AC_SY679_.jpg", // Avengers: Endgame
             "Acción",
             "Anthony Russo, Joe Russo",
             181
@@ -77,7 +77,7 @@ export function generarPeliculas(): Pelicula[] {
             "Japonés",
             ["Inglés", "Español", "Francés", "Alemán"],
             ["Inglés", "Español", "Francés", "Alemán", "Coreano"],
-            "/images/spirited-away.jpg",
+            "https://m.media-amazon.com/images/I/51Qvs9i5a%2BL._AC_.jpg", // Spirited Away
             "Animación",
             "Hayao Miyazaki",
             125
