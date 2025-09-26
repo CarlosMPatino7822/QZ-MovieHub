@@ -1,9 +1,11 @@
+import { Pelicula } from "../modelo/Pelicula";
 export function MostrarPelicula(peliculas: Pelicula[]): void {
     const contenedor = document.getElementById('contenedor-Peliculas');
     if (contenedor !== null) {
         contenedor.innerHTML = "";
     }
     peliculas.forEach((pelicula) => {
+        
         contenedor.innerHTML = `<div class="pelicula">
           <img src="${pelicula.getImagen()}" alt="${pelicula.getNombre()}">
           <div>
