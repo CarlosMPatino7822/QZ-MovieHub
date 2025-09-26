@@ -1,11 +1,12 @@
 import { Pelicula } from "../modelo/Pelicula";
 import { generarPeliculas } from "./generarPeliculas";
-export function MostrarPelicula(): void {
-  console.log("Mostrando peliculas");
-    const contenedor = document.getElementById('contenedor');
+export function MostrarPelicula() {
+    console.log("Mostrando peliculas");
+    const contenedor = document.getElementById('contenedor-Peliculas');
     if (contenedor !== null) {
         contenedor.innerHTML = "";
-        const peliculas: Pelicula[] = generarPeliculas();
+    }
+    const peliculas = generarPeliculas();
     peliculas.forEach((pelicula) => {
         contenedor.innerHTML += `<div class="pelicula">
           <img src="${pelicula.getImagen()}" alt="${pelicula.getNombre()}">
@@ -18,9 +19,6 @@ export function MostrarPelicula(): void {
             <p><strong>Doblajes:</strong> ${pelicula.getDoblajes().join(", ")}</p>
             <p><strong>Subtítulos:</strong> ${pelicula.getSubtitulos().join(", ")}</p>
           </div>
-        </div>`
-
+        </div>`;
     });
-    }
-    
 }
