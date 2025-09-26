@@ -3,8 +3,14 @@ import { generarPeliculas } from "./generarPeliculas.js";
 
 export function MostrarPelicula(): void {
   console.log("Mostrando peliculas");
-  const contenedor = document.getElementById('contenedor');
-  if (contenedor !== null) {
+  console.log("sigue el proceso");
+ const contenedor = document.getElementById("contenedor-Peliculas");
+  if (!contenedor) {
+    console.error("No se encontró el contenedor con id='contenedor-Peliculas'");
+    return;
+  }
+  contenedor.innerHTML = "";
+  console.log("Contenedor encontrado");
     contenedor.innerHTML = "";
     const peliculas: Pelicula[] = generarPeliculas();
     peliculas.forEach((pelicula) => {
@@ -21,6 +27,8 @@ export function MostrarPelicula(): void {
           </div>
         </div>`
     });
+  if (contenedor != null) {
+    console.log("contenedor llenito")
   }
 }
 
