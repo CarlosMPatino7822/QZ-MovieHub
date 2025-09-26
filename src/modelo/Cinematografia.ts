@@ -97,23 +97,47 @@ export class Cinematografia {
     // Métodos adicionales
 
     public agregarDoblaje(idioma: string): void {
-        if (!this.doblajes.includes(idioma)) {
+        let existe = false;
+        for (let i = 0; i < this.doblajes.length; i++) {
+            if (this.doblajes[i] === idioma) {
+                existe = true;
+                break;
+            }
+        }
+        if (!existe) {
             this.doblajes.push(idioma);
         }
     }
 
     public agregarSubtitulo(idioma: string): void {
-        if (!this.subtitulos.includes(idioma)) {
+        let existe = false;
+        for (let i = 0; i < this.subtitulos.length; i++) {
+            if (this.subtitulos[i] === idioma) {
+                existe = true;
+                break;
+            }
+        }
+        if (!existe) {
             this.subtitulos.push(idioma);
         }
     }
 
     public tieneDoblaje(idioma: string): boolean {
-        return this.doblajes.includes(idioma);
+        for (let i = 0; i < this.doblajes.length; i++) {
+            if (this.doblajes[i] === idioma) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public tieneSubtitulo(idioma: string): boolean {
-        return this.subtitulos.includes(idioma);
+        for (let i = 0; i < this.subtitulos.length; i++) {
+            if (this.subtitulos[i] === idioma) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public resumen(): string {
