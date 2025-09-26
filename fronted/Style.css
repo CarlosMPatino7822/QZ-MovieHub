@@ -21,6 +21,11 @@
         -webkit-text-fill-color: transparent; /* para que el texto quede transparente y mostrar el gradiente */
         background-clip: text;
     }
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 30px;
+    }
 
     section {
         background: rgba(255, 255, 255, 0.1);
@@ -104,7 +109,7 @@
             /* Opcional: mejorar la interacción */
             cursor: pointer;
             transition: transform 0.2s ease;
-        }
+    }
     
     .contenedor-busqueda {
         justify-content: center;
@@ -125,4 +130,22 @@
       gap: 10px;           /* espacio entre ellos */
       margin: 10px auto;
       max-width: 400px;
+    }
+
+    /*SECCIÓN DE LOGIN*/
+    .seccion-login {
+        max-width: 600px;
+        height: 450px;
+        margin: 40px auto; /*para centrar*/
+        padding: 3rem;
+    }
+    .formulario-login {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    .seccion-login button {
+        margin-top: 50px;
+    width: 100%;   /* botón ocupa todo el ancho */
     }
