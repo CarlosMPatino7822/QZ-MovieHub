@@ -33,6 +33,7 @@
 
     input {
         padding: 12px; /* espacio dentro del campo de texto */
+        margin-top: 15px; /* espacio encima del input */
         margin-bottom: 15px; /* espacio debajo del input */
         border-radius: 25px;
         background: rgba(255, 255, 255, 0.5);
