@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peliculas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+
+    <section>
+        <h1>Bienvenido a MoviesHub🎬</h1>
+    </section>
+
+    <section>
+        <label>Cédula:</label>
+        <input type="text" id="cedulaLoguear" placeholder="Ingresa tu cédula"> 
+        <br>
+        <label>Contraseña:</label>
+        <input type="password" id="contraseñaLoguear" placeholder="Ingresa tu contraseña">
+        <br>
+        <button onclick="LoguearUser()">Iniciar Sesión</button>
+    </section>
+
+    <script type="module" src="../dist/business/MostrarPelicula.js"></script>
+    <script type="module" src="../dist/business/generarPeliculas.js"></script>
+    <script type="module" src="../dist/modelo/Pelicula.js"></script>
+
+</body>
+
+</html>
