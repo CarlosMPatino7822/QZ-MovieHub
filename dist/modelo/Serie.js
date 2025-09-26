@@ -1,33 +1,6 @@
-import {Cinematografia} from "./Cinematografia.js";
-
+import { Cinematografia } from "./Cinematografia.js";
 export class Serie extends Cinematografia {
-    capitulos: string[];
-    temporadas: number;
-    creador: string;
-    genero: string;
-    actoresPrincipales: string[];
-    duracionPromedioCapitulo: number;
-    calificacion: number;
-    estado: string;
-
-    constructor(
-        nombre: string,
-        fechaDePublicacion: string,
-        restriccionDeEdad: string,
-        descripcion: string,
-        idiomaOriginal: string,
-        doblajes: string[],
-        subtitulos: string[],
-        imagen: string,
-        capitulos: string[],
-        temporadas: number,
-        creador: string,
-        genero: string,
-        actoresPrincipales: string[],
-        duracionPromedioCapitulo: number,
-        calificacion: number,
-        estado: string
-    ) {
+    constructor(nombre, fechaDePublicacion, restriccionDeEdad, descripcion, idiomaOriginal, doblajes, subtitulos, imagen, capitulos, temporadas, creador, genero, actoresPrincipales, duracionPromedioCapitulo, calificacion, estado) {
         super(nombre, fechaDePublicacion, restriccionDeEdad, descripcion, idiomaOriginal, doblajes, subtitulos, imagen);
         this.capitulos = capitulos;
         this.temporadas = temporadas;
@@ -38,82 +11,63 @@ export class Serie extends Cinematografia {
         this.calificacion = calificacion;
         this.estado = estado;
     }
-
     // Getters
-    public getCapitulos(): string[] {
+    getCapitulos() {
         return this.capitulos;
     }
-
-    public getTemporadas(): number {
+    getTemporadas() {
         return this.temporadas;
     }
-
-    public getCreador(): string {
+    getCreador() {
         return this.creador;
     }
-
-    public getGenero(): string {
+    getGenero() {
         return this.genero;
     }
-
-    public getActoresPrincipales(): string[] {
+    getActoresPrincipales() {
         return this.actoresPrincipales;
     }
-
-    public getDuracionPromedioCapitulo(): number {
+    getDuracionPromedioCapitulo() {
         return this.duracionPromedioCapitulo;
     }
-
-    public getCalificacion(): number {
+    getCalificacion() {
         return this.calificacion;
     }
-
-    public getEstado(): string {
+    getEstado() {
         return this.estado;
     }
-
     // Setters
-    public setCapitulos(capitulos: string[]): void {
+    setCapitulos(capitulos) {
         this.capitulos = capitulos;
     }
-
-    public setTemporadas(temporadas: number): void {
+    setTemporadas(temporadas) {
         this.temporadas = temporadas;
     }
-
-    public setCreador(creador: string): void {
+    setCreador(creador) {
         this.creador = creador;
     }
-
-    public setGenero(genero: string): void {
+    setGenero(genero) {
         this.genero = genero;
     }
-
-    public setActoresPrincipales(actores: string[]): void {
+    setActoresPrincipales(actores) {
         this.actoresPrincipales = actores;
     }
-
-    public setDuracionPromedioCapitulo(duracion: number): void {
+    setDuracionPromedioCapitulo(duracion) {
         this.duracionPromedioCapitulo = duracion;
     }
-
-    public setCalificacion(calificacion: number): void {
+    setCalificacion(calificacion) {
         this.calificacion = calificacion;
     }
-
-    public setEstado(estado: string): void {
+    setEstado(estado) {
         this.estado = estado;
     }
-
     // Métodos adicionales
-
     // 1. Agregar un capítulo
-    public agregarCapitulo(nombreCapitulo: string): void {
+    agregarCapitulo(nombreCapitulo) {
         this.capitulos.push(nombreCapitulo);
     }
-
     // 2. Agregar un actor principal
-    public agregarActorPrincipal(actor: string): void {
+    agregarActorPrincipal(actor) {
         let existe = false;
         for (let i = 0; i < this.actoresPrincipales.length; i++) {
             if (this.actoresPrincipales[i] === actor) {
@@ -125,19 +79,16 @@ export class Serie extends Cinematografia {
             this.actoresPrincipales.push(actor);
         }
     }
-
     // 3. Cambiar el estado de la serie
-    public cambiarEstado(nuevoEstado: string): void {
+    cambiarEstado(nuevoEstado) {
         this.estado = nuevoEstado;
     }
-
     // 4. Calificar la serie (actualiza la calificación promedio)
-    public actualizarCalificacion(nuevaCalificacion: number): void {
+    actualizarCalificacion(nuevaCalificacion) {
         this.calificacion = (this.calificacion + nuevaCalificacion) / 2;
     }
-
     // 5. Obtener resumen de la serie
-    public resumenSerie(): string {
+    resumenSerie() {
         return `${this.nombre} (${this.temporadas} temporadas) - ${this.genero}. Estado: ${this.estado}`;
     }
 }

@@ -1,8 +1,11 @@
-import {Cinematografia} from "./Cinematografia";
+import {Cinematografia} from "./Cinematografia.js";
 export class Pelicula extends Cinematografia {
     genero: string;
     director: string;
     duracion: number;
+    premios: string[];
+    actores: string[];
+
     constructor(
         nombre: string,
         fechaDePublicacion: string,
@@ -14,7 +17,9 @@ export class Pelicula extends Cinematografia {
         imagen: string,
         genero: string, 
         director: string,
-        duracion: number
+        duracion: number,
+        premios: string[] = [],
+        actores: string[] = []
     ) {
         super(
             nombre,
@@ -25,12 +30,14 @@ export class Pelicula extends Cinematografia {
             doblajes,
             subtitulos,
             imagen
-
         );
-            this.director = director;
-            this.duracion = duracion;
-            this.genero = genero;
+        this.director = director;
+        this.duracion = duracion;
+        this.genero = genero;
+        this.premios = premios;
+        this.actores = actores;
     }
+
     // Getters
     public getGenero(): string {
         return this.genero;
@@ -42,6 +49,14 @@ export class Pelicula extends Cinematografia {
 
     public getDuracion(): number {
         return this.duracion;
+    }
+
+    public getPremios(): string[] {
+        return this.premios;
+    }
+
+    public getActores(): string[] {
+        return this.actores;
     }
 
     // Setters
@@ -57,35 +72,52 @@ export class Pelicula extends Cinematografia {
         this.duracion = duracion;
     }
 
-    
-
-    //metodos aducionales
-    reproducir(): void {
-        console.log(`Reproduciendo la película: ${this.nombre}`);
+    public setPremios(premios: string[]): void {
+        this.premios = premios;
     }
-    public agregarDoblaje(idioma: string): void {
-        if (!this.doblajes.includes(idioma)) {
-            this.doblajes.push(idioma);
+
+    public setActores(actores: string[]): void {
+        this.actores = actores;
+    }
+
+    public esGanadoraDePremio(premio: string): boolean {
+    if (!Array.isArray(this.premios)) return false;
+    for (let i = 0; i < this.premios.length; i++) {
+        if (this.premios[i] === premio) {
+            return true;
         }
     }
+    return false;
+}
 
-    public agregarSubtitulo(idioma: string): void {
-        if (!this.subtitulos.includes(idioma)) {
-            this.subtitulos.push(idioma);
+public agregarActor(actor: string): void {
+    if (!Array.isArray(this.actores)) {
+        this.actores = [];
+    }
+    let existe = false;
+    for (let i = 0; i < this.actores.length; i++) {
+        if (this.actores[i] === actor) {
+            existe = true;
+            break;
         }
     }
+    if (!existe) {
+        this.actores.push(actor);
+    }
+}
 
-    public tieneDoblaje(idioma: string): boolean {
-        return this.doblajes.includes(idioma);
+    // Método 3: Devuelve la duración en horas
+    public calcularDuracionEnHoras(): number {
+        return this.duracion / 60;
     }
 
-    public tieneSubtitulo(idioma: string): boolean {
-        return this.subtitulos.includes(idioma);
+    // Método 4: Verifica si la película fue dirigida por un director específico
+    public esDelDirector(director: string): boolean {
+        return this.director === director;
     }
 
-    public resumen(): string {
-        return `${this.nombre} (${this.fechaDePublicacion}) - ${this.descripcion}`;
+    // Método 5: Devuelve el género principal de la película
+    public obtenerGeneroPrincipal(): string {
+        return this.genero;
     }
-
-    
 }

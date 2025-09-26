@@ -1,5 +1,5 @@
 
-import { Pelicula } from "../modelo/Pelicula";
+import { Pelicula } from "../modelo/Pelicula.js";
 
 // Función para generar películas
 export function generarPeliculas(): Pelicula[] {

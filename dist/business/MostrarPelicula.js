@@ -1,14 +1,13 @@
 import { Pelicula } from "../modelo/Pelicula.js";
 import { generarPeliculas } from "./generarPeliculas.js";
-
-export function MostrarPelicula(): void {
-  console.log("Mostrando peliculas");
-  const contenedor = document.getElementById('contenedor');
-  if (contenedor !== null) {
-    contenedor.innerHTML = "";
-    const peliculas: Pelicula[] = generarPeliculas();
-    peliculas.forEach((pelicula) => {
-      contenedor.innerHTML += `<div class="pelicula">
+export function MostrarPelicula() {
+    console.log("Mostrando peliculas");
+    const contenedor = document.getElementById('contenedor');
+    if (contenedor !== null) {
+        contenedor.innerHTML = "";
+        const peliculas = generarPeliculas();
+        peliculas.forEach((pelicula) => {
+            contenedor.innerHTML += `<div class="pelicula">
           <img src="${pelicula.getImagen()}" alt="${pelicula.getNombre()}">
           <div>
             <h2>${pelicula.getNombre()}</h2>
@@ -19,17 +18,16 @@ export function MostrarPelicula(): void {
             <p><strong>Doblajes:</strong> ${pelicula.getDoblajes().join(", ")}</p>
             <p><strong>Subtítulos:</strong> ${pelicula.getSubtitulos().join(", ")}</p>
           </div>
-        </div>`
-    });
-  }
+        </div>`;
+        });
+    }
 }
-
 // Agregar el evento al botón para mostrar las películas
 document.addEventListener('DOMContentLoaded', () => {
-  const btnCargar = document.getElementById('btn-cargar');
-  if (btnCargar) {
-    btnCargar.addEventListener('click', () => {
-      MostrarPelicula();
-    });
-  }
+    const btnCargar = document.getElementById('btn-cargar');
+    if (btnCargar) {
+        btnCargar.addEventListener('click', () => {
+            MostrarPelicula();
+        });
+    }
 });

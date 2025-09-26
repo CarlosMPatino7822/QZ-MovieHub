@@ -1,23 +1,5 @@
 export class Cinematografia {
-    nombre: string;
-    fechaDePublicacion: string;
-    restriccionDeEdad: string;
-    descripcion: string;
-    idiomaOriginal: string;
-    doblajes: string[];
-    subtitulos: string[];
-    imagen: string;
-
-    constructor(
-        nombre: string,
-        fechaDePublicacion: string,
-        restriccionDeEdad: string,
-        descripcion: string,
-        idiomaOriginal: string,
-        doblajes: string[],
-        subtitulos: string[],
-        imagen: string
-    ) {
+    constructor(nombre, fechaDePublicacion, restriccionDeEdad, descripcion, idiomaOriginal, doblajes, subtitulos, imagen) {
         this.nombre = nombre;
         this.fechaDePublicacion = fechaDePublicacion;
         this.restriccionDeEdad = restriccionDeEdad;
@@ -27,76 +9,58 @@ export class Cinematografia {
         this.subtitulos = subtitulos;
         this.imagen = imagen;
     }
-
     // Getters
-    public getNombre(): string {
+    getNombre() {
         return this.nombre;
     }
-
-    public getFechaDePublicacion(): string {
+    getFechaDePublicacion() {
         return this.fechaDePublicacion;
     }
-
-    public getRestriccionDeEdad(): string {
+    getRestriccionDeEdad() {
         return this.restriccionDeEdad;
     }
-
-    public getDescripcion(): string {
+    getDescripcion() {
         return this.descripcion;
     }
-
-    public getIdiomaOriginal(): string {
+    getIdiomaOriginal() {
         return this.idiomaOriginal;
     }
-
-    public getDoblajes(): string[] {
+    getDoblajes() {
         return this.doblajes;
     }
-
-    public getSubtitulos(): string[] {
+    getSubtitulos() {
         return this.subtitulos;
     }
-
-    public getImagen(): string {
+    getImagen() {
         return this.imagen;
     }
-
     // Setters
-    public setNombre(nombre: string): void {
+    setNombre(nombre) {
         this.nombre = nombre;
     }
-
-    public setFechaDePublicacion(fecha: string): void {
+    setFechaDePublicacion(fecha) {
         this.fechaDePublicacion = fecha;
     }
-
-    public setRestriccionDeEdad(restriccion: string): void {
+    setRestriccionDeEdad(restriccion) {
         this.restriccionDeEdad = restriccion;
     }
-
-    public setDescripcion(descripcion: string): void {
+    setDescripcion(descripcion) {
         this.descripcion = descripcion;
     }
-
-    public setIdiomaOriginal(idioma: string): void {
+    setIdiomaOriginal(idioma) {
         this.idiomaOriginal = idioma;
     }
-
-    public setDoblajes(doblajes: string[]): void {
+    setDoblajes(doblajes) {
         this.doblajes = doblajes;
     }
-
-    public setSubtitulos(subtitulos: string[]): void {
+    setSubtitulos(subtitulos) {
         this.subtitulos = subtitulos;
     }
-
-    public setImagen(imagen: string): void {
+    setImagen(imagen) {
         this.imagen = imagen;
     }
-
     // Métodos adicionales
-
-    public agregarDoblaje(idioma: string): void {
+    agregarDoblaje(idioma) {
         let existe = false;
         for (let i = 0; i < this.doblajes.length; i++) {
             if (this.doblajes[i] === idioma) {
@@ -108,8 +72,7 @@ export class Cinematografia {
             this.doblajes.push(idioma);
         }
     }
-
-    public agregarSubtitulo(idioma: string): void {
+    agregarSubtitulo(idioma) {
         let existe = false;
         for (let i = 0; i < this.subtitulos.length; i++) {
             if (this.subtitulos[i] === idioma) {
@@ -121,8 +84,7 @@ export class Cinematografia {
             this.subtitulos.push(idioma);
         }
     }
-
-    public tieneDoblaje(idioma: string): boolean {
+    tieneDoblaje(idioma) {
         for (let i = 0; i < this.doblajes.length; i++) {
             if (this.doblajes[i] === idioma) {
                 return true;
@@ -130,8 +92,7 @@ export class Cinematografia {
         }
         return false;
     }
-
-    public tieneSubtitulo(idioma: string): boolean {
+    tieneSubtitulo(idioma) {
         for (let i = 0; i < this.subtitulos.length; i++) {
             if (this.subtitulos[i] === idioma) {
                 return true;
@@ -139,8 +100,7 @@ export class Cinematografia {
         }
         return false;
     }
-
-    public resumen(): string {
+    resumen() {
         return `${this.nombre} (${this.fechaDePublicacion}) - ${this.descripcion}`;
     }
 }
