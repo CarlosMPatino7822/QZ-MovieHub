@@ -1,5 +1,5 @@
-import { Pelicula } from "../modelo/Pelicula";
-import { generarPeliculas } from "./generarPeliculas";
+import { Pelicula } from "../modelo/Pelicula.js";
+import { generarPeliculas } from "./generarPeliculas.js";
 export function MostrarPelicula() {
     console.log("Mostrando peliculas");
     const contenedor = document.getElementById('contenedor');
@@ -22,3 +22,12 @@ export function MostrarPelicula() {
         });
     }
 }
+// Agregar el evento al botón para mostrar las películas
+document.addEventListener('DOMContentLoaded', () => {
+    const btnCargar = document.getElementById('btn-cargar');
+    if (btnCargar) {
+        btnCargar.addEventListener('click', () => {
+            MostrarPelicula();
+        });
+    }
+});

@@ -1,4 +1,4 @@
-import {Cinematografia} from "./Cinematografia";
+import {Cinematografia} from "./Cinematografia.js";
 export class Pelicula extends Cinematografia {
     genero: string;
     director: string;

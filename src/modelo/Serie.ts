@@ -1,4 +1,4 @@
-import {Cinematografia} from "./Cinematografia";
+import {Cinematografia} from "./Cinematografia.js";
 
 export class Serie extends Cinematografia {
     capitulos: string[];

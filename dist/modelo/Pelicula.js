@@ -1,4 +1,4 @@
-import { Cinematografia } from "./Cinematografia";
+import { Cinematografia } from "./Cinematografia.js";
 export class Pelicula extends Cinematografia {
     constructor(nombre, fechaDePublicacion, restriccionDeEdad, descripcion, idiomaOriginal, doblajes, subtitulos, imagen, genero, director, duracion, premios = [], actores = []) {
         super(nombre, fechaDePublicacion, restriccionDeEdad, descripcion, idiomaOriginal, doblajes, subtitulos, imagen);
