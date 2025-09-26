@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Peliculas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Style.css">
 </head>
+
 <body>
 
-    <div class="pelicula">
+    <section>
+        <button class="cuenta" onclick="IniciarSesion()"><i
+                class="fa-chisel fa-regular fa-circle-user fa-xl"></i></button>
+        <h1>MoviesHub 🎬</h1>
+        <div class="pelicula">
+            <input type="text" id="filtrar" placeholder="🔎Buscar pelicula por nombre">
+            <button id="btn-filtrar">Buscar</button>
+            <button id="btn-cargar">Cargar Peliculas</button><br>
+            <p id="contenedor-Peliculas"> si</p>
+
+        </div>
+    </section>
+
     <script type="module" src="../dist/business/MostrarPelicula.js"></script>
     <script type="module" src="../dist/business/generarPeliculas.js"></script>
     <script type="module" src="../dist/modelo/Pelicula.js"></script>
-    <header>
-        <h1>Movie Hub</h1>
-        <p id="contenedor-Peliculas"> si</p>
-        <button id="btn-cargar">Cargar Peliculas</button>
-    </header>
-    </div>
-    
+
 </body>
+
 </html>
