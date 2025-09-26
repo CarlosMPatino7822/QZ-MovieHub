@@ -6,8 +6,7 @@
 
     body {
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        background: #CDB0AB;
-        background: radial-gradient(circle, rgba(205, 176, 171, 1) 0%, rgba(30, 115, 135, 1) 100%);
+        background: radial-gradient(circle, rgb(214, 168, 182) 0%, rgba(30, 115, 135, 1) 100%);
         color: white; /*color texto por defecto*/ 
         padding: 20px; /* espaciado interno */
         font-size: 16px;
