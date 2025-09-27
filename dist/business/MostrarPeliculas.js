@@ -14,7 +14,9 @@ export function MostrarPelicula() {
     const peliculas = generarPeliculas();
     peliculas.forEach((pelicula) => {
         contenedor.innerHTML += `<div class="pelicula">
-          <img src="${pelicula.getImagen()}" alt="${pelicula.getNombre()}">
+          <a href="detalle.html" target="_blank">
+            <img src="${pelicula.getImagen()}" alt="${pelicula.getNombre()}">
+          </a>
           <div>
             <h2>${pelicula.getNombre()}</h2>
             <p><strong>Fecha de publicación:</strong> ${pelicula.getFechaDePublicacion()}</p>
@@ -23,6 +25,7 @@ export function MostrarPelicula() {
             <p><strong>Idioma original:</strong> ${pelicula.getIdiomaOriginal()}</p>
             <p><strong>Doblajes:</strong> ${pelicula.getDoblajes().join(", ")}</p>
             <p><strong>Subtítulos:</strong> ${pelicula.getSubtitulos().join(", ")}</p>
+            <button onclick="window.open('detalle.html', '_blank')">Ver detalles</button>
           </div>
         </div>`;
     });

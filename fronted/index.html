@@ -12,19 +12,20 @@
 <body>
 
     <section>
-        <button class="cuenta" onclick="IniciarSesion()"><i
+        <button class="cuenta" id="btn-iniciarSesion"><i
                 class="fa-chisel fa-regular fa-circle-user fa-xl"></i></button>
         <h1>MoviesHub 🎬</h1>
-        <div class="pelicula">
-            <input type="text" id="filtrar" placeholder="🔎Buscar pelicula por nombre">
-            <button id="btn-filtrar">Buscar</button>
-            <button id="btn-cargar">Cargar Peliculas</button><br>
-            <p id="contenedor-Peliculas"> si</p>
 
-        </div>
+        <input type="text" id="filtrar" placeholder="🔎Buscar pelicula por nombre">
+        <button id="btn-filtrar">Buscar</button>
+        <button id="btn-cargar">Cargar Peliculas</button><br>
+
+    </section>
+    <section>
+        <p id="contenedor-Peliculas"></p>
     </section>
 
-    <script type="module" src="../dist/business/MostrarPelicula.js"></script>
+    <script type="module" src="../dist/business/MostrarPeliculas.js"></script>
     <script type="module" src="../dist/business/generarPeliculas.js"></script>
     <script type="module" src="../dist/modelo/Pelicula.js"></script>
 

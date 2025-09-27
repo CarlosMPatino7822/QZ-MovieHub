@@ -3,13 +3,21 @@ import { generarPeliculas } from "./generarPeliculas.js";
 
 export function MostrarPelicula(): void {
   console.log("Mostrando peliculas");
-  const contenedor = document.getElementById('contenedor');
-  if (contenedor !== null) {
+  console.log("sigue el proceso");
+ const contenedor = document.getElementById("contenedor-Peliculas");
+  if (!contenedor) {
+    console.error("No se encontró el contenedor con id='contenedor-Peliculas'");
+    return;
+  }
+  contenedor.innerHTML = "";
+  console.log("Contenedor encontrado");
     contenedor.innerHTML = "";
     const peliculas: Pelicula[] = generarPeliculas();
     peliculas.forEach((pelicula) => {
       contenedor.innerHTML += `<div class="pelicula">
-          <img src="${pelicula.getImagen()}" alt="${pelicula.getNombre()}">
+          <a href="detalle.html" target="_blank">
+            <img src="${pelicula.getImagen()}" alt="${pelicula.getNombre()}">
+          </a>
           <div>
             <h2>${pelicula.getNombre()}</h2>
             <p><strong>Fecha de publicación:</strong> ${pelicula.getFechaDePublicacion()}</p>
@@ -18,9 +26,12 @@ export function MostrarPelicula(): void {
             <p><strong>Idioma original:</strong> ${pelicula.getIdiomaOriginal()}</p>
             <p><strong>Doblajes:</strong> ${pelicula.getDoblajes().join(", ")}</p>
             <p><strong>Subtítulos:</strong> ${pelicula.getSubtitulos().join(", ")}</p>
+            <button onclick="window.open('detalle.html', '_blank')">Ver detalles</button>
           </div>
         </div>`
     });
+  if (contenedor != null) {
+    console.log("contenedor llenito")
   }
 }
 
