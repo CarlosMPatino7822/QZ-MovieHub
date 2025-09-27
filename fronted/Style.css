@@ -5,7 +5,7 @@
     }
 
     body {
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         background: radial-gradient(circle, rgb(214, 168, 182) 0%, rgba(30, 115, 135, 1) 100%);
         color: white; /*color texto por defecto*/ 
         padding: 20px; /* espaciado interno */
@@ -20,6 +20,7 @@
         -webkit-text-fill-color: transparent; /* para que el texto quede transparente y mostrar el gradiente */
         background-clip: text;
     }
+    
     h2 {
         text-align: center;
         margin-bottom: 30px;
@@ -138,7 +139,7 @@
         margin: 40px auto; /*para centrar*/
         padding: 3rem;
     }
-    .miCuenta {
+    .formulario-login {
         display: flex;
         flex-direction: column;
         align-items: center;
