@@ -20,6 +20,7 @@
         -webkit-text-fill-color: transparent; /* para que el texto quede transparente y mostrar el gradiente */
         background-clip: text;
     }
+    
     h2 {
         text-align: center;
         margin-bottom: 30px;
