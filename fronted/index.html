@@ -12,8 +12,9 @@
 <body>
 
     <section>
-        <button class="cuenta" id="btn-iniciarSesion"><i
-                class="fa-chisel fa-regular fa-circle-user fa-xl"></i></button>
+        <button class="cuenta" id="btn-iniciarSesion">
+            <i class="fa-chisel fa-regular fa-circle-user fa-xl"></i>
+        </button>
         <h1>MoviesHub 🎬</h1>
 
         <input type="text" id="filtrar" placeholder="🔎Buscar pelicula por nombre">
@@ -23,12 +24,13 @@
 
     </section>
     <section>
-        <p id="contenedor-Peliculas"></p>
+        <div id="contenedor-Peliculas"></div>
     </section>
 
     <script type="module" src="../dist/business/MostrarPeliculas.js"></script>
     <script type="module" src="../dist/business/generarPeliculas.js"></script>
     <script type="module" src="../dist/modelo/Pelicula.js"></script>
+    <script type="module" src="../dist/business/filtrarPelicula.js"></script>
 
 </body>
 
