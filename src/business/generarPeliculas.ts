@@ -1,21 +1,38 @@
 
 import { Pelicula } from "../modelo/Pelicula.js";
 
-// Función para generar películas
+/**
+ * Función que genera un arreglo de objetos de tipo Pelicula.
+ * 
+ * Cada objeto representa una película con sus atributos principales:
+ * - título
+ * - fecha de estreno
+ * - clasificación por edad
+ * - sinopsis
+ * - idioma original
+ * - lista de doblajes disponibles
+ * - lista de subtítulos disponibles
+ * - URL del póster o imagen promocional
+ * - género
+ * - director
+ * - duración en minutos
+ * 
+ * @returns {Pelicula[]} Arreglo con películas predefinidas
+ */
 export function generarPeliculas(): Pelicula[] {
     const peliculas: Pelicula[] = [
         new Pelicula(
-            "El Padrino",
-            "1972-03-24",
-            "+18",
-            "La saga de una familia de inmigrantes sicilianos en Nueva York que se convierte en una de las más poderosas familias del crimen organizado.",
-            "Inglés",
-            ["Español", "Francés", "Italiano"],
-            ["Español", "Francés", "Italiano", "Portugués"],
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy0rVPvCfkTXyDY39-5NmH0gdYa7bU9h8mNQ&s",
-            "Drama",
-            "Francis Ford Coppola",
-            175 
+            "El Padrino", // Título
+            "1972-03-24", // Fecha de estreno
+            "+18", // Clasificación
+            "La saga de una familia de inmigrantes sicilianos en Nueva York que se convierte en una de las más poderosas familias del crimen organizado.", // Sinopsis
+            "Inglés", // Idioma original
+            ["Español", "Francés", "Italiano"], // Doblajes
+            ["Español", "Francés", "Italiano", "Portugués"], // Subtítulos
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy0rVPvCfkTXyDY39-5NmH0gdYa7bU9h8mNQ&s", // Imagen
+            "Drama", // Género
+            "Francis Ford Coppola", // Director
+            175 // Duración (minutos)
         ),
         new Pelicula(
             "Inception",
@@ -87,5 +104,10 @@ export function generarPeliculas(): Pelicula[] {
     return peliculas;
 }
 
-// Exportar el arreglo de películas
+/**
+ * Exporta un arreglo de películas ya generado.
+ * 
+ * Puede usarse directamente en otros módulos sin necesidad
+ * de llamar explícitamente a la función `generarPeliculas`.
+ */
 export const peliculasArray: Pelicula[] = generarPeliculas();

@@ -1,8 +1,14 @@
 import { generarPeliculas } from "./generarPeliculas.js";
+/**
+ * Busca una película por nombre y la muestra en el contenedor correspondiente.
+ * Si no se encuentra, muestra un mensaje de error.
+ * Si el campo está vacío, solicita al usuario que ingrese un nombre.
+ */
 export function buscarPeliculaByNombre() {
     var _a;
     console.log("Aca si entro :D");
     const contenedor = document.getElementById("contenedor-Peliculas");
+    // Genera la lista de películas
     const peliculas = generarPeliculas();
     if (!contenedor) {
         console.error("El contenedor de películas no se encontró.");
@@ -17,6 +23,7 @@ export function buscarPeliculaByNombre() {
         contenedor.innerHTML = "<p>Por favor ingresa el nombre de una película.</p>";
         return;
     }
+    // Busca y muestra la película que coincide con el nombre
     for (let i = 0; i < peliculas.length; i++) {
         const pelicula = peliculas[i];
         if (pelicula && pelicula.nombre == nombrePeli) {
@@ -37,11 +44,14 @@ export function buscarPeliculaByNombre() {
             `;
         }
     }
+    // Si no se encontró ninguna película, muestra mensaje
     if (contenedor.innerHTML === "") {
         contenedor.innerHTML = "<p>No se encontraron películas con ese nombre.</p>";
     }
 }
-// Agregar el evento al botón para mostrar las películas
+/**
+ * Agrega el evento al botón para mostrar las películas cuando el DOM está cargado.
+ */
 document.addEventListener('DOMContentLoaded', () => {
     const Buscar = document.getElementById('btn-filtrar');
     if (Buscar) {
