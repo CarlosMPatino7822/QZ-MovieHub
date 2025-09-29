@@ -14,7 +14,7 @@
 
     h1 {
         text-align: center;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /*esto se utiliza para settear la fuente de el titulos */
         font-size: 3rem;
         background: linear-gradient(100deg, #755465, #708dc7);
         -webkit-text-fill-color: transparent; /* para que el texto quede transparente y mostrar el gradiente */
