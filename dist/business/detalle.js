@@ -2,44 +2,36 @@ import { generarPeliculas } from "./generarPeliculas.js";
 import { generarSeries } from "./generarSeries.js";
 import { Pelicula } from "../modelo/Pelicula.js";
 import { Serie } from "../modelo/Serie.js";
-
 const params = new URLSearchParams(window.location.search);
 const nombrePeli = params.get("nombre");
 console.log("Nombre de la película o serie desde URL:", nombrePeli);
-
-
 // Obtenemos todas las películas y series
-const peliculas: Pelicula[] = generarPeliculas();
-const series: Serie[] = generarSeries();
-
-let item: Pelicula | Serie | null = null;
-
+const peliculas = generarPeliculas();
+const series = generarSeries();
+let item = null;
 // Buscar en películas con for
 for (let i = 0; i < peliculas.length; i++) {
-  const pelicula = peliculas[i];
-  if (pelicula && pelicula.nombre === nombrePeli) {
-    item = pelicula;
-    break;
-  }
+    const pelicula = peliculas[i];
+    if (pelicula && pelicula.nombre === nombrePeli) {
+        item = pelicula;
+        break;
+    }
 }
-
 // Si no lo encontró en películas, busca en series
 if (!item) {
-  for (let i = 0; i < series.length; i++) {
-    const serie = series[i];
-    if (serie && serie.nombre === nombrePeli) {
-      item = serie;
-      break;
+    for (let i = 0; i < series.length; i++) {
+        const serie = series[i];
+        if (serie && serie.nombre === nombrePeli) {
+            item = serie;
+            break;
+        }
     }
-  }
 }
-
 // Mostrar resultado
 const contenedor = document.getElementById("detalle-contenedor");
-
 if (item && contenedor) {
-  // Render común
-  let html = `
+    // Render común
+    let html = `
     <div class="detalle">
       <img src="${item.imagen}" alt="${item.nombre}">
       <div>
@@ -51,20 +43,20 @@ if (item && contenedor) {
         <p><strong>Doblajes:</strong> ${item.doblajes.join(", ")}</p>
         <p><strong>Subtítulos:</strong> ${item.subtitulos.join(", ")}</p>
   `;
-
-  // Render específico según sea Pelicula o Serie
-  if ("director" in item) {
-    // Es una Pelicula
-    html += `
+    // Render específico según sea Pelicula o Serie
+    if ("director" in item) {
+        // Es una Pelicula
+        html += `
         <p><strong>Género:</strong> ${item.genero}</p>
         <p><strong>Director:</strong> ${item.director}</p>
         <p><strong>Duración:</strong> ${item.duracion} min</p>
         <p><strong>Premios:</strong> ${item.premios.join(", ") || "Ninguno"}</p>
         <p><strong>Actores:</strong> ${item.actores.join(", ")}</p>
     `;
-  } else if ("temporadas" in item) {
-    // Es una Serie
-    html += `
+    }
+    else if ("temporadas" in item) {
+        // Es una Serie
+        html += `
         <p><strong>Capítulos:</strong> ${item.capitulos.join(", ")}</p>
         <p><strong>Temporadas:</strong> ${item.temporadas}</p>
         <p><strong>Creador:</strong> ${item.creador}</p>
@@ -74,10 +66,10 @@ if (item && contenedor) {
         <p><strong>Calificación:</strong> ${item.calificacion}/10</p>
         <p><strong>Estado:</strong> ${item.estado}</p>
     `;
-  }
-
-  html += `</div></div>`;
-  contenedor.innerHTML = html;
-} else if (contenedor) {
-  contenedor.innerHTML = `<p style="color:red;">No se encontró la película o serie con el nombre: ${nombrePeli}</p>`;
+    }
+    html += `</div></div>`;
+    contenedor.innerHTML = html;
+}
+else if (contenedor) {
+    contenedor.innerHTML = `<p style="color:red;">No se encontró la película o serie con el nombre: ${nombrePeli}</p>`;
 }
