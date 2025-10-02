@@ -8,7 +8,7 @@ import { generarPeliculas } from "./generarPeliculas.js";
 export function buscarPeliculaByNombre(): void {
     console.log("Aca si entro :D");
     const contenedor = document.getElementById("contenedor-Peliculas");
-   
+
     // Genera la lista de películas
     const peliculas = generarPeliculas();
     if (!contenedor) {
@@ -31,21 +31,33 @@ export function buscarPeliculaByNombre(): void {
         if (pelicula && pelicula.nombre == nombrePeli) {
             const movie = pelicula;
             contenedor.innerHTML += `
-                <div class="pelicula">
-                    <img src="${movie.imagen}" alt="${movie.nombre}">
-                    <div>
-                        <h2>${movie.nombre}</h2>
-                        <p><strong>Fecha de publicación:</strong> ${movie.fechaDePublicacion}</p>
-                        <p><strong>Edad mínima:</strong> ${movie.restriccionDeEdad}+</p>
-                        <p><strong>Descripción:</strong> ${movie.descripcion}</p>
-                        <p><strong>Idioma original:</strong> ${movie.idiomaOriginal}</p>
-                        <p><strong>Doblajes:</strong> ${movie.doblajes.join(", ")}</p>
-                        <p><strong>Subtítulos:</strong> ${movie.subtitulos.join(", ")}</p>
-                    </div>
+            <div class="pelicula">
+                <img src="${movie.imagen}" alt="${movie.nombre}">
+                <div>
+                    <h2>${movie.nombre}</h2>
+                    <p><strong>Fecha de publicación:</strong> ${movie.fechaDePublicacion}</p>
+                    <p><strong>Edad mínima:</strong> ${movie.restriccionDeEdad}+</p>
+                    <p><strong>Descripción:</strong> ${movie.descripcion}</p>
+                    <p><strong>Idioma original:</strong> ${movie.idiomaOriginal}</p>
+                    <p><strong>Doblajes:</strong> ${movie.doblajes.join(", ")}</p>
+                    <p><strong>Subtítulos:</strong> ${movie.subtitulos.join(", ")}</p>
+                    <button class="btn-detalles" data-nombre="${movie.nombre}">
+                        Ver detalles
+                    </button>
                 </div>
-            `;
+            </div>
+        `;
         }
-    }
+    }// delegación de eventos para los botones
+    contenedor.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        if (target.classList.contains("btn-detalles")) {
+            const nombrePeli = target.getAttribute("data-nombre");
+            if (nombrePeli) {
+                window.open(`descripcionCinematografia.html?nombre=${encodeURIComponent(nombrePeli)}`, "_blank");
+            }
+        }
+    });
     // Si no se encontró ninguna película, muestra mensaje
     if (contenedor.innerHTML === "") {
         contenedor.innerHTML = "<p>No se encontraron películas con ese nombre.</p>";
@@ -56,10 +68,10 @@ export function buscarPeliculaByNombre(): void {
  * Agrega el evento al botón para mostrar las películas cuando el DOM está cargado.
  */
 document.addEventListener('DOMContentLoaded', () => {
-  const Buscar = document.getElementById('btn-filtrar');
-  if (Buscar) {
-    Buscar.addEventListener('click', () => {
-      buscarPeliculaByNombre();
-    });
-  }
+    const Buscar = document.getElementById('btn-filtrar');
+    if (Buscar) {
+        Buscar.addEventListener('click', () => {
+            buscarPeliculaByNombre();
+        });
+    }
 });
