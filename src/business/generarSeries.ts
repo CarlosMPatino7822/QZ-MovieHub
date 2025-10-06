@@ -33,7 +33,7 @@ export function generarSeries(): Serie[] {
       "Inglés", // idiomaOriginal
       ["Español", "Francés", "Alemán"], // doblajes
       ["Español", "Francés", "Alemán", "Portugués"], // subtítulos
-      "https://m.media-amazon.com/images/I/51K8ouYrHeL._AC_.jpg", // imagen
+      "https://www.orientaserie.it/wp-content/uploads/2022/09/A1pkVxm26RL._AC_SL1500_.jpg", // imagen
       ["Piloto", "Cat’s in the Bag...", "…And the Bag’s in the River"], // capitulos (ejemplo)
       5, // temporadas
       "Vince Gilligan", // creador
@@ -51,7 +51,7 @@ export function generarSeries(): Serie[] {
       "Inglés",
       ["Español", "Francés", "Alemán", "Italiano"],
       ["Español", "Francés", "Alemán", "Italiano", "Portugués"],
-      "https://m.media-amazon.com/images/I/71xZL6vxF9L._AC_SY679_.jpg",
+      "https://m.media-amazon.com/images/I/91FTgJZL-kL._UF894,1000_QL80_.jpg",
       ["Capítulo Uno: La desaparición de Will Byers", "Capítulo Dos: La chica rara en la calle Maple"],
       4,
       "The Duffer Brothers",
@@ -69,7 +69,7 @@ export function generarSeries(): Serie[] {
       "Alemán",
       ["Español", "Inglés", "Francés"],
       ["Español", "Inglés", "Francés", "Portugués", "Italiano"],
-      "https://m.media-amazon.com/images/I/81rHcN3T9oL._AC_SY679_.jpg",
+      "https://i.pinimg.com/736x/5e/0e/5a/5e0e5a3ba85c112a89a1cf604f3198d1.jpg",
       ["Secretos", "Mentiras", "Pasado y presente"],
       3,
       "Baran bo Odar, Jantje Friese",
