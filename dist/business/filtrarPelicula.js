@@ -29,21 +29,33 @@ export function buscarPeliculaByNombre() {
         if (pelicula && pelicula.nombre == nombrePeli) {
             const movie = pelicula;
             contenedor.innerHTML += `
-                <div class="pelicula">
-                    <img src="${movie.imagen}" alt="${movie.nombre}">
-                    <div>
-                        <h2>${movie.nombre}</h2>
-                        <p><strong>Fecha de publicación:</strong> ${movie.fechaDePublicacion}</p>
-                        <p><strong>Edad mínima:</strong> ${movie.restriccionDeEdad}+</p>
-                        <p><strong>Descripción:</strong> ${movie.descripcion}</p>
-                        <p><strong>Idioma original:</strong> ${movie.idiomaOriginal}</p>
-                        <p><strong>Doblajes:</strong> ${movie.doblajes.join(", ")}</p>
-                        <p><strong>Subtítulos:</strong> ${movie.subtitulos.join(", ")}</p>
-                    </div>
+            <div class="pelicula">
+                <img src="${movie.imagen}" alt="${movie.nombre}">
+                <div>
+                    <h2>${movie.nombre}</h2>
+                    <p><strong>Fecha de publicación:</strong> ${movie.fechaDePublicacion}</p>
+                    <p><strong>Edad mínima:</strong> ${movie.restriccionDeEdad}+</p>
+                    <p><strong>Descripción:</strong> ${movie.descripcion}</p>
+                    <p><strong>Idioma original:</strong> ${movie.idiomaOriginal}</p>
+                    <p><strong>Doblajes:</strong> ${movie.doblajes.join(", ")}</p>
+                    <p><strong>Subtítulos:</strong> ${movie.subtitulos.join(", ")}</p>
+                    <button class="btn-detalles" data-nombre="${movie.nombre}">
+                        Ver detalles
+                    </button>
                 </div>
-            `;
+            </div>
+        `;
         }
-    }
+    } // delegación de eventos para los botones
+    contenedor.addEventListener("click", (e) => {
+        const target = e.target;
+        if (target.classList.contains("btn-detalles")) {
+            const nombrePeli = target.getAttribute("data-nombre");
+            if (nombrePeli) {
+                window.open(`descripcionCinematografia.html?nombre=${encodeURIComponent(nombrePeli)}`, "_blank");
+            }
+        }
+    });
     // Si no se encontró ninguna película, muestra mensaje
     if (contenedor.innerHTML === "") {
         contenedor.innerHTML = "<p>No se encontraron películas con ese nombre.</p>";

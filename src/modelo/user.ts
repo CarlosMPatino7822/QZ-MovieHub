@@ -1,5 +1,5 @@
 // Importa la clase Persona para heredar sus atributos y métodos
-import { Persona } from "./persona"
+import { Persona } from "./persona.js"
 
 // Clase que representa a un usuario del sistema QZ-MovieHub.
 // Hereda de Persona y añade atributos y métodos específicos para el usuario.

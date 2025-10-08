@@ -1,10 +1,10 @@
-import { Persona } from "../modelo/persona.js";
-import { personas } from "./generarPersonas.js";
-export function loguearPersona(cedula, contraseña) {
-    for (const persona of personas) {
-        if (persona.cedula === cedula && persona.clave === contraseña) {
-            persona.logIn();
-            return persona;
+import { User } from "../modelo/user.js";
+import { users } from "./generarUsers.js";
+export function loguearUser(cedula, contraseña) {
+    for (const user of users) {
+        if (user.cedula === cedula && user.clave === contraseña) {
+            user.logIn();
+            return user;
         }
         else {
             console.log("Usuario oontraseña");
@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         // Llamar a la función de login
-        const persona = loguearPersona(cedula, contraseña);
+        const user = loguearUser(cedula, contraseña);
         // Manejar el resultado
-        if (persona) {
-            alert(`¡Bienvenido/a ${persona.nombre || 'Usuario'}!`);
+        if (user) {
+            alert(`¡Bienvenido/a ${user.nombre || 'Usuario'}!`);
             // Redirigir a index.html
             window.location.href = 'index.html';
         }
