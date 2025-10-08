@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Películas</title>
+    <link rel="stylesheet" href="Style.css" />
+</head>
+
+<body>
+    <section>
+    <h1>Gestión de Películas 🎬</h1>
+    </section>
+
+    <!-- FORMULARIO PARA AGREGAR PELÍCULAS -->
+    <section>
+        <h2>Agregar nueva película</h2>
+
+        <div class="contenedor">
+        <label>Nombre:</label>
+        <input type="text" id="NewPeliName" placeholder="Nombre de la película" />
+        </div>
+
+        <div class="contenedor">
+        <label>Fecha de publicación:</label>
+        <input type="date" id="NewPeliDate" />
+        </div>
+
+        <div class="contenedor">
+        <label>Edad mínima:</label>
+        <input type="number" id="NewPeliAge" placeholder="Ej: 13" />
+        </div>
+
+        <div class="contenedor">
+        <label>Descripción:</label>
+        <input type="text" id="NewPeliDescrip" placeholder="Descripción breve" />
+        </div>
+
+        <div class="contenedor">
+        <label>Idioma original:</label>
+        <input type="text" id="NewPeliLang" placeholder="Ej: Inglés" />
+        </div>
+
+        <div class="contenedor">
+        <label>Imagen (URL):</label>
+        <input type="text" id="NewPeliImagen" placeholder="URL de la imagen"/>
+        </div>
+
+        <div class="contenedor">
+        <label>Género:</label>
+        <input type="text" id="NewPeliGenre" placeholder="Ej: Acción" />
+        </div>
+
+        <div class="contenedor">
+        <label>Director:</label>
+        <input type="text" id="NewPeliDirector" placeholder="Nombre del director" />
+        </div>
+
+        <div class="contenedor">
+        <label>Duración (minutos):</label>
+        <input type="number" id="NewPeliDuration" placeholder="Ej: 120" />
+        </div>
+
+        <div class="contenedor">
+        <label>Doblajes (separa por comas):</label>
+        <input type="text" id="NewPeliDoblaje" placeholder="Ej: Español, Francés" />
+        </div>
+
+        <div class="contenedor">
+        <label>Subtítulos (separa por comas):</label>
+        <input type="text" id="NewPeliSubTitle" placeholder="Ej: Español, Inglés" />
+        </div>
+
+        <div class="contenedor">
+        <label>Actores (separa por comas):</label>
+        <input type="text" id="NewPeliActors" placeholder="Ej: Brad Pitt, Angelina Jolie" />
+        </div>
+
+        <div class="contenedor">
+        <label>Premios (separa por comas):</label>
+        <input type="text" id="NewPeliAwards" placeholder="Ej: Oscar, Globo de Oro" />
+        </div>
+
+        <button type="button" id="btnAddPeli">Agregar película</button>
+    </form>
+    </section>
+    <section>
+        <h2>Peliculas en el sistema</h2>
+        <div id="contenedor-Peliculas">
+            <table id="tablaPeliculas" border="1">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Fecha de Publicación</th>
+                        <th>Edad mínima</th>
+                        <th>Descripción</th>
+                        <th>Idioma Original</th>
+                        <th>Doblajes</th>
+                        <th>Subtítulos</th>
+                        <th>Imagen</th>
+                        <th>Género</th>
+                        <th>Director</th>
+                        <th>Duración</th>
+                        <th>Premios</th>
+                        <th>Actores</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+
+    <script type="module" src="../dist/business/gestionarPeliculas.js"></script>
+</body>
+
+</html>

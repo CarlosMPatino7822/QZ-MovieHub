@@ -6,7 +6,6 @@
 import { Pelicula } from "../modelo/Pelicula.js";
 import { generarPeliculas } from "./generarPeliculas.js";
 
-
 /**
  * Muestra las películas en el contenedor con id 'contenedor-Peliculas'.
  *
@@ -21,7 +20,7 @@ import { generarPeliculas } from "./generarPeliculas.js";
  * Métodos:
  * MostrarPelicula - Función principal para renderizar las películas.
  */
-export function MostrarPelicula(): void {
+export function mostrarPelicula(): void {
 
   console.log("Mostrando peliculas");
   console.log("sigue el proceso");
@@ -39,7 +38,8 @@ export function MostrarPelicula(): void {
   /**
    * Arreglo de películas a mostrar.
    */
-  const peliculas: Pelicula[] = generarPeliculas();
+  const peliculas: Pelicula[] = [];
+
   peliculas.forEach((pelicula) => {
     /**
      * Elemento div para cada película.
@@ -82,7 +82,7 @@ export function MostrarPelicula(): void {
     const btnDetalles = document.createElement("button");
     btnDetalles.textContent = "Ver detalles";
     btnDetalles.addEventListener("click", () => {
-      window.open("detalle.html", "_blank");
+      window.open("descripcionCinematografiadescripcionCinematografia.html", "_blank");
     });
 
     divInfo.appendChild(btnDetalles);
@@ -96,12 +96,38 @@ export function MostrarPelicula(): void {
   }
 }
 
+function obtenerPeliculasDeStorage(): Pelicula[] {
+  const data = localStorage.getItem("peliculas");
+
+  if (data) { // Reconstruir los objetos Pelicula desde el JSON
+    return JSON.parse(data).map(
+      (p: any) =>
+        new Pelicula(
+          p.nombre,
+          p.fechaDePublicacion,
+          p.restriccionDeEdad,
+          p.descripcion,
+          p.idiomaOriginal,
+          p.doblajes,
+          p.subtitulos,
+          p.imagen,
+          p.genero,
+          p.director,
+          p.duracion,
+          p.premios,
+          p.actores
+        )
+    );
+  }
+  return [];
+}
+
 // Agregar el evento al botón para mostrar las películas
 document.addEventListener('DOMContentLoaded', () => {
   const btnCargar = document.getElementById('btn-cargar');
   if (btnCargar) {
     btnCargar.addEventListener('click', () => {
-      MostrarPelicula();
+      mostrarPelicula();
     });
   }
 });
