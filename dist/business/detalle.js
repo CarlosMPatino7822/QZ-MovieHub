@@ -4,6 +4,7 @@ import { Pelicula } from "../modelo/Pelicula.js";
 import { Serie } from "../modelo/Serie.js";
 const params = new URLSearchParams(window.location.search);
 const nombrePeli = params.get("nombre");
+console.log("Nombre de la película o serie desde URL:", nombrePeli);
 // Obtenemos todas las películas y series
 const peliculas = generarPeliculas();
 const series = generarSeries();
