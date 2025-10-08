@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Series</title>
+    <link rel="stylesheet" href="Style.css" />
+
+</head>
+<body>
+    <section>
+        <h1>Gestión de Series 📺</h1>
+    </section>
+    
+    <!-- FORMULARIO PARA AGREGAR SERIES -->
+    <section>
+        <h2>Agregar nueva serie</h2>
+    
+        <div class="contenedor">
+            <label>Nombre:</label>
+            <input type="text" id="NewSerieName" placeholder="Nombre de la serie" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Fecha de publicación:</label>
+            <input type="date" id="NewSerieDate" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Edad mínima:</label>
+            <input type="number" id="NewSerieAge" placeholder="Ej: 13" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Descripción:</label>
+            <input type="text" id="NewSerieDescrip" placeholder="Descripción breve" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Idioma original:</label>
+            <input type="text" id="NewSerieLang" placeholder="Ej: Inglés" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Imagen (URL):</label>
+            <input type="text" id="NewSerieImagen" placeholder="URL de la imagen" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Doblajes (separa por comas):</label>
+            <input type="text" id="NewSerieDoblaje" placeholder="Ej: Español, Francés" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Subtítulos (separa por comas):</label>
+            <input type="text" id="NewSerieSubTitle" placeholder="Ej: Español, Inglés" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Capítulos (separa por comas):</label>
+            <input type="text" id="NewSerieCapitulos" placeholder="Ej: Capítulo 1, Capítulo 2" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Número de temporadas:</label>
+            <input type="number" id="NewSerieTemporadas" placeholder="Ej: 5" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Creador:</label>
+            <input type="text" id="NewSerieCreador" placeholder="Nombre del creador" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Género:</label>
+            <input type="text" id="NewSerieGenero" placeholder="Ej: Drama, Ciencia ficción" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Actores principales (separa por comas):</label>
+            <input type="text" id="NewSerieActores" placeholder="Ej: Bryan Cranston, Aaron Paul" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Duración promedio de capítulo (minutos):</label>
+            <input type="number" id="NewSerieDuracion" placeholder="Ej: 45" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Calificación promedio:</label>
+            <input type="number" step="0.1" id="NewSerieCalificacion" placeholder="Ej: 8.5" />
+        </div>
+    
+        <div class="contenedor">
+            <label>Estado:</label>
+            <input type="text" id="NewSerieEstado" placeholder="Ej: En emisión, Finalizada" />
+        </div>
+    
+        <button type="button" id="btnAddSerie">Agregar Serie</button>
+        
+        <section>
+            <h2>Series en el sistema</h2>
+            <div id="contenedor-Series">
+                <table id="tablaSeries" border="1">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Fecha de Publicación</th>
+                            <th>Edad mínima</th>
+                            <th>Descripción</th>
+                            <th>Idioma Original</th>
+                            <th>Doblajes</th>
+                            <th>Subtítulos</th>
+                            <th>Imagen</th>
+                            <th>Temporadas</th>
+                            <th>Creador</th>
+                            <th>Género</th>
+                            <th>Actores principales</th>
+                            <th>Duración promedio</th>
+                            <th>Calificación</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section> 
+        <script type="module" src="../dist/business/gestionarSeries.js"></script>
+
+</body>
+</html>
