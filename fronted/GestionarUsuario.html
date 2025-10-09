@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" href="Style.css" />
+</head>
+
+<body>
+    <section>
+        <button id="btnVolver">« Volver</button>
+        <h1>Gestión de Usuarios 👲</h1>
+    </section>
+
+    <!-- FORMULARIO PARA AGREGAR USUARIOS -->
+    <section> 
+        <h2>Agregar nuevo usuario</h2>
+
+        <div class="contenedor">
+            <label>Cédula:</label>
+            <input type="text" id="NewUserCedula" placeholder="Número de cédula" />
+        </div>
+        <div class="contenedor">
+            <label>Nombre:</label>
+            <input type="text" id="NewUserNombre" placeholder="Nombre del usuario" />
+        </div>
+        <div class="contenedor">
+            <label>Apellido:</label>
+            <input type="text" id="NewUserApellido" placeholder="Apellido del usuario" />
+        </div>
+        <div class="contenedor">
+            <label>Edad:</label>
+            <input type="number" id="NewUserEdad" placeholder="Ej: 25" />
+        </div>
+        <div class="contenedor">
+            <label>Dirección:</label>
+            <input type="text" id="NewUserDireccion" placeholder="Dirección de residencia" />
+        </div>
+        <div class="contenedor">
+            <label>Película favorita:</label>
+            <input type="text" id="NewUserPeliculaFavorita" placeholder="Ej: Inception" />
+        </div>
+        <div class="contenedor">
+            <label>Clave:</label>
+            <input type="password" id="NewUserClave" placeholder="Contraseña" />
+        </div>
+        <div class="contenedor">
+            <label>Correo electrónico:</label>
+            <input type="email" id="NewUserCorreo" placeholder="Ej: usuario@correo.com" />
+        </div>
+        <div class="contenedor">
+            <label>ID de usuario:</label>
+            <input type="text" id="NewUserIdUser" placeholder="Ej: U001" />
+        </div>
+        <div class="contenedor">
+            <label>País:</label>
+            <input type="text" id="NewUserPais" placeholder="Ej: Colombia" />
+        </div>
+        <div class="contenedor">
+            <label>Idioma principal:</label>
+            <input type="text" id="NewUserIdiomaPrincipal" placeholder="Ej: Español" />
+        </div>
+        <div class="contenedor">
+            <label>¿Membresía activa?:</label>
+            <select id="NewUserMembresia">
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+            </select> 
+        </div> 
+        <button type="button" id="btnAddUser">Agregar Usuario</button>
+    </section>
+
+    <section>
+        <h2>Usuarios en el sistema</h2>
+        <div id="contenedor-Usuarios">
+            <table id="tablaUsuarios" border="1"> 
+                <thead>
+                    <tr>
+                        <th>ID Usuario</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cédula</th>
+                        <th>Correo</th>
+                        <th>Edad</th>
+                        <th>País</th>
+                        <th>Idioma Principal</th>
+                        <th>Dirección</th>
+                        <th>Película Favorita</th>
+                        <th>Membresía</th>
+                        <th>Estado de Sesión</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas de usuarios se insertan aquí por gestionarUsuarios.ts -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script type="module" src="../dist/business/gestionarUsuarios.js"></script>
+
+    <!--PARA VOLVER A LA PESTAÑA ANTERIOR -->
+    <script>
+    document.getElementById("btnVolver")?.addEventListener("click", function() {
+        window.location.href = "PanelInicioAdmin.html";
+    }); 
+    </script>
+
+</body>
+</html>

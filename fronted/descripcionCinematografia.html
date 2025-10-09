@@ -12,6 +12,7 @@
 <body>
 
     <section>
+        <button id="btnVolver">« Volver</button>
         <h1>¡Bienvenido a MoviesHub🎬!</h1>
     </section>
 
@@ -26,6 +27,11 @@
     <script type="module" src="../dist/business/generarPeliculas.js"></script>
     <script type="module" src="../dist/modelo/Pelicula.js"></script>
     <script type="module" src="../dist/business/detalle.js"></script>
+    <script>
+        document.getElementById("btnVolver")?.addEventListener("click", function () {
+        window.location.href = "Index.html";
+        }); 
+    </script>
 
 </body>
 

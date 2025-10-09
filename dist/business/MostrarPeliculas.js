@@ -25,72 +25,52 @@ export function mostrarPelicula() {
     /**
      * Elemento contenedor donde se insertarán las películas.
      */
-    const contenedor = document.getElementById("contenedor-Peliculas");
+    const contenedor = document.getElementById("contenedor-cinematografia");
+    // Genera la lista de películas
+    const peliculas = generarPeliculas();
     if (!contenedor) {
-        console.error("No se encontró el contenedor con id='contenedor-Peliculas'");
+        console.error("El contenedor de películas no se encontró.");
         return;
     }
     contenedor.innerHTML = "";
     console.log("Contenedor encontrado");
-    /**
-     * Arreglo de películas a mostrar.
-     */
-    const peliculas = [];
-    peliculas.forEach((pelicula) => {
-        /**
-         * Elemento div para cada película.
-         */
-        const divPelicula = document.createElement("div");
-        divPelicula.className = "pelicula";
-        /**
-         * Enlace a la página de detalles de la película.
-         */
-        const enlace = document.createElement("a");
-        enlace.href = "detalle.html";
-        enlace.target = "_blank";
-        /**
-         * Imagen de la película.
-         */
-        const img = document.createElement("img");
-        img.src = pelicula.getImagen();
-        img.alt = pelicula.getNombre();
-        enlace.appendChild(img);
-        /**
-         * Div con la información textual de la película.
-         */
-        const divInfo = document.createElement("div");
-        divInfo.innerHTML = `
-      <h2>${pelicula.getNombre()}</h2>
-      <p><strong>Fecha de publicación:</strong> ${pelicula.getFechaDePublicacion()}</p>
-      <p><strong>Edad mínima:</strong> ${pelicula.getRestriccionDeEdad()}+</p>
-      <p><strong>Descripción:</strong> ${pelicula.getDescripcion()}</p>
-      <p><strong>Idioma original:</strong> ${pelicula.getIdiomaOriginal()}</p>
-      <p><strong>Doblajes:</strong> ${pelicula.getDoblajes().join(", ")}</p>
-      <p><strong>Subtítulos:</strong> ${pelicula.getSubtitulos().join(", ")}</p>
-    `;
-        /**
-         * Botón para ver detalles de la película.
-         */
-        const btnDetalles = document.createElement("button");
-        btnDetalles.textContent = "Ver detalles";
-        btnDetalles.addEventListener("click", () => {
-            window.open("descripcionCinematografiadescripcionCinematografia.html", "_blank");
-        });
-        divInfo.appendChild(btnDetalles);
-        divPelicula.appendChild(enlace);
-        divPelicula.appendChild(divInfo);
-        contenedor.appendChild(divPelicula);
+    // Busca y muestra la película que coincide con el nombre
+    for (let i = 0; i < peliculas.length; i++) {
+        const movie = peliculas[i];
+        if (movie) {
+            contenedor.innerHTML += `
+            <div class="pelicula">
+                <img src="${movie.imagen}" alt="${movie.nombre}">
+                <div>
+                    <h2>${movie.nombre}</h2>
+                    <p><strong>Fecha de publicación:</strong> ${movie.fechaDePublicacion}</p>
+                    <p><strong>Edad mínima:</strong> ${movie.restriccionDeEdad}+</p>
+                    <p><strong>Descripción:</strong> ${movie.descripcion}</p>
+                    <p><strong>Idioma original:</strong> ${movie.idiomaOriginal}</p>
+                    <p><strong>Doblajes:</strong> ${movie.doblajes.join(", ")}</p>
+                    <p><strong>Subtítulos:</strong> ${movie.subtitulos.join(", ")}</p>
+                    <button class="btn-detalles" data-nombre="${movie.nombre}">
+                        Ver detalles
+                    </button>
+                </div>
+            </div>
+        `;
+        }
+    } // delegación de eventos para los botones
+    contenedor.addEventListener("click", (e) => {
+        const target = e.target;
+        if (target.classList.contains("btn-detalles")) {
+            const nombrePeli = target.getAttribute("data-nombre");
+            if (nombrePeli) {
+                // Carga la página en la misma pestaña
+                window.location.href = `descripcionCinematografia.html?nombre=${encodeURIComponent(nombrePeli)}`;
+            }
+        }
     });
-    if (contenedor != null) {
-        console.log("contenedor llenito");
+    // Si no se encontró ninguna película, muestra mensaje
+    if (contenedor.innerHTML === "") {
+        contenedor.innerHTML = "<p>No se encontraron películas con ese nombre.</p>";
     }
-}
-function obtenerPeliculasDeStorage() {
-    const data = localStorage.getItem("peliculas");
-    if (data) { // Reconstruir los objetos Pelicula desde el JSON
-        return JSON.parse(data).map((p) => new Pelicula(p.nombre, p.fechaDePublicacion, p.restriccionDeEdad, p.descripcion, p.idiomaOriginal, p.doblajes, p.subtitulos, p.imagen, p.genero, p.director, p.duracion, p.premios, p.actores));
-    }
-    return [];
 }
 // Agregar el evento al botón para mostrar las películas
 document.addEventListener('DOMContentLoaded', () => {

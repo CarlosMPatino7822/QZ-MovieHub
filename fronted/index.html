@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peliculas</title>
+    <title>Panel inicio de usuario</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="Style.css">
 </head>
@@ -12,9 +12,7 @@
 <body>
 
     <section>
-        <button class="cuenta" id="btn-iniciarSesion">
-            <i class="fa-chisel fa-regular fa-circle-user fa-xl"></i>
-        </button>
+        <button id="btnCloseSesion">Cerrar Sesión ❌</button>
         <h1>MoviesHub 🎬</h1>
 
         <input type="text" id="filtrar" placeholder="🔎Buscar pelicula por nombre">
@@ -24,14 +22,20 @@
 
     </section>
     <section>
-        <div id="contenedor-Peliculas"></div>
+        <div id="contenedor-cinematografia"></div>
     </section>
 
     <script type="module" src="../dist/business/mostrarPeliculas.js"></script>
+    <script type="module" src="../dist/business/mostrarSeries.js"></script>
     <script type="module" src="../dist/business/generarPeliculas.js"></script>
     <script type="module" src="../dist/modelo/Pelicula.js"></script>
-    <script type="module" src="../dist/business/filtrarPelicula.js"></script>
-
+    <script type="module" src="../dist/business/filtrarCinematografia.js"></script>
+    <script>
+        document.getElementById("btnCloseSesion")?.addEventListener("click", function () {
+        window.location.href = "Login.html";
+        }); 
+    </script>
+    
 </body>
 
 </html>

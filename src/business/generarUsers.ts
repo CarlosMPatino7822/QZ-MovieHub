@@ -1,53 +1,85 @@
 import { User } from "../modelo/user.js";
 
+/**
+ * Genera una lista de usuarios de ejemplo para el sistema QZ-MovieHub.
+ * Cada usuario contiene información personal y de preferencias.
+ * 
+ * @returns Un arreglo con instancias de la clase User.
+ */
 export function generarUsers(): User[] {
     const users: User[] = [
         new User(
-            "101",  //cedula
-            "Carlos", //nombre
-            "Gómez", //apellido
-            25, //edad
-            "Calle 10", //direccion
-            "Matrix", //peliculaFavorita
-            "2000-05-20", //fechaNacimiento
-            "clave123", //clave
-            "carlos@gmail.com",
-            "U001",
-            "Colombia",
-            "Español",
-            true
+            "carlos@gmail.com", // correo
+            "U001",             // idUser
+            "Colombia",         // país
+            "Español",          // idioma principal
+            true,               // membresía
+            "101",              // cédula
+            "Carlos",           // nombre
+            "Gómez",            // apellido
+            25,                 // edad
+            "clave123",         // clave
+            "Calle 10 #45-23",  // dirección
+            "Matrix"            // película favorita
         ),
         new User(
-            "102",
-            "María",
-            "Lopez",
-            19,
-            "Carrera 15",
-            "Titanic",
-            "2005-09-10",
-            "clave456",
             "maria@gmail.com",
             "U002",
             "México",
             "Español",
-            false
+            false,
+            "102",
+            "María",
+            "López",
+            19,
+            "clave456",
+            "Carrera 15 #20-10",
+            "Titanic"
         ),
         new User(
-            "103",
-            "Andrés",
-            "Martínez",
-            28,
-            "Av. Central",
-            "Avatar",
-            "1997-01-18",
-            "clave789",
             "andres@gmail.com",
             "U003",
             "Chile",
             "Español",
-            true
+            true,
+            "103",
+            "Andrés",
+            "Martínez",
+            28,
+            "clave789",
+            "Av. Central #33",
+            "Avatar"
+        ),
+        new User(
+            "sofia@gmail.com",
+            "U004",
+            "Argentina",
+            "Español",
+            true,
+            "104",
+            "Sofía",
+            "Ramírez",
+            22,
+            "passsofi22",
+            "Calle San Martín 124",
+            "Inception"
+        ),
+        new User(
+            "daniel@gmail.com",
+            "U005",
+            "Perú",
+            "Español",
+            false,
+            "105",
+            "Daniel",
+            "Torres",
+            30,
+            "dan12345",
+            "Av. Lima 321",
+            "Interestelar"
         )
     ];
+
     return users;
 }
 

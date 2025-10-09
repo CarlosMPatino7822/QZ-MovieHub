@@ -3,46 +3,51 @@ import { generarSeries } from "./generarSeries.js";
 export function MostrarSeries() {
     console.log("Mostrando series");
     console.log("sigue el proceso");
-    const contenedor = document.getElementById("contenedor-Peliculas");
+    console.log("Aca si entro :D");
+    const contenedor = document.getElementById("contenedor-cinematografia");
+    const series = generarSeries();
     if (!contenedor) {
-        console.error("No se encontró el contenedor con id='contenedor-Peliculas'");
+        console.error("El contenedor de cinematografia no se encontró.");
         return;
     }
     contenedor.innerHTML = "";
     console.log("Contenedor encontrado");
-    const series = generarSeries();
-    series.forEach((serie) => {
-        const divSerie = document.createElement("div");
-        divSerie.className = "pelicula";
-        const enlace = document.createElement("a");
-        enlace.href = "detalle.html";
-        enlace.target = "_blank";
-        const img = document.createElement("img");
-        img.src = serie.getImagen();
-        img.alt = serie.getNombre();
-        enlace.appendChild(img);
-        const divInfo = document.createElement("div");
-        divInfo.innerHTML = `
-      <h2>${serie.getNombre()}</h2>
-      <p><strong>Fecha de publicación:</strong> ${serie.getFechaDePublicacion()}</p>
-      <p><strong>Edad mínima:</strong> ${serie.getRestriccionDeEdad()}+</p>
-      <p><strong>Descripción:</strong> ${serie.getDescripcion()}</p>
-      <p><strong>Idioma original:</strong> ${serie.getIdiomaOriginal()}</p>
-      <p><strong>Doblajes:</strong> ${serie.getDoblajes().join(", ")}</p>
-      <p><strong>Subtítulos:</strong> ${serie.getSubtitulos().join(", ")}</p>
-    `;
-        const btnDetalles = document.createElement("button");
-        btnDetalles.textContent = "Ver detalles";
-        btnDetalles.addEventListener("click", () => {
-            window.open("detalle.html", "_blank");
-        });
-        divInfo.appendChild(btnDetalles);
-        divSerie.appendChild(enlace);
-        divSerie.appendChild(divInfo);
-        contenedor.appendChild(divSerie);
+    // Busca y muestra la serie que coincide con el nombre
+    for (let i = 0; i < series.length; i++) {
+        const serie = series[i];
+        if (serie) {
+            contenedor.innerHTML += `
+            <div class="pelicula">
+                <img src="${serie.imagen}" alt="${serie.nombre}">
+                <div>
+                    <h2>${serie.nombre}</h2>
+                    <p><strong>Fecha de publicación:</strong> ${serie.fechaDePublicacion}</p>
+                    <p><strong>Edad mínima:</strong> ${serie.restriccionDeEdad}+</p>
+                    <p><strong>Descripción:</strong> ${serie.descripcion}</p>
+                    <p><strong>Idioma original:</strong> ${serie.idiomaOriginal}</p>
+                    <p><strong>Doblajes:</strong> ${serie.doblajes.join(", ")}</p>
+                    <p><strong>Subtítulos:</strong> ${serie.subtitulos.join(", ")}</p>
+                    <button class="btn-detalles" data-nombre="${serie.nombre}">
+                        Ver detalles
+                    </button>
+                </div>
+            </div>
+        `;
+        }
+    } // delegación de eventos para los botones
+    contenedor.addEventListener("click", (e) => {
+        const target = e.target;
+        if (target.classList.contains("btn-detalles")) {
+            const nombreSerie = target.getAttribute("data-nombre");
+            if (nombreSerie) {
+                // Carga la página en la misma pestaña
+                window.location.href = `descripcionCinematografia.html?nombre=${encodeURIComponent(nombreSerie)}`;
+            }
+        }
     });
-    if (contenedor != null) {
-        console.log("contenedor llenito");
+    // Si no se encontró ninguna película, muestra mensaje
+    if (contenedor.innerHTML === "") {
+        contenedor.innerHTML = "<p>No se encontraron películas con ese nombre.</p>";
     }
 }
 document.addEventListener('DOMContentLoaded', () => {
