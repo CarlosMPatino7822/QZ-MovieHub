@@ -9,6 +9,7 @@
 </head>
 <body>
     <section>
+        <button id="btnVolver">« Volver</button>
         <h1>Gestión de Series 📺</h1>
     </section>
     
@@ -126,7 +127,16 @@
                 </table>
             </div>
         </section> 
-        <script type="module" src="../dist/business/gestionarSeries.js"></script>
 
+        <script type="module" src="../dist/business/gestionarSeries.js"></script>
+        
+        <!--PARA VOLVER A LA PESTAÑA ANTERIOR -->
+        <script>
+            document.getElementById("btnVolver")?.addEventListener("click", function () {
+                window.location.href = "PanelInicioAdmin.html";
+            }); 
+        </script>
+        
 </body>
+        
 </html>

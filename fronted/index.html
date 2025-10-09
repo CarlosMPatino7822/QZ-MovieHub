@@ -12,9 +12,7 @@
 <body>
 
     <section>
-        <button class="cuenta" id="btn-iniciarSesion">
-            <i class="fa-chisel fa-regular fa-circle-user fa-xl"></i>
-        </button>
+        <button id="btnCloseSesion">Cerrar Sesión ❌</button>
         <h1>MoviesHub 🎬</h1>
 
         <input type="text" id="filtrar" placeholder="🔎Buscar pelicula por nombre">
@@ -32,7 +30,12 @@
     <script type="module" src="../dist/business/generarPeliculas.js"></script>
     <script type="module" src="../dist/modelo/Pelicula.js"></script>
     <script type="module" src="../dist/business/filtrarCinematografia.js"></script>
-
+    <script>
+        document.getElementById("btnCloseSesion")?.addEventListener("click", function () {
+        window.location.href = "Login.html";
+        }); 
+    </script>
+    
 </body>
 
 </html>

@@ -3,11 +3,15 @@ import { Admin } from "../modelo/admin.js";
 export function generarAdmins(): Admin[] {
     const admins: Admin[] = [
         new Admin(
+            "admin@eam.edu.co",
+            "Colombia",
+            "Español", 
+            "",
             "201",
             "Laura",
             "Pérez",
             30,
-            "Av. 20",
+            "admin123",
             "Inception",
             "1995-08-10",
             "admin123",
@@ -18,6 +22,10 @@ export function generarAdmins(): Admin[] {
             "Positiva"
         ),
         new Admin(
+            "admin2@eam.edu.co",
+            "Colombia",
+            "Español", 
+            "",
             "202",
             "Andrés",
             "Martínez",
@@ -33,11 +41,15 @@ export function generarAdmins(): Admin[] {
             "Bolívar"
         ),
         new Admin(
+            "admin3@eam.edu.co",
+            "Colombia",
+            "Español", 
+            "",
             "203",
             "Miguel",
             "Suarez",
             35,
-            "Calle 100",
+            "admin789",
             "Gladiator",
             "1988-12-05",
             "admin789",

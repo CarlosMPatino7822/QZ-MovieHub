@@ -9,7 +9,8 @@
 
 <body>
     <section>
-    <h1>Gestión de Películas 🎬</h1>
+        <button id="btnVolver">« Volver</button>
+        <h1>Gestión de Películas 🎬</h1>
     </section>
 
     <!-- FORMULARIO PARA AGREGAR PELÍCULAS -->
@@ -111,6 +112,14 @@
     </section>
 
     <script type="module" src="../dist/business/gestionarPeliculas.js"></script>
+
+    <!--PARA VOLVER A LA PESTAÑA ANTERIOR -->
+    <script>
+        document.getElementById("btnVolver")?.addEventListener("click", function () {
+        window.location.href = "PanelInicioAdmin.html";
+        }); 
+    </script>
+
 </body>
 
 </html>

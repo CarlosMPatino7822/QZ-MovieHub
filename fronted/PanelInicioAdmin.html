@@ -8,6 +8,7 @@
 </head>
 <body>
     <section>
+        <button id="btnCloseSesion">Cerrar Sesión ❌</button>
         <h1>Bienvenido, admin</h1>
     </section>
     <section>
@@ -16,6 +17,30 @@
         <button class="button-NewPagina" id="btnCrudSeries">Gestionar series</button>
         <button class="button-NewPagina" id="btnCrudUsers">Gestionar usuarios</button>
     </section>
+
+    <script>
+        document.getElementById("btnCrudPelis")?.addEventListener("click", function () {
+        window.location.href = "GestionPeliculas.html";
+        }); 
+    </script>
+
+    <script>
+        document.getElementById("btnCrudSeries")?.addEventListener("click", function () {
+        window.location.href = "GestionSeries.html";
+        }); 
+    </script>
+
+    <script>
+        document.getElementById("btnCrudUsers")?.addEventListener("click", function () {
+        window.location.href = "GestionarUsuario.html";
+        }); 
+    </script>
+
+    <script>
+        document.getElementById("btnCloseSesion")?.addEventListener("click", function () {
+        window.location.href = "Login.html";
+        }); 
+    </script>
     
 </body>
 </html>

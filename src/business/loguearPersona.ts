@@ -1,5 +1,7 @@
 import { User } from "../modelo/user.js";
 import { users } from "./generarUsers.js";
+import { Admin } from "../modelo/admin.js";
+import { admins } from "./generarAdmins.js";
 
 
 export function loguearUser(cedula: string, contraseña: string): User | null {
@@ -9,6 +11,18 @@ export function loguearUser(cedula: string, contraseña: string): User | null {
             return user;
         } else {
             console.log("Usuario oontraseña")
+        }
+    }
+    return null;
+}
+
+export function loguearAdmin(cedula: string, contraseña: string): Admin | null {
+    for (const admin of admins) {
+        if (admin.cedula === cedula && admin.clave === contraseña) {
+            admin.logIn();
+            return admin;
+        } else {
+            console.log("Admin oontraseña")
         }
     }
     return null;
@@ -31,19 +45,25 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Llamar a la función de login
-        const user = loguearUser(cedula, contraseña);
+        
+        const admin = loguearAdmin(cedula, contraseña);
+        if (admin) {
+            alert(`¡Bienvenido/a Admin ${admin.nombre || 'Usuario'}!`);
+            window.location.href = 'PanelInicioAdmin.html';
+            return;
+        }
 
-        // Manejar el resultado
+        // Si no es admin, probamos como user
+        const user = loguearUser(cedula, contraseña);
         if (user) {
             alert(`¡Bienvenido/a ${user.nombre || 'Usuario'}!`);
-            // Redirigir a index.html
             window.location.href = 'index.html';
-        } else {
-            alert('Cédula o contraseña incorrecta. Por favor, intenta de nuevo.');
-            // Limpiar el campo de contraseña
-            contraseñaInput.value = '';
+            return;
         }
+
+        // Ninguno coincidió
+        alert('Cédula o contraseña incorrecta. Por favor, intenta de nuevo.');
+        contraseñaInput.value = '';
     });
 
     // Opcional: permitir login con Enter

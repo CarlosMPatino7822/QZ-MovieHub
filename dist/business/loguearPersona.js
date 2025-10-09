@@ -1,5 +1,7 @@
 import { User } from "../modelo/user.js";
 import { users } from "./generarUsers.js";
+import { Admin } from "../modelo/admin.js";
+import { admins } from "./generarAdmins.js";
 export function loguearUser(cedula, contraseña) {
     for (const user of users) {
         if (user.cedula === cedula && user.clave === contraseña) {
@@ -8,6 +10,18 @@ export function loguearUser(cedula, contraseña) {
         }
         else {
             console.log("Usuario oontraseña");
+        }
+    }
+    return null;
+}
+export function loguearAdmin(cedula, contraseña) {
+    for (const admin of admins) {
+        if (admin.cedula === cedula && admin.clave === contraseña) {
+            admin.logIn();
+            return admin;
+        }
+        else {
+            console.log("Admin oontraseña");
         }
     }
     return null;
@@ -26,19 +40,22 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Por favor, ingresa tu cédula y contraseña');
             return;
         }
-        // Llamar a la función de login
+        const admin = loguearAdmin(cedula, contraseña);
+        if (admin) {
+            alert(`¡Bienvenido/a Admin ${admin.nombre || 'Usuario'}!`);
+            window.location.href = 'PanelInicioAdmin.html';
+            return;
+        }
+        // Si no es admin, probamos como user
         const user = loguearUser(cedula, contraseña);
-        // Manejar el resultado
         if (user) {
             alert(`¡Bienvenido/a ${user.nombre || 'Usuario'}!`);
-            // Redirigir a index.html
             window.location.href = 'index.html';
+            return;
         }
-        else {
-            alert('Cédula o contraseña incorrecta. Por favor, intenta de nuevo.');
-            // Limpiar el campo de contraseña
-            contraseñaInput.value = '';
-        }
+        // Ninguno coincidió
+        alert('Cédula o contraseña incorrecta. Por favor, intenta de nuevo.');
+        contraseñaInput.value = '';
     });
     // Opcional: permitir login con Enter
     contraseñaInput === null || contraseñaInput === void 0 ? void 0 : contraseñaInput.addEventListener('keypress', (event) => {
