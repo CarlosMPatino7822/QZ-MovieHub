@@ -1,4 +1,4 @@
-import { Persona } from "../modelo/persona.js";
+/*import { Persona } from "../modelo/persona.js";
 
 export function generarPersonas(): Persona[] {
     const personas: Persona[] = [
@@ -37,4 +37,4 @@ export function generarPersonas(): Persona[] {
 }
 
 
-export const personas: Persona[] = generarPersonas();
+export const personas: Persona[] = generarPersonas();*/

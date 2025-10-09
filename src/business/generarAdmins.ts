@@ -6,7 +6,7 @@ export function generarAdmins(): Admin[] {
             "admin@eam.edu.co",
             "Colombia",
             "Español", 
-            "",
+            true,
             "201",
             "Laura",
             "Pérez",
@@ -19,13 +19,12 @@ export function generarAdmins(): Admin[] {
             "3001112233",
             "2018-03-01",
             "SURA",
-            "Positiva"
         ),
         new Admin(
             "admin2@eam.edu.co",
             "Colombia",
             "Español", 
-            "",
+            true,
             "202",
             "Andrés",
             "Martínez",
@@ -38,13 +37,12 @@ export function generarAdmins(): Admin[] {
             "3102223344",
             "2015-06-10",
             "Sanitas",
-            "Bolívar"
         ),
         new Admin(
             "admin3@eam.edu.co",
             "Colombia",
             "Español", 
-            "",
+            true,
             "203",
             "Miguel",
             "Suarez",
@@ -57,7 +55,6 @@ export function generarAdmins(): Admin[] {
             "3203334455",
             "2016-11-20",
             "Compensar",
-            "Colpatria"
         )
     ];
     return admins;

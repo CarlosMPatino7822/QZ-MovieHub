@@ -74,16 +74,16 @@ export function generarPeliculas(): Pelicula[] {
             132
         ),
         new Pelicula(
-            "Avengers: Endgame",
-            "2019-04-26",
+            "Gnomeo y Julieta",
+            "2011-04-26",
             "+13",
-            "Los Vengadores supervivientes trabajan para revertir el daño causado por Thanos en Infinity War.",
+            "Unos gnomos de jardín enamorados son parte de una disputa entre unos vecinos en Stratford-Upon-Avon. Juliet se enamora del apuesto Gnomeo.",
             "Inglés",
             ["Español", "Francés", "Alemán", "Italiano", "Portugués"],
             ["Español", "Francés", "Alemán", "Italiano", "Portugués", "Japonés"],
-            "https://images.justwatch.com/poster/139509768/s166/vengadores-endgame",
+            "https://cineplex.com.co/wp-content/uploads/2020/10/GNOMEO-Y-JULIETA-pelicula-poster.jpg",
             "Acción",
-            "Anthony Russo, Joe Russo",
+            "Kelly Asbury",
             181
         ),
         new Pelicula(
