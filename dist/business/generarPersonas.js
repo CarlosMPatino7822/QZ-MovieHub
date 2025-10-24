@@ -39,3 +39,4 @@ export function generarPersonas(): Persona[] {
 
 
 export const personas: Persona[] = generarPersonas();*/
+//# sourceMappingURL=generarPersonas.js.map

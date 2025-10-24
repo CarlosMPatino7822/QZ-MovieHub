@@ -1,4 +1,3 @@
-var _a;
 import { Pelicula } from "../modelo/Pelicula.js";
 import { generarPeliculas } from "./generarPeliculas.js";
 export class gestionarPeliculas {
@@ -165,7 +164,8 @@ export class gestionarPeliculas {
 // Instancia global
 const gestorPeliculas = new gestionarPeliculas();
 // Eventos
-(_a = document.getElementById("btnAddPeli")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => gestorPeliculas.agregarPelicula());
+document.getElementById("btnAddPeli")?.addEventListener("click", () => gestorPeliculas.agregarPelicula());
 window.addEventListener("DOMContentLoaded", () => gestorPeliculas.mostrarPeliculasEnTabla());
 // Exportar
 export const gestionModule = gestorPeliculas;
+//# sourceMappingURL=gestionarPeliculas.js.map

@@ -1,4 +1,3 @@
-var _a;
 import { User } from "../modelo/user.js";
 import { generarUsers } from "./generarUsers.js";
 export class gestionarUsuarios {
@@ -155,7 +154,8 @@ export class gestionarUsuarios {
 }
 // Instancia global
 const gestorUsers = new gestionarUsuarios();
-(_a = document.getElementById("btnAddUser")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => gestorUsers.agregarUsuario());
+document.getElementById("btnAddUser")?.addEventListener("click", () => gestorUsers.agregarUsuario());
 window.addEventListener("DOMContentLoaded", () => gestorUsers.mostrarUsersEnTabla());
 // Exportar
 export const gestionModule = gestorUsers;
+//# sourceMappingURL=gestionarUsuarios.js.map

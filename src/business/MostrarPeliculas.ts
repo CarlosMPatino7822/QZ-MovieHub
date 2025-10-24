@@ -4,7 +4,7 @@
  * Importa la clase Pelicula y la función generarPeliculas para obtener y renderizar la información de las películas.
  */
 import { Pelicula } from "../modelo/Pelicula.js";
-import { generarPeliculas } from "./generarPeliculas.js";
+import { getPopularMovies } from "../tmdb/tmdb.js";
 
 /**
  * Muestra las películas en el contenedor con id 'contenedor-Peliculas'.
@@ -20,8 +20,8 @@ import { generarPeliculas } from "./generarPeliculas.js";
  * Métodos:
  * MostrarPelicula - Función principal para renderizar las películas.
  */
-export function mostrarPelicula(): void {
-
+async function mostrarPelicula() {
+/** 
   console.log("Mostrando peliculas");
   console.log("sigue el proceso");
   /**
@@ -30,7 +30,7 @@ export function mostrarPelicula(): void {
   const contenedor = document.getElementById("contenedor-cinematografia");
 
   // Genera la lista de películas
-  const peliculas = generarPeliculas();
+  const peliculas = await  getPopularMovies();
   if (!contenedor) {
     console.error("El contenedor de películas no se encontró.");
     return;
@@ -39,24 +39,18 @@ export function mostrarPelicula(): void {
   console.log("Contenedor encontrado");
 
 
-  // Busca y muestra la película que coincide con el nombre
   for (let i = 0; i < peliculas.length; i++) {
     const movie = peliculas[i];
     if (movie) {
-
-
       contenedor.innerHTML += `
             <div class="pelicula">
-                <img src="${movie.imagen}" alt="${movie.nombre}">
+                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="https://image.tmdb.org/t/p/w500${movie.poster_path}">
                 <div>
-                    <h2>${movie.nombre}</h2>
-                    <p><strong>Fecha de publicación:</strong> ${movie.fechaDePublicacion}</p>
-                    <p><strong>Edad mínima:</strong> ${movie.restriccionDeEdad}+</p>
-                    <p><strong>Descripción:</strong> ${movie.descripcion}</p>
-                    <p><strong>Idioma original:</strong> ${movie.idiomaOriginal}</p>
-                    <p><strong>Doblajes:</strong> ${movie.doblajes.join(", ")}</p>
-                    <p><strong>Subtítulos:</strong> ${movie.subtitulos.join(", ")}</p>
-                    <button class="btn-detalles" data-nombre="${movie.nombre}">
+                    <h2>${movie.title}</h2>
+                    <p><strong>Fecha de publicación:</strong> ${movie.release_date}</p>
+                    <p><strong>Descripción:</strong> ${movie.overview}</p>
+                    <p><strong>Idioma original:</strong> ${movie.vote_average}</p>
+                    <button class="btn-detalles" data-nombre="${movie.title}">
                         Ver detalles
                     </button>
                 </div>

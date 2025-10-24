@@ -8,3 +8,4 @@ export function generarAdmins() {
     return admins;
 }
 export const admins = generarAdmins();
+//# sourceMappingURL=generarAdmins.js.map

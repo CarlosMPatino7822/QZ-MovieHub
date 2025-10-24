@@ -46,3 +46,4 @@ export function generarPeliculas() {
  * de llamar explícitamente a la función `generarPeliculas`.
  */
 export const peliculasArray = generarPeliculas();
+//# sourceMappingURL=generarPeliculas.js.map
