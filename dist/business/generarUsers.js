@@ -29,3 +29,4 @@ export function generarUsers() {
 }
 // Exportamos la lista generada directamente
 export const users = generarUsers();
+//# sourceMappingURL=generarUsers.js.map

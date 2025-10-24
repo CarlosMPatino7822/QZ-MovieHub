@@ -139,3 +139,4 @@ export class Pelicula extends Cinematografia {
         return this.genero;
     }
 }
+//# sourceMappingURL=Pelicula.js.map

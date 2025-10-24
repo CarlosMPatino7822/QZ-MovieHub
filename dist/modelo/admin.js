@@ -128,3 +128,4 @@ export class Admin extends User {
         return `El administrador ${this.getNombre()} ha cerrado sesión correctamente.`;
     }
 }
+//# sourceMappingURL=admin.js.map

@@ -1,5 +1,6 @@
 import { Serie } from "../modelo/Serie.js";
-import { generarSeries } from "./generarSeries.js";
+import { getPopularTVShows } from "../tmdb/tmdb.js";
+import { generarSeries } from "../business/generarSeries.js";
 
 export class GestionarSeries {
   listaSeries: Serie[] = generarSeries();

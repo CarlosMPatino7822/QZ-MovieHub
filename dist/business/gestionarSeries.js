@@ -1,6 +1,6 @@
-var _a;
 import { Serie } from "../modelo/Serie.js";
-import { generarSeries } from "./generarSeries.js";
+import { getPopularTVShows } from "../tmdb/tmdb.js";
+import { generarSeries } from "../business/generarSeries.js";
 export class GestionarSeries {
     constructor() {
         this.listaSeries = generarSeries();
@@ -185,7 +185,8 @@ export class GestionarSeries {
 // Instancia global
 const gestorSeries = new GestionarSeries();
 // Eventos
-(_a = document.getElementById("btnAddSerie")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => gestorSeries.agregarSerie());
+document.getElementById("btnAddSerie")?.addEventListener("click", () => gestorSeries.agregarSerie());
 window.addEventListener("DOMContentLoaded", () => gestorSeries.mostrarSeriesEnTabla());
 // Exportar
 export const gestionModule = gestorSeries;
+//# sourceMappingURL=gestionarSeries.js.map

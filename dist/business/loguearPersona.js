@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cedulaInput = document.getElementById('cedulaLoguear');
     const contraseñaInput = document.getElementById('contraseñaLoguear');
     // Agregar listener al botón
-    btnLogin === null || btnLogin === void 0 ? void 0 : btnLogin.addEventListener('click', () => {
+    btnLogin?.addEventListener('click', () => {
         // Obtener valores
         const cedula = cedulaInput.value.trim();
         const contraseña = contraseñaInput.value;
@@ -58,9 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
         contraseñaInput.value = '';
     });
     // Opcional: permitir login con Enter
-    contraseñaInput === null || contraseñaInput === void 0 ? void 0 : contraseñaInput.addEventListener('keypress', (event) => {
+    contraseñaInput?.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             btnLogin.click();
         }
     });
 });
+//# sourceMappingURL=loguearPersona.js.map

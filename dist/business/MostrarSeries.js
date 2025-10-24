@@ -1,11 +1,11 @@
 import { Serie } from "../modelo/Serie.js";
-import { generarSeries } from "./generarSeries.js";
-export function MostrarSeries() {
+import { getPopularTVShows } from "../tmdb/tmdb.js";
+async function MostrarSeries() {
     console.log("Mostrando series");
     console.log("sigue el proceso");
     console.log("Aca si entro :D");
     const contenedor = document.getElementById("contenedor-cinematografia");
-    const series = generarSeries();
+    const series = await getPopularTVShows();
     if (!contenedor) {
         console.error("El contenedor de cinematografia no se encontró.");
         return;
@@ -18,16 +18,13 @@ export function MostrarSeries() {
         if (serie) {
             contenedor.innerHTML += `
             <div class="pelicula">
-                <img src="${serie.imagen}" alt="${serie.nombre}">
+                <img src="https://image.tmdb.org/t/p/w500${serie.poster_path}" alt="https://image.tmdb.org/t/p/w500${serie.poster_path}">
                 <div>
-                    <h2>${serie.nombre}</h2>
-                    <p><strong>Fecha de publicación:</strong> ${serie.fechaDePublicacion}</p>
-                    <p><strong>Edad mínima:</strong> ${serie.restriccionDeEdad}+</p>
-                    <p><strong>Descripción:</strong> ${serie.descripcion}</p>
-                    <p><strong>Idioma original:</strong> ${serie.idiomaOriginal}</p>
-                    <p><strong>Doblajes:</strong> ${serie.doblajes.join(", ")}</p>
-                    <p><strong>Subtítulos:</strong> ${serie.subtitulos.join(", ")}</p>
-                    <button class="btn-detalles" data-nombre="${serie.nombre}">
+                    <h2>${serie.name}</h2>
+                    <p><strong>Fecha de publicación:</strong> ${serie.first_air_date}</p>              
+                    <p><strong>Descripción:</strong> ${serie.overview}</p>
+                    <p><strong>:</strong> ${serie.vote_average}</p>
+                    <button class="btn-detalles" data-nombre="${serie.name}">
                         Ver detalles
                     </button>
                 </div>
@@ -58,3 +55,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+//# sourceMappingURL=MostrarSeries.js.map

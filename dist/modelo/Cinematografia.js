@@ -180,3 +180,4 @@ export class Cinematografia {
         return `${this.nombre} (${this.fechaDePublicacion}) - ${this.descripcion}`;
     }
 }
+//# sourceMappingURL=Cinematografia.js.map
