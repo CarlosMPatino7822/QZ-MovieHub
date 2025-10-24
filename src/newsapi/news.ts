@@ -1,6 +1,5 @@
 const API_KEY = "6d30ac3094ba483db18fe40cb5ba81ef"; 
 
-
 export async function getMovieNews() {
   try {
     const response = await fetch(
