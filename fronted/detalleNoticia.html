@@ -3,27 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias de Cine</title>
+    <title>Detalle de la noticia</title>
     <link rel="stylesheet" href="Style.css">
 </head>
 <body>
     <section>
         <button id="btnVolver">« Volver</button>
         <h1>MoviesHub Noticias</h1>
-        <h3>Noticias destacadas 📰</h3>
-        <button id="btn-cargar">Cargar noticias</button>
     </section>
-    
-    <section id="contenedor-news"> </section>
-  
-    <script type="module" src="../dist/business/mostrarNoticias.js"></script>
+
+    <!-- se carga la noticia en esta sección -->
+    <section id="detalle-contenedor">
+        <h2>Detalle de la noticia</h2>
+        <div id="detalle-noticia">
+            <p>Cargando detalle de la noticia...</p>
+        </div>
+    </section>
 
     <!--PARA VOLVER A LA PESTAÑA ANTERIOR -->
     <script>
         document.getElementById("btnVolver")?.addEventListener("click", function () {
-        window.location.href = "index.html";
+        window.location.href = "noticias.html";
         });
     </script>
+
+    <script type="module" src="../dist/business/detalleNoticia.js"></script>
 
 </body>
 </html>

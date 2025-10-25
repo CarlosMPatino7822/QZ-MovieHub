@@ -4,9 +4,10 @@ export async function getMovieNews() {
         const response = await fetch(`https://newsapi.org/v2/everything?q=cinema&language=es&apiKey=6d30ac3094ba483db18fe40cb5ba81ef`);
         if (!response.ok) {
             throw new Error("Error al obtener noticias del servidor");
+            return [];
         }
         const data = await response.json();
-        return data.articles;
+        return Array.isArray(data.articles) ? data.articles : [];
     }
     catch (error) {
         console.error("Error en getMovieNews:", error);

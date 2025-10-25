@@ -8,11 +8,11 @@ export async function getMovieNews() {
 
     if (!response.ok) {
       throw new Error("Error al obtener noticias del servidor");
+      return [];
     }
-
     const data = await response.json();
-    return data.articles;
-  } catch (error) {
+    return Array.isArray(data.articles) ? data.articles : [];
+    } catch (error) {
     console.error("Error en getMovieNews:", error);
     return [];
   }
@@ -36,5 +36,5 @@ export async function getNews(): Promise<NewsArticle[]> {
   const res = await fetch(`https://newsapi.org/v2/everything?q=movies&language=es&apiKey=${API_KEY}`);
   const data = await res.json();
   return data.articles;
-  
+
 }
