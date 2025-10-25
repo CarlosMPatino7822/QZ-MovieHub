@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias de Cine</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+    <section>
+        <button id="btnVolver">« Volver</button>
+        <h1>MoviesHub Noticias</h1>
+        <h3>Noticias destacadas 📰</h3>
+        <button id="btn-cargar">Cargar noticias</button>
+    </section>
+    
+    <section id="contenedor-news"> </section>
+  
+    <script type="module" src="../dist/business/mostrarNoticias.js"></script>
+
+    <!--PARA VOLVER A LA PESTAÑA ANTERIOR -->
+    <script>
+        document.getElementById("btnVolver")?.addEventListener("click", function () {
+        window.location.href = "index.html";
+        });
+    </script>
+
+</body>
+</html>
