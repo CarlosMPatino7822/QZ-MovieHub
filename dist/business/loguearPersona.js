@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const user = loguearUser(cedula, contraseña);
         if (user) {
             alert(`¡Bienvenido/a ${user.nombre || 'Usuario'}!`);
-            window.location.href = 'fornted/index.html';
+            window.location.href = 'fronted/index.html';
             return;
         }
         // Ninguno coincidió
