@@ -55,4 +55,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-//# sourceMappingURL=mostrarSeries.js.map
+//# sourceMappingURL=MostrarSeries.js.map

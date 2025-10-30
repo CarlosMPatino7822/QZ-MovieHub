@@ -43,14 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const admin = loguearAdmin(cedula, contraseña);
         if (admin) {
             alert(`¡Bienvenido/a Admin ${admin.nombre || 'Usuario'}!`);
-            window.location.href = 'PanelInicioAdmin.html';
+            window.location.href = 'fronted/PanelInicioAdmin.html';
             return;
         }
         // Si no es admin, probamos como user
         const user = loguearUser(cedula, contraseña);
         if (user) {
             alert(`¡Bienvenido/a ${user.nombre || 'Usuario'}!`);
-            window.location.href = 'index.html';
+            window.location.href = 'fornted/index.html';
             return;
         }
         // Ninguno coincidió
