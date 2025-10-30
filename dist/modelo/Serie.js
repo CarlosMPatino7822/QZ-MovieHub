@@ -166,4 +166,3 @@ export class Serie extends Cinematografia {
         return `${this.nombre} (${this.temporadas} temporadas) - ${this.genero}. Estado: ${this.estado}`;
     }
 }
-//# sourceMappingURL=Serie.js.map

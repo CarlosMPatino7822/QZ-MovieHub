@@ -12,4 +12,3 @@ export async function getPopularTVShows() {
     const data = await res.json(); // transformamos la respuesta a JSON
     return data.results;
 }
-//# sourceMappingURL=tmdb.js.map

@@ -52,4 +52,3 @@ if (contenedor && contenedor.contains == null) {
     <p style="color:red;">No se encontró la película o serie con el nombre: ${nombrePeli}</p>
   `;
 }
-//# sourceMappingURL=detalleCinematografia.js.map

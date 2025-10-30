@@ -189,4 +189,3 @@ document.getElementById("btnAddSerie")?.addEventListener("click", () => gestorSe
 window.addEventListener("DOMContentLoaded", () => gestorSeries.mostrarSeriesEnTabla());
 // Exportar
 export const gestionModule = gestorSeries;
-//# sourceMappingURL=gestionarSeries.js.map

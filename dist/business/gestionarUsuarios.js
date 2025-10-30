@@ -158,4 +158,3 @@ document.getElementById("btnAddUser")?.addEventListener("click", () => gestorUse
 window.addEventListener("DOMContentLoaded", () => gestorUsers.mostrarUsersEnTabla());
 // Exportar
 export const gestionModule = gestorUsers;
-//# sourceMappingURL=gestionarUsuarios.js.map

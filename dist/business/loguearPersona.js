@@ -64,4 +64,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-//# sourceMappingURL=loguearPersona.js.map

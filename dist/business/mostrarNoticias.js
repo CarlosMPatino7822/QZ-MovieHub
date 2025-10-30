@@ -53,4 +53,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-//# sourceMappingURL=mostrarNoticias.js.map

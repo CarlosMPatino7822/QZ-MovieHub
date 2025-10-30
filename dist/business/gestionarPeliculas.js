@@ -168,4 +168,3 @@ document.getElementById("btnAddPeli")?.addEventListener("click", () => gestorPel
 window.addEventListener("DOMContentLoaded", () => gestorPeliculas.mostrarPeliculasEnTabla());
 // Exportar
 export const gestionModule = gestorPeliculas;
-//# sourceMappingURL=gestionarPeliculas.js.map
