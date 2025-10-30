@@ -78,4 +78,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-//# sourceMappingURL=mostrarPeliculas.js.map
+//# sourceMappingURL=MostrarPeliculas.js.map
