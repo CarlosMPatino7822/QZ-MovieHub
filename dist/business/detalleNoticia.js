@@ -48,4 +48,3 @@ if (contenedor && contenedor.innerHTML.trim() === "") { //si no encontró nada
     No se encontró la noticia con el nombre: <strong>${nombreNoticia}</strong>
     </p> `;
 }
-//# sourceMappingURL=detalleNoticia.js.map

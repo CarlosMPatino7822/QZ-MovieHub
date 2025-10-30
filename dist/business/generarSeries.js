@@ -53,4 +53,3 @@ export function generarSeries() {
  * sin tener que invocar directamente `generarSeries()`.
  */
 export const seriesArray = generarSeries();
-//# sourceMappingURL=generarSeries.js.map

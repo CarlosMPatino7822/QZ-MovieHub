@@ -19,4 +19,3 @@ export async function getNews() {
     const data = await res.json();
     return data.articles;
 }
-//# sourceMappingURL=news.js.map
