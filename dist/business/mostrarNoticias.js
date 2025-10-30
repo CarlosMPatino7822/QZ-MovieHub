@@ -1,4 +1,4 @@
-import { getNews } from "../newsapi/news.js";
+import { getTrendingMovies, getUpcomingMovies } from "../newsapi/news.js";
 async function mostrarNoticias() {
     const contenedor = document.getElementById("contenedor-news");
     if (!contenedor) {
@@ -6,43 +6,64 @@ async function mostrarNoticias() {
         return;
     }
     contenedor.innerHTML = "<p>Cargando noticias...</p>";
-    //obtenemos las noticias desde la API
-    const noticias = await getNews();
-    contenedor.innerHTML = "";
-    if (!noticias || noticias.length === 0) { //si no hay noticias
-        contenedor.innerHTML = "<p>No se encontraron noticias.</p>";
-        return;
-    }
-    console.log("contenedor encontrado");
-    //recorremos el arreglo de noticias y generamos el html
-    for (let i = 0; i < noticias.length; i++) {
-        const noticia = noticias[i];
-        if (noticia) {
-            contenedor.innerHTML += `
-            <div class="news">
-                <img src="${noticia.urlToImage}" alt="${noticia.urlToImage}">
-                <div>
-                    <h2>${noticia.title}</h2>
-                    <p><strong>Fecha de publicación:</strong> ${noticia.publishedAt}</p>
-                    <p><strong>Autor:</strong> ${noticia.author}</p>
-                    <button class="btn-detalles" data-nombre="${noticia.title}">
-                        Ver noticia completa
-                    </button>
-                    <hr>
-                </div>
-            </div>
-            `;
+    try {
+        // Obtenemos películas en tendencia y próximas
+        const trending = await getTrendingMovies();
+        const upcoming = await getUpcomingMovies();
+        // Combinamos ambas listas (primero trending, luego upcoming)
+        const noticias = [...trending.slice(0, 10), ...upcoming.slice(0, 10)];
+        contenedor.innerHTML = "";
+        if (!noticias || noticias.length === 0) {
+            contenedor.innerHTML = "<p>No se encontraron noticias.</p>";
+            return;
         }
-    }
-    contenedor.addEventListener("click", (e) => {
-        const target = e.target;
-        if (target.classList.contains("btn-detalles")) {
-            const nombreNoticia = target.getAttribute("data-nombre");
-            if (nombreNoticia) {
-                window.location.href = `detalleNoticia.html?nombre=${encodeURIComponent(nombreNoticia)}`;
+        console.log("contenedor encontrado");
+        // Recorremos el arreglo de noticias y generamos el html
+        for (let i = 0; i < noticias.length; i++) {
+            const noticia = noticias[i];
+            if (noticia) {
+                // Formateamos la fecha
+                const fecha = new Date(noticia.release_date).toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                // URL de la imagen
+                const imagenUrl = noticia.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${noticia.poster_path}`
+                    : 'https://via.placeholder.com/500x750?text=Sin+Imagen';
+                contenedor.innerHTML += `
+                <div class="news">
+                    <img src="${imagenUrl}" alt="${noticia.title}">
+                    <div>
+                        <h2>${noticia.title}</h2>
+                        <p><strong>Fecha de publicación:</strong> ${fecha}</p>
+                        <p><strong>Popularidad:</strong> ⭐ ${noticia.popularity.toFixed(1)}</p>
+                        <p><strong>Descripción:</strong> ${noticia.overview || 'Sin descripción disponible'}</p>
+                        <button class="btn-detalles" data-nombre="${noticia.title}">
+                            Ver noticia completa
+                        </button>
+                        <hr>
+                    </div>
+                </div>
+                `;
             }
         }
-    });
+        // Delegación de eventos para los botones
+        contenedor.addEventListener("click", (e) => {
+            const target = e.target;
+            if (target.classList.contains("btn-detalles")) {
+                const nombreNoticia = target.getAttribute("data-nombre");
+                if (nombreNoticia) {
+                    window.location.href = `detalleNoticia.html?nombre=${encodeURIComponent(nombreNoticia)}`;
+                }
+            }
+        });
+    }
+    catch (error) {
+        console.error("Error al cargar noticias:", error);
+        contenedor.innerHTML = "<p>Error al cargar las noticias. Intenta de nuevo más tarde.</p>";
+    }
 }
 // Agregar el evento al botón para mostrar las noticias
 document.addEventListener('DOMContentLoaded', () => {
