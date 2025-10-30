@@ -1,0 +1,224 @@
+ * {
+        margin: 0; /* elimina el margen externo (evita espacios no deseados alrededor)*/
+        padding: 0; /* elimina el relleno interno por defecto */
+        box-sizing: border-box; /* Incluye border y padding en el ancho total */
+    }
+
+    body {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        background: radial-gradient(circle, rgb(214, 168, 182) 0%, rgba(30, 115, 135, 1) 100%);
+        color: white; /*color texto por defecto*/ 
+        padding: 20px; /* espaciado interno */
+        font-size: 16px; /* tamaño base de letra para el documento*/
+    }
+
+    h1 {
+        display: flex;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /*esto se utiliza para settear la fuente de el titulos */
+        font-size: 3rem;
+        background: linear-gradient(100deg, #755465, #708dc7);
+        -webkit-text-fill-color: transparent; /* para que el texto quede transparente y mostrar el gradiente */
+        background-clip: text; /* recorta el fondo para que sólo se muestre dentro de las letras*/
+    }
+    
+    h2 {
+        text-align: center;
+        margin-bottom: 30px; /* separa del siguiente elemento (espacio inferior)*/
+        font-size: 30px;
+    }
+
+    section {
+        background: rgba(255, 255, 255, 0.1); /*(10% de opacidad)*/
+        backdrop-filter: blur(15px); /* aplica desenfoque al contenido que queda detrás*/
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 2rem; /* espacio interno (2rem = 2 * tamaño raíz) */
+        border-radius: 20px; /* esquinas redondeadas*/
+        margin: 20px auto;
+    }
+
+    input {
+        padding: 12px; /* espacio dentro del campo de texto */
+        margin-bottom: 15px; /* espacio debajo del input */
+        border-radius: 25px; 
+        background: rgba(255, 255, 255, 0.5);
+        border: 2px solid #bebebe;
+        width: 300px;
+        font-size: 14px;
+    }
+
+    input::placeholder {
+        color: #555555; /*color de texto*/
+    }
+
+    .pelicula {
+        background: #fff;
+        border-radius: 12px;
+        padding: 15px;
+        margin: 15px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        display: flex; /*los elementos hijos se ponen en una fila horizontal */
+        align-items: flex-start; /* alinea los items al inicio verticalmente*/
+    }
+
+    .pelicula img { /*imagenes de peliculas*/
+        width: 120px;
+        height: auto;
+        border-radius: 8px;
+        margin-right: 15px;
+    }
+
+    .pelicula h2 { /*texto de las pelis*/
+        margin: 0;
+        color: #333;
+    }
+
+    .pelicula p {
+        margin: 5px 0;
+        color: #555;
+    }
+
+    button {
+        background-color: #1E7387;
+        color: white;
+        margin: 10px auto;
+        width: 200px;
+        margin: 10px;
+        border-radius: 20px;
+        padding: 15px;
+        font-weight: bold;
+        font-size: 14px;
+        border: 1px solid #8f9091;
+    }
+
+    .button-NewPagina {
+        display: block;
+        background-color: aliceblue;
+        color: #333;
+        border-radius: 10px;
+        width: 500px;
+        font-size: 20px;
+        transition: all 0.5s ease;
+    }
+
+    .cuenta {
+        background: linear-gradient(100deg, #5b609b, #708dc7);
+        color: whitesmoke;
+        width: 50px;
+        height: 50px;
+        border-radius: 100px;
+        font-weight: bold;
+        font-size: 16px;
+        border: 1px solid #8f9091;
+        margin-left: 1170px;
+    
+        /* Propiedades para centrar el contenido */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        /* Opcional: mejorar la interacción */
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+    .contenedor-busqueda {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px; /* controla separación */
+    }
+
+    button:hover { /*Cuando pasan el puntero en el botón*/
+        background: linear-gradient(90deg, #755465, #708dc7);
+        font-weight: bold;
+        color: black; /*color de la letra*/
+        border: 1px solid #5e5d5d;
+    }
+
+    .contenedor {
+      display: flex; /* pone los elementos en la misma línea */
+      grid-template-columns: 150px 1fr;       
+      align-items: center; /* alinea verticalmente */
+      gap: 10px;           /* espacio entre ellos */
+      margin: 10px auto;
+      max-width: 400px;
+    }
+
+    /*SECCIÓN DE LOGIN*/
+    .seccion-login {
+        max-width: 600px;
+        height: 450px;
+        margin: 40px auto; /*para centrar*/
+        padding: 3rem;
+    }
+    .formulario-login {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    .seccion-login button {
+        margin-top: 50px;
+        width: 100%;   /* botón ocupa todo el ancho */
+    }
+
+    .miCuenta {
+        display: flex;
+        flex-direction: column; /* apila en columna */
+        align-items: center;
+        margin-bottom: 15px; /*espacio por debajo del bloque*/
+    }
+
+    .volver {
+        background-color: #1E7387;
+        color: white;
+        margin: 10px auto;
+        width: 50px;
+        margin: 10px;
+        border-radius: 20px;
+        padding: 15px;
+        font-weight: bold;
+        font-size: 14px;
+        border: 1px solid #8f9091;
+    }
+
+    .news {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        margin-bottom: 25px;
+        padding: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+    }
+
+    .news img {
+        width: 220px;
+        height: 190px;
+        border-radius: 8px;
+        object-fit: cover;
+        margin-right: 15px;
+    }
+
+    .detalle {
+        display: flex; /* coloca la imagen y el texto en una fila horizontal */
+        align-items: flex-start; /* alinea arriba verticalmente */
+        gap: 25px; /* separación entre la imagen y el texto */
+        padding: 20px;
+        margin-top: 30px;
+    }
+
+    .detalle img {
+        width: 500px;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+    
+    .detalle h2 {
+        font-size: 2rem;
+        text-align: center;
+        font-family: 'Times New Roman', Times, serif;
+    }

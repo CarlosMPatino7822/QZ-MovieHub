@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de la noticia</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+    <section>
+        <button id="btnVolver">« Volver</button>
+        <h1>MoviesHub Noticias</h1>
+    </section>
+
+    <!-- se carga la noticia en esta sección -->
+    <section id="detalle-contenedor">
+        <h2>Detalle de la noticia</h2>
+        <div id="detalle-noticia">
+            <p>Cargando detalle de la noticia...</p>
+        </div>
+    </section>
+
+    <!--PARA VOLVER A LA PESTAÑA ANTERIOR -->
+    <script>
+        document.getElementById("btnVolver")?.addEventListener("click", function () {
+        window.location.href = "noticias.html";
+        });
+    </script>
+
+    <script type="module" src="../dist/business/detalleNoticia.js"></script>
+
+</body>
+</html>

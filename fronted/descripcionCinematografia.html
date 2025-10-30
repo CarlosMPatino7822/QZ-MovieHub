@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descripción de peliculas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+
+    <section>
+        <button id="btnVolver">« Volver</button>
+        <h1>¡Bienvenido a MoviesHub!</h1>
+    </section>
+
+    <section class="descripcion-cinematografia" id="detalle-contenedor">
+        <h2>Descripción de cinematografía</h2>
+        
+        <div id="class">- Esta interfaz está en proceso.</div>
+
+    </section>
+
+    <script type="module" src="../dist/business/detalleCinematografia.js"></script>
+
+    <script>
+        document.getElementById("btnVolver")?.addEventListener("click", function () {
+        window.location.href = "Index.html";
+        });
+    </script>
+
+</body>
+
+</html>
