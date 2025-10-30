@@ -1,6 +1,6 @@
 import { Serie } from "../modelo/Serie.js";
 import { getPopularTVShows } from "../tmdb/tmdb.js";
-async function MostrarSeries() {
+async function mostrarSeries() {
     console.log("Mostrando series");
     console.log("sigue el proceso");
     console.log("Aca si entro :D");
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCargarSeries = document.getElementById('btn-cargarSeries');
     if (btnCargarSeries) {
         btnCargarSeries.addEventListener('click', () => {
-            MostrarSeries();
+            mostrarSeries();
         });
     }
 });
