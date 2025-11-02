@@ -1,38 +1,44 @@
-import { getNews } from "../newsapi/news.js";
-//obtenemos el parámetro "nombre" desde la URL
+import { getTrendingMovies, getUpcomingMovies } from "../newsapi/news.js";
+// Obtenemos el parámetro "nombre" desde la URL
 const params = new URLSearchParams(window.location.search);
 const nombreNoticia = params.get("nombre");
 console.log("Noticia seleccionada desde la URL: ", nombreNoticia);
-//obtenemos todas la noticias desde la API
-const noticias = await getNews();
-//obtenemos el contenedor donde se mostrará el detalle de la noticia
+// Obtenemos todas las películas desde la API
+const trending = await getTrendingMovies();
+const upcoming = await getUpcomingMovies();
+const noticias = [...trending, ...upcoming];
+// Obtenemos el contenedor donde se mostrará el detalle de la noticia
 const contenedor = document.getElementById("detalle-contenedor");
 let html = "";
-//buscamos la noticia por su título
+// Buscamos la película por su título
 for (let i = 0; i < noticias.length; i++) {
     const noticia = noticias[i];
     // Compara el título con el nombre obtenido de la URL
     if (noticia && noticia.title === nombreNoticia && contenedor) {
-        const imagen = noticia.urlToImage || "https://via.placeholder.com/500x300?text=Sin+imagen";
-        const descripcion = noticia.description || "Sin descripción disponible.";
-        const contenido = noticia.content || "";
-        const autor = noticia.author || noticia.source?.name || "Desconocido";
-        const fecha = noticia.publishedAt
-            ? new Date(noticia.publishedAt).toLocaleString("es-ES")
+        const imagen = noticia.poster_path
+            ? `https://image.tmdb.org/t/p/w780${noticia.poster_path}`
+            : "https://via.placeholder.com/780x1170?text=Sin+imagen";
+        const descripcion = noticia.overview || "Sin descripción disponible.";
+        const fecha = noticia.release_date
+            ? new Date(noticia.release_date).toLocaleDateString("es-ES", {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            })
             : "Fecha desconocida";
-        const enlace = noticia.url || "#";
+        // Enlace a la página de TMDB de la película
+        const enlace = `https://www.themoviedb.org/movie/${noticia.id}`;
         html = `
       <div class="detalle">
-        <img src="${noticia.urlToImage}" alt="${noticia.title}">
+        <img src="${imagen}" alt="${noticia.title}">
         <div>
           <h2>${noticia.title}</h2>
-          <p><strong>Autor:</strong> ${autor}</p>
-          <p><strong>Fecha de publicación:</strong> ${fecha}</p>
+          <p><strong>Fecha de estreno:</strong> ${fecha}</p>
+          <p><strong>Popularidad:</strong> ⭐ ${noticia.popularity.toFixed(1)}</p>
           <p><strong>Descripción:</strong> ${descripcion}</p>
-          <p>${contenido}</p>
           <p>
             <a href="${enlace}" target="_blank" rel="noopener noreferrer">
-              Ver noticia completa 🔗
+              Ver más información en TMDB 🔗
             </a>
           </p>
         </div>
@@ -42,9 +48,9 @@ for (let i = 0; i < noticias.length; i++) {
         break;
     }
 }
-if (contenedor && contenedor.innerHTML.trim() === "") { //si no encontró nada
+if (contenedor && contenedor.innerHTML.trim() === "") { // Si no encontró nada
     contenedor.innerHTML = `
     <p style="color:red;">
-    No se encontró la noticia con el nombre: <strong>${nombreNoticia}</strong>
-    </p> `;
+    No se encontró la película con el nombre: <strong>${nombreNoticia}</strong>
+    </p>`;
 }

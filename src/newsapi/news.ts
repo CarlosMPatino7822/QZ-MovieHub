@@ -1,40 +1,39 @@
-const API_KEY = "6d30ac3094ba483db18fe40cb5ba81ef"; 
+const TMDB_API_KEY = "301bfb1e19e55044b6df5cff678b9df2";
+const BASE_URL = "https://api.themoviedb.org/3";
 
-export async function getMovieNews() {
+export interface MovieNews {
+  id: number;
+  title: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  popularity: number;
+}
+
+// Obtener películas próximas (funciona como noticias)
+export async function getUpcomingMovies(): Promise<MovieNews[]> {
+  const url = `${BASE_URL}/movie/upcoming?api_key=${TMDB_API_KEY}&language=es-ES`;
+  
   try {
-    const response = await fetch(
-      `https://newsapi.org/v2/everything?q=cinema&language=es&apiKey=6d30ac3094ba483db18fe40cb5ba81ef`
-    );
-
-    if (!response.ok) {
-      throw new Error("Error al obtener noticias del servidor");
-      return [];
-    }
+    const response = await fetch(url);
     const data = await response.json();
-    return Array.isArray(data.articles) ? data.articles : [];
-    } catch (error) {
-    console.error("Error en getMovieNews:", error);
+    return data.results || [];
+  } catch (error) {
+    console.error("Error al obtener películas próximas:", error);
     return [];
   }
 }
 
-export interface NewsArticle {
-  source: {
-    id: string | null;
-    name: string;
-  };
-  author: string | null;
-  title: string;
-  description: string;
-  url: string;
-  urlToImage: string | null;
-  publishedAt: string;
-  content: string;
-}
-
-export async function getNews(): Promise<NewsArticle[]> {
-  const res = await fetch(`https://newsapi.org/v2/everything?q=movies&language=es&apiKey=${API_KEY}`);
-  const data = await res.json();
-  return data.articles;
-
+// Obtener películas en tendencia (últimas 24 horas)
+export async function getTrendingMovies(): Promise<MovieNews[]> {
+  const url = `${BASE_URL}/trending/movie/day?api_key=${TMDB_API_KEY}&language=es-ES`;
+  
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.results || [];
+  } catch (error) {
+    console.error("Error al obtener películas en tendencia:", error);
+    return [];
+  }
 }
