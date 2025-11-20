@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start': new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-MG4NNSPQ');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - qzMoviesHub </title>
+    <meta name="keywords" content="qzMoviesHub, MovieHub, peliculas, noticias de peliculas">
+    <meta name="description" content="Encuentra información sobre series y peliculas. Verás las proximos lanzamientos en peliculas o series.">
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MG4NNSPQ" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    <section>
+        <h1>MoviesHub</h1>
+        <div class="header-right">
+            <button id="btn-ToLogin" class="button">Iniciar sesión</button>
+            <button id="btn-ToSignUp" class="">Registrarme</button>
+        </div>
+    </section>
+
+    <section>
+        <div class="welcome" id="Welcome">
+            <h3>¡Bienvenido a MovieHub 🎬!</h3>
+            <p>Encuentra información sobre series y peliculas. Podrás conocer los proximos lanzamientos.</p>
+            <button id="btn-ToSignUp">Comenzar</button>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("btn-ToSignUp")?.addEventListener("click", function () {
+            window.location.href = "reg.html";
+        });
+    </script>
+
+</body>
+
+</html>

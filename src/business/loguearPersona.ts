@@ -1,7 +1,7 @@
 import { User } from "../modelo/user.js";
-import { users } from "./generarUsers.js";
 import { Admin } from "../modelo/admin.js";
-import { admins } from "./generarAdmins.js";
+import { getAdmins } from "../business/generarAdmins.js";
+import { verifyPassword } from "./hashPassword.js";
 
 function cargarUsersDesdeLocalStorage(): User[] {
     const datos = localStorage.getItem("users");
@@ -27,12 +27,13 @@ function cargarUsersDesdeLocalStorage(): User[] {
     ));
 }
 
-export function loguearUser(cedula: string, contraseña: string): User | null {
+export async function loguearUser(cedula: string, contraseña: string): Promise<User | null> {
 
-    const users = cargarUsersDesdeLocalStorage(); //cargamos los usuarios que esten en el local storage
+    const users = cargarUsersDesdeLocalStorage(); // Cargamos los usuarios del localStorage
 
     for (const user of users) {
-        if (user.cedula === cedula && user.clave === contraseña) {
+        // Compara cedula y contraseña hasheada
+        if (user.cedula === cedula && await verifyPassword(contraseña, user.clave)) {
             user.logIn();
             return user;
         }
@@ -41,15 +42,19 @@ export function loguearUser(cedula: string, contraseña: string): User | null {
     return null;
 }
 
-export function loguearAdmin(cedula: string, contraseña: string): Admin | null {
+
+export async function loguearAdmin(cedula: string, contraseña: string): Promise<Admin | null> {
+
+    const admins = await getAdmins();
+
     for (const admin of admins) {
-        if (admin.cedula === cedula && admin.clave === contraseña) {
+        // Comparamos cédula y contraseña hasheada
+        if (admin.cedula === cedula && await verifyPassword(contraseña, admin.clave)) {
             admin.logIn();
             return admin;
-        } else {
-            console.log("Admin oontraseña")
         }
     }
+
     return null;
 }
 
@@ -59,33 +64,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const contraseñaInput = document.getElementById('contraseñaLoguear') as HTMLInputElement;
 
     // Agregar listener al botón
-    btnLogin?.addEventListener('click', () => {
-        // Obtener valores
-        const cedula = cedulaInput.value.trim();
-        const contraseña = contraseñaInput.value;
+    btnLogin?.addEventListener('click', async () => {
+    const cedula = cedulaInput.value.trim();
+    const contraseña = contraseñaInput.value;
 
-        // Validar que se hayan ingresado datos
-        if (!cedula || !contraseña) {
-            alert('Por favor, ingresa tu cédula y contraseña');
-            return;
-        }
+    if (!cedula || !contraseña) {
+        alert('Por favor, ingresa tu cédula y contraseña');
+        return;
+    }
 
         
-        const admin = loguearAdmin(cedula, contraseña);
-        if (admin) {
-            alert(`¡Bienvenido/a Admin ${admin.nombre || 'Usuario'}!`);
-            window.location.href = 'fronted/PanelInicioAdmin.html';
-            return;
-        }
+    const admin = await loguearAdmin(cedula, contraseña);
+    if (admin) {
+        alert(`¡Bienvenido/a Admin!`);
+        localStorage.setItem("sessionType", "admin");
+        localStorage.setItem("sessionCedula", admin.cedula);
+        window.location.href = 'fronted/PanelInicioAdmin.html';
+        return;
+    }
 
         // Si no es admin, probamos como user
-        const user = loguearUser(cedula, contraseña);
+        const user = await loguearUser(cedula, contraseña);
         if (user) {
-            alert(`¡Bienvenido/a ${user.nombre || 'Usuario'}!`);
-            window.location.href = 'fronted/index.html';
+            // GUARDAR SESIÓN
+            localStorage.setItem("sessionType", "user");
+            localStorage.setItem("sessionCedula", user.cedula);
+
+            alert(`¡Bienvenido/a ${'Usuario'}!`);
+             window.location.href = `fronted/index.html?cedula=${encodeURIComponent(cedula)}`;
             return;
         }
-
         // Ninguno coincidió
         alert('Cédula o contraseña incorrecta. Por favor, intenta de nuevo.');
         contraseñaInput.value = '';

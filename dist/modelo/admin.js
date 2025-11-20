@@ -57,6 +57,9 @@ export class Admin extends User {
     getArl() {
         return this.arl;
     }
+    getNombre() {
+        return this.nombre;
+    }
     // ------------------- SETTERS -------------------
     /** Establece el identificador del administrador */
     setIdAdmin(value) {

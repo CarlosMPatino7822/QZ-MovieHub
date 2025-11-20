@@ -6,6 +6,8 @@
 import { Pelicula } from "../modelo/Pelicula.js";
 import { getPopularMovies } from "../tmdb/tmdb.js";
 
+import { generarUsers } from "./generarUsers.js";
+
 /**
  * Muestra las películas en el contenedor con id 'contenedor-Peliculas'.
  *
