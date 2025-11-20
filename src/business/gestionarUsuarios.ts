@@ -1,3 +1,4 @@
+
 import { User } from "../modelo/user.js";
 import { generarUsers } from "./generarUsers.js";
 
@@ -47,15 +48,18 @@ export class gestionarUsuarios {
             alert("Usuario editado correctamente");
             this.indiceEdicion = null;
             (document.getElementById("btnAddUser") as HTMLButtonElement).textContent = "Agregar Usuario";
+            
+            // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE EDITAR
+            localStorage.setItem('users', JSON.stringify(this.users));
         } else {
-            //VALIDAMOS SI EL USUARIO EXISTE
+            // VALIDAMOS SI EL USUARIO EXISTE
             const existe = this.users.find(u => u.cedula.toLowerCase() === cedula.toLowerCase());
             if (existe) {
                 alert("Ya existe un usuario con esta cédula. Intenta con otra");
                 return;
             }
 
-            //CREAMOS EL NUEVO USUARIO
+            // CREAMOS EL NUEVO USUARIO
             const nuevoUsuario = new User(
                 correo, idUser, pais, idiomaPrincipal, membresia,
                 cedula, nombre, apellido, edad, clave, direccion, peliculaFavorita
@@ -63,11 +67,13 @@ export class gestionarUsuarios {
 
             this.users.push(nuevoUsuario);
             alert("Usuario agregado exitosamente");
+            
+            // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE AGREGAR
+            localStorage.setItem('users', JSON.stringify(this.users));
         }
 
         this.limpiarFormulario();
         this.mostrarUsersEnTabla();
-
     }
 
     private eliminarUser(index: number): void {
@@ -79,56 +85,60 @@ export class gestionarUsuarios {
 
         this.users.splice(index, 1);
         alert("🗑️ Usuario eliminado correctamente");
+        
+        // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE ELIMINAR
+        localStorage.setItem('users', JSON.stringify(this.users));
+        
         this.mostrarUsersEnTabla();
     }
 
     public mostrarUsersEnTabla(): void {   
-    const tablaBody = document.querySelector("#tablaUsuarios tbody") as HTMLTableSectionElement;
-    if (!tablaBody) return;
+        const tablaBody = document.querySelector("#tablaUsuarios tbody") as HTMLTableSectionElement;
+        if (!tablaBody) return;
 
-    tablaBody.innerHTML = "";
+        tablaBody.innerHTML = "";
 
-    if (this.users.length === 0) {
-        tablaBody.innerHTML = `<tr><td colspan="13" style="text-align:center;">No hay usuarios registrados</td></tr>`;
-        return;
-    }
+        if (this.users.length === 0) {
+            tablaBody.innerHTML = `<tr><td colspan="13" style="text-align:center;">No hay usuarios registrados</td></tr>`;
+            return;
+        }
 
-    this.users.forEach((user, index) => {
-        const fila = document.createElement("tr");
-        fila.innerHTML = `
-            <td>${user.getIdUser()}</td>
-            <td>${user.getNombre()}</td>
-            <td>${user.getApellido()}</td>
-            <td>${user.getCedula()}</td>
-            <td>${user.getCorreo()}</td>
-            <td>${user.getEdad()}</td>
-            <td>${user.getPais()}</td>
-            <td>${user.getIdiomaPrincipal()}</td>
-            <td>${user.getDireccion()}</td>
-            <td>${user.getPeliculaFavorita()}</td>
-            <td>${user.getMembresia() ? "Sí" : "No"}</td>
-            <td>${user.isLoggedIn() ? "Activo" : "Inactivo"}</td>
-            <td>
-                <button class="btnEditar" data-index="${index}">✏️ Editar</button>
-                <button class="btnEliminar" data-index="${index}">🗑️ Eliminar</button>
-            </td>
-        `;
-        tablaBody.appendChild(fila);
-    });
-
-    tablaBody.querySelectorAll(".btnEliminar").forEach(btn => {
-        btn.addEventListener("click", e => {
-            const index = parseInt((e.target as HTMLElement).getAttribute("data-index") || "-1");
-            if (index >= 0) this.eliminarUser(index);
+        this.users.forEach((user, index) => {
+            const fila = document.createElement("tr");
+            fila.innerHTML = `
+                <td>${user.getIdUser()}</td>
+                <td>${user.getNombre()}</td>
+                <td>${user.getApellido()}</td>
+                <td>${user.getCedula()}</td>
+                <td>${user.getCorreo()}</td>
+                <td>${user.getEdad()}</td>
+                <td>${user.getPais()}</td>
+                <td>${user.getIdiomaPrincipal()}</td>
+                <td>${user.getDireccion()}</td>
+                <td>${user.getPeliculaFavorita()}</td>
+                <td>${user.getMembresia() ? "Sí" : "No"}</td>
+                <td>${user.isLoggedIn() ? "Activo" : "Inactivo"}</td>
+                <td>
+                    <button class="btnEditar" data-index="${index}">✏️ Editar</button>
+                    <button class="btnEliminar" data-index="${index}">🗑️ Eliminar</button>
+                </td>
+            `;
+            tablaBody.appendChild(fila);
         });
-    });
 
-    tablaBody.querySelectorAll(".btnEditar").forEach(btn => {
-        btn.addEventListener("click", e => {
-            const index = parseInt((e.target as HTMLElement).getAttribute("data-index") || "-1");
-            if (index >= 0) this.cargarUsersEnFormulario(index);
+        tablaBody.querySelectorAll(".btnEliminar").forEach(btn => {
+            btn.addEventListener("click", e => {
+                const index = parseInt((e.target as HTMLElement).getAttribute("data-index") || "-1");
+                if (index >= 0) this.eliminarUser(index);
+            });
         });
-    });
+
+        tablaBody.querySelectorAll(".btnEditar").forEach(btn => {
+            btn.addEventListener("click", e => {
+                const index = parseInt((e.target as HTMLElement).getAttribute("data-index") || "-1");
+                if (index >= 0) this.cargarUsersEnFormulario(index);
+            });
+        });
     }
 
     private cargarUsersEnFormulario(index: number): void {
@@ -152,7 +162,6 @@ export class gestionarUsuarios {
         (document.getElementById("btnAddUser") as HTMLButtonElement).textContent = "Guardar Cambios";
     }
 
-
     // LIMPIAR FORMULARIO
     private limpiarFormulario(): void {
         const campos = [
@@ -169,7 +178,6 @@ export class gestionarUsuarios {
             }
         });
     }
-
 }
 
 // Instancia global
@@ -180,4 +188,3 @@ window.addEventListener("DOMContentLoaded", () => gestorUsers.mostrarUsersEnTabl
 
 // Exportar
 export const gestionModule = gestorUsers;
-

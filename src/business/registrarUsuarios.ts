@@ -47,6 +47,9 @@ export class registrarUsuarios {
             alert("Usuario editado correctamente");
             this.indiceEdicion = null;
             (document.getElementById("btnAddUser") as HTMLButtonElement).textContent = "Agregar Usuario";
+
+            // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE EDITAR
+            localStorage.setItem('users', JSON.stringify(this.users));
         } else {
             //VALIDAMOS SI EL USUARIO EXISTE
             const existe = this.users.find(u => u.cedula.toLowerCase() === cedula.toLowerCase());
@@ -63,10 +66,12 @@ export class registrarUsuarios {
 
             this.users.push(nuevoUsuario);
             alert("Usuario agregado exitosamente");
+
+            // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE AGREGAR
+            localStorage.setItem('users', JSON.stringify(this.users));
         }
 
         this.limpiarFormulario();
-
     }
 
     // LIMPIAR FORMULARIO
