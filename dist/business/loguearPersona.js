@@ -2,14 +2,20 @@ import { User } from "../modelo/user.js";
 import { users } from "./generarUsers.js";
 import { Admin } from "../modelo/admin.js";
 import { admins } from "./generarAdmins.js";
+function cargarUsersDesdeLocalStorage() {
+    const datos = localStorage.getItem("users");
+    if (!datos)
+        return []; // No hay usuarios
+    const lista = JSON.parse(datos);
+    // Reconstruir objetos como instancias de User
+    return lista.map((u) => new User(u.correo, u.idUser, u.pais, u.idiomaPrincipal, u.membresia, u.cedula, u.nombre, u.apellido, u.edad, u.clave, u.direccion, u.peliculaFavorita));
+}
 export function loguearUser(cedula, contraseña) {
+    const users = cargarUsersDesdeLocalStorage(); // ⬅ AQUI ESTA EL CAMBIO
     for (const user of users) {
         if (user.cedula === cedula && user.clave === contraseña) {
             user.logIn();
             return user;
-        }
-        else {
-            console.log("Usuario oontraseña");
         }
     }
     return null;

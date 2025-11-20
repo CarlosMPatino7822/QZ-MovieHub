@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start': new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-MG4NNSPQ');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up - MovieHub</title>
+    <link rel="stylesheet" href="/fronted/Style.css">
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MG4NNSPQ"
+                height="0" width="0"
+                style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <section>
+        <h1>¡Bienvenido a MovieHub 🎬!</h1>
+    </section>
+
+    <section class="seccion-login">
+        <h2>Registrarse</h2>
+
+        <form id="formRegistro">
+
+            <div class="formulario-signup">
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" placeholder="Ingresa tu correo">
+            </div>
+
+            <div class="formulario-signup">
+                <label for="idUser">ID Usuario:</label>
+                <input type="text" id="idUser" placeholder="Ej: U001">
+            </div>
+
+            <div class="formulario-signup">
+                <label for="pais">País:</label>
+                <input type="text" id="pais" placeholder="Ingresa tu país">
+            </div>
+
+            <div class="formulario-signup">
+                <label for="idioma">Idioma principal:</label>
+                <input type="text" id="idioma" placeholder="Ej: Español">
+            </div>
+
+            <div class="formulario-signup">
+                <label for="membresia">¿Tiene membresía?</label>
+                <select id="membresia">
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
+            <div class="formulario-signup">
+                <label for="cedula">Cédula:</label>
+                <input type="number" id="cedula" placeholder="Ingresa tu cédula">
+            </div>
+
+            <div class="formulario-signup">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" placeholder="Ingresa tu nombre">
+            </div>
+
+            <div class="formulario-signup">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" placeholder="Ingresa tu apellido">
+            </div>
+
+            <div class="formulario-signup">
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" placeholder="Ingresa tu edad">
+            </div>
+
+            <div class="formulario-signup">
+                <label for="clave">Contraseña:</label>
+                <input type="password" id="clave" placeholder="Ingresa una contraseña">
+            </div>
+
+            <div class="formulario-signup">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" placeholder="Ingresa tu dirección">
+            </div>
+
+            <div class="formulario-signup">
+                <label for="peliculaFavorita">Película favorita:</label>
+                <input type="text" id="peliculaFavorita" placeholder="Ej: Matrix">
+            </div>
+
+            <button type="button" id="btnRegistrar">Registrarme</button>
+        </form>
+
+    </section>
+
+    <script type="module" src="dist/business/RegistrarPersona.js"></script>
+
+</body>
+</html>

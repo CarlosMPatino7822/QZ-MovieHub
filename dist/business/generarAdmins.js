@@ -7,4 +7,17 @@ export function generarAdmins() {
     ];
     return admins;
 }
+function cargarAdmins() {
+    let admins = [];
+    const guardados = localStorage.getItem('admins');
+    if (guardados) {
+        // Parsear y reconstruir instancias
+        admins = JSON.parse(guardados).map((data) => new Admin(data.correo, data.pais, data.idiomaPrincipal, data.membresia, data.cedula, data.nombre, data.apellido, data.edad, data.clave, data.direccion, data.peliculaFavorita, data.idAdmin, data.telefono, data.fechaIngreso, data.eps, data.arl));
+    }
+    else {
+        admins = generarAdmins();
+        localStorage.setItem('admins', JSON.stringify(admins));
+    }
+    return admins;
+}
 export const admins = generarAdmins();
