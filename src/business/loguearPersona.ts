@@ -3,16 +3,41 @@ import { users } from "./generarUsers.js";
 import { Admin } from "../modelo/admin.js";
 import { admins } from "./generarAdmins.js";
 
+function cargarUsersDesdeLocalStorage(): User[] {
+    const datos = localStorage.getItem("users");
+
+    if (!datos) return []; // No hay usuarios
+
+    const lista = JSON.parse(datos); //JSON.parse para convertir el string en un objeto
+
+    // Reconstruir cada objeto como una instancia de la clase User ya que de otra forma no tendria los metodos de la clase
+    return lista.map((u: any) => new User(
+        u.correo,
+        u.idUser,
+        u.pais,
+        u.idiomaPrincipal,
+        u.membresia,
+        u.cedula,
+        u.nombre,
+        u.apellido,
+        u.edad,
+        u.clave,
+        u.direccion,
+        u.peliculaFavorita
+    ));
+}
 
 export function loguearUser(cedula: string, contraseña: string): User | null {
+
+    const users = cargarUsersDesdeLocalStorage(); //cargamos los usuarios que esten en el local storage
+
     for (const user of users) {
         if (user.cedula === cedula && user.clave === contraseña) {
             user.logIn();
             return user;
-        } else {
-            console.log("Usuario oontraseña")
         }
     }
+
     return null;
 }
 

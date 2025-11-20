@@ -4,6 +4,17 @@ export class gestionarUsuarios {
     constructor() {
         this.users = generarUsers();
         this.indiceEdicion = null;
+        const usuariosGuardados = localStorage.getItem('users');
+        if (usuariosGuardados) {
+            const lista = JSON.parse(usuariosGuardados);
+            // Reconstruir cada objeto como una instancia de la clase User
+            this.users = lista.map((u) => new User(u.correo, u.idUser, u.pais, u.idiomaPrincipal, u.membresia, u.cedula, u.nombre, u.apellido, u.edad, u.clave, u.direccion, u.peliculaFavorita));
+        }
+        else {
+            this.users = generarUsers();
+            localStorage.setItem('users', JSON.stringify(this.users));
+        }
+        this.indiceEdicion = null;
     }
     agregarUsuario() {
         const correo = document.getElementById("NewUserCorreo").value.trim();
@@ -42,18 +53,22 @@ export class gestionarUsuarios {
             alert("Usuario editado correctamente");
             this.indiceEdicion = null;
             document.getElementById("btnAddUser").textContent = "Agregar Usuario";
+            // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE EDITAR
+            localStorage.setItem('users', JSON.stringify(this.users));
         }
         else {
-            //VALIDAMOS SI EL USUARIO EXISTE
+            // VALIDAMOS SI EL USUARIO EXISTE
             const existe = this.users.find(u => u.cedula.toLowerCase() === cedula.toLowerCase());
             if (existe) {
                 alert("Ya existe un usuario con esta cédula. Intenta con otra");
                 return;
             }
-            //CREAMOS EL NUEVO USUARIO
+            // CREAMOS EL NUEVO USUARIO
             const nuevoUsuario = new User(correo, idUser, pais, idiomaPrincipal, membresia, cedula, nombre, apellido, edad, clave, direccion, peliculaFavorita);
             this.users.push(nuevoUsuario);
             alert("Usuario agregado exitosamente");
+            // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE AGREGAR
+            localStorage.setItem('users', JSON.stringify(this.users));
         }
         this.limpiarFormulario();
         this.mostrarUsersEnTabla();
@@ -67,6 +82,8 @@ export class gestionarUsuarios {
             return;
         this.users.splice(index, 1);
         alert("🗑️ Usuario eliminado correctamente");
+        // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE ELIMINAR
+        localStorage.setItem('users', JSON.stringify(this.users));
         this.mostrarUsersEnTabla();
     }
     mostrarUsersEnTabla() {
@@ -81,23 +98,23 @@ export class gestionarUsuarios {
         this.users.forEach((user, index) => {
             const fila = document.createElement("tr");
             fila.innerHTML = `
-            <td>${user.getIdUser()}</td>
-            <td>${user.getNombre()}</td>
-            <td>${user.getApellido()}</td>
-            <td>${user.getCedula()}</td>
-            <td>${user.getCorreo()}</td>
-            <td>${user.getEdad()}</td>
-            <td>${user.getPais()}</td>
-            <td>${user.getIdiomaPrincipal()}</td>
-            <td>${user.getDireccion()}</td>
-            <td>${user.getPeliculaFavorita()}</td>
-            <td>${user.getMembresia() ? "Sí" : "No"}</td>
-            <td>${user.isLoggedIn() ? "Activo" : "Inactivo"}</td>
-            <td>
-                <button class="btnEditar" data-index="${index}">✏️ Editar</button>
-                <button class="btnEliminar" data-index="${index}">🗑️ Eliminar</button>
-            </td>
-        `;
+                <td>${user.getIdUser()}</td>
+                <td>${user.getNombre()}</td>
+                <td>${user.getApellido()}</td>
+                <td>${user.getCedula()}</td>
+                <td>${user.getCorreo()}</td>
+                <td>${user.getEdad()}</td>
+                <td>${user.getPais()}</td>
+                <td>${user.getIdiomaPrincipal()}</td>
+                <td>${user.getDireccion()}</td>
+                <td>${user.getPeliculaFavorita()}</td>
+                <td>${user.getMembresia() ? "Sí" : "No"}</td>
+                <td>${user.isLoggedIn() ? "Activo" : "Inactivo"}</td>
+                <td>
+                    <button class="btnEditar" data-index="${index}">✏️ Editar</button>
+                    <button class="btnEliminar" data-index="${index}">🗑️ Eliminar</button>
+                </td>
+            `;
             tablaBody.appendChild(fila);
         });
         tablaBody.querySelectorAll(".btnEliminar").forEach(btn => {

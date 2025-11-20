@@ -27,5 +27,17 @@ export function generarUsers() {
     ];
     return users;
 }
+function cargarUsers() {
+    let users = [];
+    const guardados = localStorage.getItem('users');
+    if (guardados) {
+        users = JSON.parse(guardados).map((data) => new User(data.correo, data.idUser, data.pais, data.idiomaPrincipal, data.membresia, data.cedula, data.nombre, data.apellido, data.edad, data.clave, data.direccion, data.peliculaFavorita));
+    }
+    else {
+        users = generarUsers();
+        localStorage.setItem('users', JSON.stringify(users));
+    }
+    return users;
+}
 // Exportamos la lista generada directamente
 export const users = generarUsers();
