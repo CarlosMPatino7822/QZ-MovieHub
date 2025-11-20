@@ -1,11 +1,12 @@
-import { User } from "../modelo/user.js";
+/*import { User } from "../modelo/user.js";
 import { generarUsers } from "./generarUsers.js";
 
 export class registrarUsuarios {
+
     users: User[] = generarUsers();
     private indiceEdicion: number | null = null;
 
-    public agregarUsuario(): void {
+    public async agregarUsuario(): Promise<void> {
         const correo = (document.getElementById("NewUserCorreo") as HTMLInputElement).value.trim();
         const idUser = (document.getElementById("NewUserIdUser") as HTMLInputElement).value.trim();
         const pais = (document.getElementById("NewUserPais") as HTMLInputElement).value.trim();
@@ -99,3 +100,4 @@ document.getElementById("btnAddUser")?.addEventListener("click", () => registrar
 
 // Exportar
 export const gestionModule = registrarUsuario;
+*/

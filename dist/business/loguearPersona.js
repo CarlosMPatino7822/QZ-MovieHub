@@ -1,33 +1,33 @@
 import { User } from "../modelo/user.js";
-import { users } from "./generarUsers.js";
 import { Admin } from "../modelo/admin.js";
-import { admins } from "./generarAdmins.js";
+import { getAdmins } from "../business/generarAdmins.js";
+import { verifyPassword } from "./hashPassword.js";
 function cargarUsersDesdeLocalStorage() {
     const datos = localStorage.getItem("users");
     if (!datos)
         return []; // No hay usuarios
-    const lista = JSON.parse(datos);
-    // Reconstruir objetos como instancias de User
+    const lista = JSON.parse(datos); //JSON.parse para convertir el string en un objeto
+    // Reconstruir cada objeto como una instancia de la clase User ya que de otra forma no tendria los metodos de la clase
     return lista.map((u) => new User(u.correo, u.idUser, u.pais, u.idiomaPrincipal, u.membresia, u.cedula, u.nombre, u.apellido, u.edad, u.clave, u.direccion, u.peliculaFavorita));
 }
-export function loguearUser(cedula, contraseña) {
-    const users = cargarUsersDesdeLocalStorage(); // ⬅ AQUI ESTA EL CAMBIO
+export async function loguearUser(cedula, contraseña) {
+    const users = cargarUsersDesdeLocalStorage(); // Cargamos los usuarios del localStorage
     for (const user of users) {
-        if (user.cedula === cedula && user.clave === contraseña) {
+        // Compara cedula y contraseña hasheada
+        if (user.cedula === cedula && await verifyPassword(contraseña, user.clave)) {
             user.logIn();
             return user;
         }
     }
     return null;
 }
-export function loguearAdmin(cedula, contraseña) {
+export async function loguearAdmin(cedula, contraseña) {
+    const admins = await getAdmins();
     for (const admin of admins) {
-        if (admin.cedula === cedula && admin.clave === contraseña) {
+        // Comparamos cédula y contraseña hasheada
+        if (admin.cedula === cedula && await verifyPassword(contraseña, admin.clave)) {
             admin.logIn();
             return admin;
-        }
-        else {
-            console.log("Admin oontraseña");
         }
     }
     return null;
@@ -37,26 +37,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const cedulaInput = document.getElementById('cedulaLoguear');
     const contraseñaInput = document.getElementById('contraseñaLoguear');
     // Agregar listener al botón
-    btnLogin?.addEventListener('click', () => {
-        // Obtener valores
+    btnLogin?.addEventListener('click', async () => {
         const cedula = cedulaInput.value.trim();
         const contraseña = contraseñaInput.value;
-        // Validar que se hayan ingresado datos
         if (!cedula || !contraseña) {
             alert('Por favor, ingresa tu cédula y contraseña');
             return;
         }
-        const admin = loguearAdmin(cedula, contraseña);
+        const admin = await loguearAdmin(cedula, contraseña);
         if (admin) {
-            alert(`¡Bienvenido/a Admin ${admin.nombre || 'Usuario'}!`);
+            alert(`¡Bienvenido/a Admin!`);
+            localStorage.setItem("sessionType", "admin");
+            localStorage.setItem("sessionCedula", admin.cedula);
             window.location.href = 'fronted/PanelInicioAdmin.html';
             return;
         }
         // Si no es admin, probamos como user
-        const user = loguearUser(cedula, contraseña);
+        const user = await loguearUser(cedula, contraseña);
         if (user) {
-            alert(`¡Bienvenido/a ${user.nombre || 'Usuario'}!`);
-            window.location.href = 'fronted/index.html';
+            // GUARDAR SESIÓN
+            localStorage.setItem("sessionType", "user");
+            localStorage.setItem("sessionCedula", user.cedula);
+            alert(`¡Bienvenido/a ${'Usuario'}!`);
+            window.location.href = `fronted/index.html?cedula=${encodeURIComponent(cedula)}`;
             return;
         }
         // Ninguno coincidió

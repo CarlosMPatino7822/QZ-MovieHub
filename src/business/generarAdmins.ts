@@ -1,6 +1,11 @@
 import { Admin } from "../modelo/admin.js";
+import { hashPassword } from "./hashPassword.js";
 
-export function generarAdmins(): Admin[] {
+/**
+ * Genera una lista de administradores con contraseñas hasheadas
+ * @returns Una promesa que resuelve a un arreglo de Admin
+ */
+export async function generarAdmins(): Promise<Admin[]> {
     const admins: Admin[] = [
         new Admin(
             "admin@eam.edu.co",
@@ -11,14 +16,14 @@ export function generarAdmins(): Admin[] {
             "Laura",
             "Pérez",
             30,
-            "admin123",
+            await hashPassword("admin123"), // Contraseña hasheada
+            "Calle 10 #45-23",
             "Inception",
-            "1995-08-10",
-            "admin123",
             "A001",
             "3001112233",
             "2018-03-01",
             "SURA",
+            "Positiva"
         ),
         new Admin(
             "admin2@eam.edu.co",
@@ -29,14 +34,14 @@ export function generarAdmins(): Admin[] {
             "Andrés",
             "Martínez",
             40,
+            await hashPassword("admin456"), // Contraseña hasheada
             "Calle 50",
             "Avatar",
-            "1983-02-15",
-            "admin456",
             "A002",
             "3102223344",
             "2015-06-10",
             "Sanitas",
+            "Sura ARL"
         ),
         new Admin(
             "admin3@eam.edu.co",
@@ -47,48 +52,68 @@ export function generarAdmins(): Admin[] {
             "Miguel",
             "Suarez",
             35,
-            "admin789",
+            await hashPassword("admin789"), // Contraseña hasheada
+            "Carrera 20 #30-40",
             "Gladiator",
-            "1988-12-05",
-            "admin789",
             "A003",
             "3203334455",
             "2016-11-20",
             "Compensar",
+            "Colmena"
         )
     ];
     return admins;
 }
-function cargarAdmins() {
-  let admins: Admin[] = [];
-  const guardados = localStorage.getItem('admins');
-  if (guardados) {
-    // Parsear y reconstruir instancias
-    admins = JSON.parse(guardados).map((data: any) =>
-      new Admin(
-        data.correo,
-        data.pais,
-        data.idiomaPrincipal,
-        data.membresia,
-        data.cedula,
-        data.nombre,
-        data.apellido,
-        data.edad,
-        data.clave,
-        data.direccion,
-        data.peliculaFavorita,
-        data.idAdmin,
-        data.telefono,
-        data.fechaIngreso,
-        data.eps,
-        data.arl
-      )
-    );
-  } else {
-    admins = generarAdmins();
-    localStorage.setItem('admins', JSON.stringify(admins));
-  }
-  return admins;
+
+/**
+ * Carga administradores desde localStorage o genera nuevos
+ * @returns Una promesa que resuelve a un arreglo de Admin
+ */
+async function cargarAdmins(): Promise<Admin[]> {
+    let admins: Admin[] = [];
+    const guardados = localStorage.getItem('admins');
+    
+    if (guardados) {
+        // Parsear y reconstruir instancias
+        admins = JSON.parse(guardados).map((data: any) =>
+            new Admin(
+                data.correo,
+                data.pais,
+                data.idiomaPrincipal,
+                data.membresia,
+                data.cedula,
+                data.nombre,
+                data.apellido,
+                data.edad,
+                data.clave, // Ya está hasheada
+                data.direccion,
+                data.peliculaFavorita,
+                data.idAdmin,
+                data.telefono,
+                data.fechaIngreso,
+                data.eps,
+                data.arl
+            )
+        );
+    } else {
+        // Generar nuevos admins con contraseñas hasheadas
+        admins = await generarAdmins();
+        localStorage.setItem('admins', JSON.stringify(admins));
+    }
+    return admins;
 }
 
-export const admins: Admin[] = generarAdmins();
+// Variable para almacenar los admins cargados
+let adminsCache: Admin[] | null = null;
+
+/**
+ * Obtiene los administradores (carga desde cache o localStorage)
+ * @returns Una promesa que resuelve a un arreglo de Admin
+ */
+export async function getAdmins(): Promise<Admin[]> {
+    if (!adminsCache) {
+        adminsCache = await cargarAdmins();
+    }
+    return adminsCache;
+}export const admins = getAdmins();
+

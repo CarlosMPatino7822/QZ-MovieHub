@@ -5,38 +5,43 @@ import { generarUsers } from "./generarUsers.js";
 export class gestionarUsuarios {
 
     constructor() {
-    const usuariosGuardados = localStorage.getItem('users');
-
-    if (usuariosGuardados) {
-
-        const lista = JSON.parse(usuariosGuardados); //JSON.parse para convertir el string en un objeto
-
-        // Reconstruir cada objeto como una instancia de la clase User ya que de otra forma no tendria los metodos de la clase
-        this.users = lista.map((u: any) => new User(
-            u.correo,
-            u.idUser,
-            u.pais,
-            u.idiomaPrincipal,
-            u.membresia,
-            u.cedula,
-            u.nombre,
-            u.apellido,
-            u.edad,
-            u.clave,
-            u.direccion,
-            u.peliculaFavorita
-        ));
-
-    } else {
-        this.users = generarUsers();  // Si no hay usuarios guardados, cargar los generados por defecto
-        localStorage.setItem('users', JSON.stringify(this.users)); // Guardar en localStorage
+        this.init();
     }
 
-    this.indiceEdicion = null; //Ver si estamos editando o no
+    private async init() {
+        const usuariosGuardados = localStorage.getItem('users');
+
+        if (usuariosGuardados) {
+
+            const lista = JSON.parse(usuariosGuardados);
+
+            this.users = lista.map((u: any) => new User(
+                u.correo,
+                u.idUser,
+                u.pais,
+                u.idiomaPrincipal,
+                u.membresia,
+                u.cedula,
+                u.nombre,
+                u.apellido,
+                u.edad,
+                u.clave,
+                u.direccion,
+                u.peliculaFavorita
+            ));
+
+        } else {
+
+            this.users = await generarUsers();  // ⬅ AHORA SÍ FUNCIONA
+            localStorage.setItem('users', JSON.stringify(this.users));
+        }
+
+        this.indiceEdicion = null;
     }
 
-    users: User[] = generarUsers();
+    users: User[] = [];
     private indiceEdicion: number | null = null;
+
 
     public agregarUsuario(): void {
         const correo = (document.getElementById("NewUserCorreo") as HTMLInputElement).value.trim();

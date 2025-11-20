@@ -318,4 +318,18 @@
     }
 }
 
-/* Inputs y se*
+.welcome {
+    background: url('https://i.pinimg.com/1200x/21/2e/7d/212e7df3c8352fc306cc5cd3a6860c04.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    margin: 32px 64px;
+    height: 400px;
+}
+
+.header-right {
+    display: flex;
+    gap: 12px;
+}

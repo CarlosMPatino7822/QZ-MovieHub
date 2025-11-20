@@ -110,6 +110,11 @@ export class Admin extends User {
         return this.arl;
     }
 
+    public getNombre(): string {
+        
+        return this.nombre
+    }
+
     // ------------------- SETTERS -------------------
 
     /** Establece el identificador del administrador */

@@ -2,16 +2,18 @@ import { User } from "../modelo/user.js";
 import { generarUsers } from "./generarUsers.js";
 export class gestionarUsuarios {
     constructor() {
-        this.users = generarUsers();
+        this.users = [];
         this.indiceEdicion = null;
+        this.init();
+    }
+    async init() {
         const usuariosGuardados = localStorage.getItem('users');
         if (usuariosGuardados) {
             const lista = JSON.parse(usuariosGuardados);
-            // Reconstruir cada objeto como una instancia de la clase User
             this.users = lista.map((u) => new User(u.correo, u.idUser, u.pais, u.idiomaPrincipal, u.membresia, u.cedula, u.nombre, u.apellido, u.edad, u.clave, u.direccion, u.peliculaFavorita));
         }
         else {
-            this.users = generarUsers();
+            this.users = await generarUsers(); // ⬅ AHORA SÍ FUNCIONA
             localStorage.setItem('users', JSON.stringify(this.users));
         }
         this.indiceEdicion = null;

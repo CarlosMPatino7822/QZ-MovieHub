@@ -1,12 +1,13 @@
 import { User } from "../modelo/user.js";
+import { hashPassword } from "./hashPassword.js";
 
 /**
  * Genera una lista de usuarios de ejemplo para el sistema QZ-MovieHub.
- * Cada usuario contiene información personal y de preferencias.
+ * Cada usuario contiene información personal con contraseñas hasheadas.
  * 
- * @returns Un arreglo con instancias de la clase User.
+ * @returns Una promesa que resuelve a un arreglo con instancias de la clase User.
  */
-export function generarUsers(): User[] {
+export async function generarUsers(): Promise<User[]> {
     const users: User[] = [
         new User(
             "carlos@gmail.com", // correo
@@ -18,7 +19,7 @@ export function generarUsers(): User[] {
             "Carlos",           // nombre
             "Gómez",            // apellido
             25,                 // edad
-            "clave123",         // clave
+            await hashPassword("clave123"), // clave hasheada
             "Calle 10 #45-23",  // dirección
             "Matrix"            // película favorita
         ),
@@ -32,7 +33,7 @@ export function generarUsers(): User[] {
             "María",
             "López",
             19,
-            "clave456",
+            await hashPassword("clave456"), // clave hasheada
             "Carrera 15 #20-10",
             "Titanic"
         ),
@@ -46,7 +47,7 @@ export function generarUsers(): User[] {
             "Andrés",
             "Martínez",
             28,
-            "clave789",
+            await hashPassword("clave789"), // clave hasheada
             "Av. Central #33",
             "Avatar"
         ),
@@ -60,7 +61,7 @@ export function generarUsers(): User[] {
             "Sofía",
             "Ramírez",
             22,
-            "passsofi22",
+            await hashPassword("passsofi22"), // clave hasheada
             "Calle San Martín 124",
             "Inception"
         ),
@@ -74,7 +75,7 @@ export function generarUsers(): User[] {
             "Daniel",
             "Torres",
             30,
-            "dan12345",
+            await hashPassword("dan12345"), // clave hasheada
             "Av. Lima 321",
             "Interestelar"
         )
@@ -82,32 +83,61 @@ export function generarUsers(): User[] {
 
     return users;
 }
-function cargarUsers() {
-  let users: User[] = [];
-  const guardados = localStorage.getItem('users');
-  if (guardados) {
-    users = JSON.parse(guardados).map((data: any) =>
-      new User(
-        data.correo,
-        data.idUser,
-        data.pais,
-        data.idiomaPrincipal,
-        data.membresia,
-        data.cedula,
-        data.nombre,
-        data.apellido,
-        data.edad,
-        data.clave,
-        data.direccion,
-        data.peliculaFavorita
-      )
-    );
-  } else {
-    users = generarUsers();
-    localStorage.setItem('users', JSON.stringify(users));
-  }
+
+/**
+ * Carga usuarios desde localStorage o genera nuevos
+ * @returns Una promesa que resuelve a un arreglo de User
+ */
+async function cargarUsers(): Promise<User[]> {
+    let users: User[] = [];
+    const guardados = localStorage.getItem('users');
+    
+    if (guardados) {
+        // Si hay datos en localStorage, los cargamos (ya están hasheados)
+        users = JSON.parse(guardados).map((data: any) =>
+            new User(
+                data.correo,
+                data.idUser,
+                data.pais,
+                data.idiomaPrincipal,
+                data.membresia,
+                data.cedula,
+                data.nombre,
+                data.apellido,
+                data.edad,
+                data.clave, // La clave ya está hasheada en localStorage
+                data.direccion,
+                data.peliculaFavorita
+            )
+        );
+    } else {
+        // Si no hay datos, generamos usuarios nuevos con contraseñas hasheadas
+        users = await generarUsers();
+        localStorage.setItem('users', JSON.stringify(users));
+    }
     return users;
 }
 
-// Exportamos la lista generada directamente
-export const users: User[] = generarUsers();
+// Variable para almacenar los users cargados en cache
+let usersCache: User[] | null = null;
+
+/**
+ * Obtiene los usuarios (carga desde cache o localStorage)
+ * Esta es la función principal que debes usar en otros archivos
+ * @returns Una promesa que resuelve a un arreglo de User
+ */
+export async function getUsers(): Promise<User[]> {
+    if (!usersCache) {
+        usersCache = await cargarUsers();
+    }
+    return usersCache;
+}
+
+/**
+ * Recarga los usuarios desde localStorage (útil después de agregar/editar)
+ * @returns Una promesa que resuelve a un arreglo de User actualizado
+ */
+export async function recargarUsers(): Promise<User[]> {
+    usersCache = await cargarUsers();
+    return usersCache;
+}
