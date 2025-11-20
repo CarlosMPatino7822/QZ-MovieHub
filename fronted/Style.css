@@ -222,3 +222,100 @@
         text-align: center;
         font-family: 'Times New Roman', Times, serif;
     }
+
+
+.seccion-login {  
+    margin: 50px auto;                      /* centra horizontalmente y separa verticalmente */
+    padding: 3rem 2.5rem;                   /* espacio interno (arriba/abajo 3rem, lados 2.5rem) */
+    border-radius: 25px;      
+    background: rgba(255, 255, 255, 0.12);  /* fondo semi-transparente blanco (12% opacidad) */
+    border: 1px solid rgba(255, 255, 255, 0.25); /* borde suave para delimitar la tarjeta */
+    backdrop-filter: blur(20px);            /* desenfoca lo que hay detrás de esta tarjeta*/
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* sombra para dar profundidad (x, y, blur, color) */
+}
+
+/* Título dentro de la sección */
+.seccion-login h2 {
+    text-align: center;          
+    font-size: 2rem;
+    margin-bottom: 30px;                    /* separa del formulario */
+    background: linear-gradient(90deg, #2f0033, #387ba8); /* degradado de fondo para el texto */
+    -webkit-text-fill-color: transparent;   /* <--- importante explicado abajo */
+    background-clip: text;                  /* <--- importante explicado abajo */
+    -webkit-background-clip: text;          /* soporte extra para webkit (Safari/Chrome antiguos) */
+}
+
+/* EXPLICACIÓN:
+   -webkit-text-fill-color: transparent;
+     Hace que el "relleno" del texto quede transparente. Esto se suele usar en combinación
+     con background-clip: text para que el texto muestre el fondo (degradado) en lugar de
+     un color sólido. Es una propiedad con prefijo -webkit porque es historic/propia de navegadores
+     basados en WebKit/Blink, pero funciona bien en la práctica.
+
+   background-clip: text;
+     Indica que el recorte del fondo (background) se aplique sólo dentro de las letras del texto.
+     Combinado con -webkit-text-fill-color: transparent permite "rellenar" las letras con un
+     degradado u otra imagen de fondo.
+*/
+
+/* =========================================================
+  ADICIONES PARA ORDENAR EL SIGN UP
+  Pegar AL FINAL de tu Style.css
+   - No borra nada, solo agrega/override donde haga falta
+   - Comentarios explicativos incluidos
+   ========================================================= */
+
+/* Asegura que la sección del signup use el mismo ancho que definiste,
+   pero la centra y añade un padding más consistente */
+.seccion-login {
+    max-width: 720px;          /* un poco más ancho para escritorio */
+    height: auto;
+    margin: 40px auto;         /* centra horizontalmente y separa verticalmente */
+    padding: 36px 32px;        /* espacio interior (arriba/abajo, laterales) */
+    border-radius: 20px;       /* esquinas redondeadas (override si ya tenías) */
+    background: rgba(255,255,255,0.09); /* ligera capa para destacar el formulario */
+    backdrop-filter: blur(12px);       /* desenfoque del fondo detrás (glassmorphism) */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25); /* sombra para profundidad */
+}
+
+/* Título: que refleje "Sign Up" en lugar de 'Registrarse' si quieres homogeneizar.
+   Esto no cambia tu HTML, solo el estilo (puedes mantener el texto HTML como prefieras). */
+.seccion-login h2 {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    /* gradiente aplicado al texto */
+    background: linear-gradient(90deg,#543175,#80b5d8);
+    -webkit-background-clip: text;    /* recorta el fondo al interior del texto (webkit) */
+    background-clip: text;            /* estándar */
+    -webkit-text-fill-color: transparent; /* hace el "relleno" del texto transparente para ver el gradiente */
+}
+
+/* FORMA Y ESPACIADO de cada campo del formulario */
+.formulario-signup {
+    display: flex;
+    flex-direction: column;   /* coloca label sobre input */
+    gap: 8px;                 /* espacio pequeño entre label e input */
+}
+
+/* Si quieres agrupar en dos columnas en pantallas grandes, usamos un "grid" en el form */
+#formRegistro {
+    display: grid;
+    grid-template-columns: 1fr; /* por defecto 1 columna (móvil) */
+    gap: 16px;                  /* separación entre celdas */
+}
+
+/* En pantallas más anchas, pasa a 2 columnas para aprovechar el espacio */
+@media (min-width: 900px) {
+    #formRegistro {
+        grid-template-columns: 1fr 1fr; /* dos columnas iguales */
+    }
+
+    /* Forzar que ciertos campos ocupen las dos columnas (ej: botón o dirección larga) */
+    /* usa la clase .fullwidth en el HTML si quieres que un campo ocupe 2 columnas */
+    #formRegistro .fullwidth {
+        grid-column: 1 / -1; /* ocupa desde la primera hasta la última columna */
+    }
+}
+
+/* Inputs y se*
