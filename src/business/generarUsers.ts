@@ -88,7 +88,7 @@ export async function generarUsers(): Promise<User[]> {
  * Carga usuarios desde localStorage o genera nuevos
  * @returns Una promesa que resuelve a un arreglo de User
  */
-async function cargarUsers(): Promise<User[]> {
+export async function cargarUsers(): Promise<User[]> {
     let users: User[] = [];
     const guardados = localStorage.getItem('users');
     
@@ -127,17 +127,9 @@ let usersCache: User[] | null = null;
  * @returns Una promesa que resuelve a un arreglo de User
  */
 export async function getUsers(): Promise<User[]> {
-    if (!usersCache) {
-        usersCache = await cargarUsers();
-    }
-    return usersCache;
+    return await cargarUsers();
 }
 
-/**
- * Recarga los usuarios desde localStorage (útil después de agregar/editar)
- * @returns Una promesa que resuelve a un arreglo de User actualizado
- */
 export async function recargarUsers(): Promise<User[]> {
-    usersCache = await cargarUsers();
-    return usersCache;
+    return await cargarUsers();
 }

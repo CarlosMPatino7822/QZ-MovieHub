@@ -2,107 +2,85 @@ import { User } from "../modelo/user.js";
 import { Admin } from "../modelo/admin.js";
 import { getAdmins } from "../business/generarAdmins.js";
 import { verifyPassword } from "./hashPassword.js";
+import { recargarUsers } from "./generarUsers.js";
 
-function cargarUsersDesdeLocalStorage(): User[] {
-    const datos = localStorage.getItem("users");
-
-    if (!datos) return []; // No hay usuarios
-
-    const lista = JSON.parse(datos); //JSON.parse para convertir el string en un objeto
-
-    // Reconstruir cada objeto como una instancia de la clase User ya que de otra forma no tendria los metodos de la clase
-    return lista.map((u: any) => new User(
-        u.correo,
-        u.idUser,
-        u.pais,
-        u.idiomaPrincipal,
-        u.membresia,
-        u.cedula,
-        u.nombre,
-        u.apellido,
-        u.edad,
-        u.clave,
-        u.direccion,
-        u.peliculaFavorita
-    ));
-}
-
-export async function loguearUser(cedula: string, contraseña: string): Promise<User | null> {
-
-    const users = cargarUsersDesdeLocalStorage(); // Cargamos los usuarios del localStorage
+// LOGIN USER
+export async function loguearUser(cedula: string, password: string): Promise<User | null> {
+    const users = await recargarUsers();
 
     for (const user of users) {
-        // Compara cedula y contraseña hasheada
-        if (user.cedula === cedula && await verifyPassword(contraseña, user.clave)) {
-            user.logIn();
-            return user;
+        if (user.cedula === cedula) {
+            const isValid = await verifyPassword(password, user.clave);
+            if (isValid) {
+                user.logIn();
+                return user;
+            }
+            return null;
         }
     }
-
     return null;
 }
 
-
-export async function loguearAdmin(cedula: string, contraseña: string): Promise<Admin | null> {
-
+// LOGIN ADMIN
+export async function loguearAdmin(cedula: string, password: string): Promise<Admin | null> {
     const admins = await getAdmins();
 
     for (const admin of admins) {
-        // Comparamos cédula y contraseña hasheada
-        if (admin.cedula === cedula && await verifyPassword(contraseña, admin.clave)) {
-            admin.logIn();
-            return admin;
+        if (admin.cedula === cedula) {
+            const isValid = await verifyPassword(password, admin.clave);
+            if (isValid) {
+                admin.logIn();
+                return admin;
+            }
+            return null;
         }
     }
-
     return null;
 }
 
+// EVENTO DEL BOTÓN
 document.addEventListener('DOMContentLoaded', () => {
     const btnLogin = document.getElementById('btnLogin') as HTMLButtonElement;
     const cedulaInput = document.getElementById('cedulaLoguear') as HTMLInputElement;
-    const contraseñaInput = document.getElementById('contraseñaLoguear') as HTMLInputElement;
+    const passwordInput = document.getElementById('contraseñaLoguear') as HTMLInputElement;
 
-    // Agregar listener al botón
     btnLogin?.addEventListener('click', async () => {
-    const cedula = cedulaInput.value.trim();
-    const contraseña = contraseñaInput.value;
+        const cedula = cedulaInput.value.trim();
+        const password = passwordInput.value;
 
-    if (!cedula || !contraseña) {
-        alert('Por favor, ingresa tu cédula y contraseña');
-        return;
-    }
-
-        
-    const admin = await loguearAdmin(cedula, contraseña);
-    if (admin) {
-        alert(`¡Bienvenido/a Admin!`);
-        localStorage.setItem("sessionType", "admin");
-        localStorage.setItem("sessionCedula", admin.cedula);
-        window.location.href = 'fronted/PanelInicioAdmin.html';
-        return;
-    }
-
-        // Si no es admin, probamos como user
-        const user = await loguearUser(cedula, contraseña);
-        if (user) {
-            // GUARDAR SESIÓN
-            localStorage.setItem("sessionType", "user");
-            localStorage.setItem("sessionCedula", user.cedula);
-
-            alert(`¡Bienvenido/a ${'Usuario'}!`);
-             window.location.href = `fronted/index.html?cedula=${encodeURIComponent(cedula)}`;
+        if (!cedula || !password) {
+            alert("Por favor ingresa ambos campos");
             return;
         }
-        // Ninguno coincidió
-        alert('Cédula o contraseña incorrecta. Por favor, intenta de nuevo.');
-        contraseñaInput.value = '';
+
+        // PRIMERO PROBAMOS ADMIN
+        const admin = await loguearAdmin(cedula, password);
+        if (admin) {
+            localStorage.setItem("sessionType", "admin");
+            localStorage.setItem("sessionCedula", admin.cedula);
+            alert("Bienvenido Administrador");
+            window.location.href = "fronted/PanelInicioAdmin.html";
+            return;
+        }
+
+        // SI NO, PROBAMOS USER
+        const user = await loguearUser(cedula, password);
+        if (user) {
+            localStorage.setItem("sessionType", "user");
+            localStorage.setItem("sessionCedula", user.cedula);
+            alert("Bienvenido Usuario");
+            window.location.href = `fronted/index.html?cedula=${encodeURIComponent(user.cedula)}`;
+            return;
+        }
+
+        // SI NINGUNO COINCIDE
+        alert("Cédula o contraseña incorrecta");
+        passwordInput.value = "";
     });
 
-    // Opcional: permitir login con Enter
-    contraseñaInput?.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            btnLogin.click();
-        }
+    // ENTER PARA LOGUEAR
+    passwordInput?.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") btnLogin.click();
     });
 });
+

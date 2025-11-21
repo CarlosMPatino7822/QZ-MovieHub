@@ -2,18 +2,6 @@
 <html lang="en">
 <head>
     <!-- Google Tag Manager -->
-    <script>
-    console.log("VERIFICANDO SESIÓN...");
-
-    const tipo = localStorage.getItem("sessionType");
-    console.log("Tipo de sesión:", tipo);
-
-    if (tipo !== "admin") {
-        alert("Acceso denegado. Por favor inicia sesión como administrador.");
-        window.location.href = "../login.html";
-    }
-</script>
-
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
                 'gtm.start':
@@ -29,6 +17,11 @@
     <title>Panel de inicio del admin</title>
     <link rel="stylesheet" href="Style.css"/>
 </head>
+
+<script type="module" src="../dist/business/verificarSesionAdmin.js">
+    verificarSesionAdmin();
+</script>
+
 <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MG4NNSPQ" height="0" width="0"
@@ -46,7 +39,6 @@
         <button class="button-NewPagina" id="btnCrudUsers">Gestionar usuarios</button>
     </section>
 
-    <script type="module" src="../dist/business/verificarSesionAdmin.js"></script>
 
     <script>
         document.getElementById("btnCrudPelis")?.addEventListener("click", function () {
@@ -68,6 +60,10 @@
 
     <script>
         document.getElementById("btnCloseSesion")?.addEventListener("click", function () {
+        localStorage.removeItem("sessionType");
+        localStorage.removeItem("sessionCedula");
+
+        alert("Sesión cerrada correctamente.");
         window.location.href = "../index.html";
         }); 
     </script>

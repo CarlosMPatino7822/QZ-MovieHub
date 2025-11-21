@@ -5,7 +5,7 @@ import { verifyPassword } from "./hashPassword.js";
 import { User } from "../modelo/user.js";
 
 const params = new URLSearchParams(window.location.search);
-const cedula = params.get("nombre");
+const cedula = params.get("cedula");
 console.log("Nombre de la película o serie desde URL:", cedula);
 
 //Devuelve la instancia `User` si las credenciales son válidas, o `null` si no.

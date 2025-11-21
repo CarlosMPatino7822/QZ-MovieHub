@@ -1,10 +1,18 @@
-/*import { User } from "../modelo/user.js";
+import { User } from "../modelo/user.js";
 import { generarUsers } from "./generarUsers.js";
+import { getUsers , recargarUsers } from "./generarUsers.js";
+import { hashPassword } from "./hashPassword.js";
 
 export class registrarUsuarios {
 
-    users: User[] = generarUsers();
+    users: User[] = [];
     private indiceEdicion: number | null = null;
+
+    public static async create(): Promise<registrarUsuarios> {
+    const inst = new registrarUsuarios();
+    inst.users = await getUsers();
+    return inst;
+}
 
     public async agregarUsuario(): Promise<void> {
         const correo = (document.getElementById("NewUserCorreo") as HTMLInputElement).value.trim();
@@ -29,51 +37,56 @@ export class registrarUsuarios {
         }
 
         if (this.indiceEdicion !== null) {
-            const usuario = this.users[this.indiceEdicion];
-            if (!usuario) return;
+                const usuario = this.users[this.indiceEdicion];
+                if (!usuario) return;
 
-            usuario.correo = correo;
-            usuario.idUser = idUser;
-            usuario.pais = pais;
-            usuario.idiomaPrincipal = idiomaPrincipal;
-            usuario.membresia = membresia;
-            usuario.cedula = cedula;
-            usuario.nombre = nombre;
-            usuario.apellido = apellido;
-            usuario.edad = edad;
-            usuario.clave = clave;
-            usuario.direccion = direccion;
-            usuario.peliculaFavorita = peliculaFavorita;
+                usuario.correo = correo;
+                usuario.idUser = idUser;
+                usuario.pais = pais;
+                usuario.idiomaPrincipal = idiomaPrincipal;
+                usuario.membresia = membresia;
+                usuario.cedula = cedula;
+                usuario.nombre = nombre;
+                usuario.apellido = apellido;
+                usuario.edad = edad;
+                // hashear antes de guardar la clave
+                usuario.clave = await hashPassword(clave);
+                usuario.direccion = direccion;
+                usuario.peliculaFavorita = peliculaFavorita;
 
-            alert("Usuario editado correctamente");
-            this.indiceEdicion = null;
-            (document.getElementById("btnAddUser") as HTMLButtonElement).textContent = "Agregar Usuario";
+                alert("Usuario editado correctamente");
+                this.indiceEdicion = null;
+                (document.getElementById("btnAddUser") as HTMLButtonElement).textContent = "Agregar Usuario";
 
-            // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE EDITAR
-            localStorage.setItem('users', JSON.stringify(this.users));
-        } else {
-            //VALIDAMOS SI EL USUARIO EXISTE
-            const existe = this.users.find(u => u.cedula.toLowerCase() === cedula.toLowerCase());
-            if (existe) {
-                alert("Ya existe un usuario con esta cédula. Intenta con otra");
-                return;
+                // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE EDITAR
+                localStorage.setItem('users', JSON.stringify(this.users));
+                await recargarUsers();
+            } else {
+                //VALIDAMOS SI EL USUARIO EXISTE
+                const existe = this.users.find(u => u.cedula.toLowerCase() === cedula.toLowerCase());
+                if (existe) {
+                    alert("Ya existe un usuario con esta cédula. Intenta con otra");
+                    return;
+                }
+
+                //CREAMOS EL NUEVO USUARIO: hashear la clave antes de crear
+                const claveHasheada = await hashPassword(clave);
+
+                const nuevoUsuario = new User(
+                    correo, idUser, pais, idiomaPrincipal, membresia,
+                    cedula, nombre, apellido, edad, claveHasheada, direccion, peliculaFavorita
+                );
+
+                this.users.push(nuevoUsuario);
+                alert("Usuario agregado exitosamente");
+
+                // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE AGREGAR
+                localStorage.setItem('users', JSON.stringify(this.users));
+                await recargarUsers();
             }
-
-            //CREAMOS EL NUEVO USUARIO
-            const nuevoUsuario = new User(
-                correo, idUser, pais, idiomaPrincipal, membresia,
-                cedula, nombre, apellido, edad, clave, direccion, peliculaFavorita
-            );
-
-            this.users.push(nuevoUsuario);
-            alert("Usuario agregado exitosamente");
-
-            // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE AGREGAR
-            localStorage.setItem('users', JSON.stringify(this.users));
-        }
-
         this.limpiarFormulario();
     }
+
 
     // LIMPIAR FORMULARIO
     private limpiarFormulario(): void {
@@ -100,4 +113,3 @@ document.getElementById("btnAddUser")?.addEventListener("click", () => registrar
 
 // Exportar
 export const gestionModule = registrarUsuario;
-*/

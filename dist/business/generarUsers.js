@@ -36,7 +36,7 @@ export async function generarUsers() {
  * Carga usuarios desde localStorage o genera nuevos
  * @returns Una promesa que resuelve a un arreglo de User
  */
-async function cargarUsers() {
+export async function cargarUsers() {
     let users = [];
     const guardados = localStorage.getItem('users');
     if (guardados) {
@@ -59,16 +59,8 @@ let usersCache = null;
  * @returns Una promesa que resuelve a un arreglo de User
  */
 export async function getUsers() {
-    if (!usersCache) {
-        usersCache = await cargarUsers();
-    }
-    return usersCache;
+    return await cargarUsers();
 }
-/**
- * Recarga los usuarios desde localStorage (útil después de agregar/editar)
- * @returns Una promesa que resuelve a un arreglo de User actualizado
- */
 export async function recargarUsers() {
-    usersCache = await cargarUsers();
-    return usersCache;
+    return await cargarUsers();
 }
