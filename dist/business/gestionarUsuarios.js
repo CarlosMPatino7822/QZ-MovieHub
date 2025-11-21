@@ -1,5 +1,6 @@
 import { User } from "../modelo/user.js";
 import { generarUsers } from "./generarUsers.js";
+import { hashPassword } from "./hashPassword.js";
 export class gestionarUsuarios {
     constructor() {
         this.users = [];
@@ -18,7 +19,7 @@ export class gestionarUsuarios {
         }
         this.indiceEdicion = null;
     }
-    agregarUsuario() {
+    async agregarUsuario() {
         const correo = document.getElementById("NewUserCorreo").value.trim();
         const idUser = document.getElementById("NewUserIdUser").value.trim();
         const pais = document.getElementById("NewUserPais").value.trim();
@@ -67,6 +68,8 @@ export class gestionarUsuarios {
             }
             // CREAMOS EL NUEVO USUARIO
             const nuevoUsuario = new User(correo, idUser, pais, idiomaPrincipal, membresia, cedula, nombre, apellido, edad, clave, direccion, peliculaFavorita);
+            const claveHasheada = await hashPassword(clave);
+            nuevoUsuario.clave = claveHasheada;
             this.users.push(nuevoUsuario);
             alert("Usuario agregado exitosamente");
             // GUARDAR CAMBIOS EN LOCAL STORAGE DESPUÉS DE AGREGAR

@@ -1,6 +1,7 @@
 
 import { User } from "../modelo/user.js";
 import { generarUsers } from "./generarUsers.js";
+import { hashPassword } from "./hashPassword.js";
 
 export class gestionarUsuarios {
 
@@ -43,7 +44,7 @@ export class gestionarUsuarios {
     private indiceEdicion: number | null = null;
 
 
-    public agregarUsuario(): void {
+    public async agregarUsuario(): Promise<void> {
         const correo = (document.getElementById("NewUserCorreo") as HTMLInputElement).value.trim();
         const idUser = (document.getElementById("NewUserIdUser") as HTMLInputElement).value.trim();
         const pais = (document.getElementById("NewUserPais") as HTMLInputElement).value.trim();
@@ -101,7 +102,8 @@ export class gestionarUsuarios {
                 correo, idUser, pais, idiomaPrincipal, membresia,
                 cedula, nombre, apellido, edad, clave, direccion, peliculaFavorita
             );
-
+            const claveHasheada = await hashPassword(clave);
+            nuevoUsuario.clave = claveHasheada;
             this.users.push(nuevoUsuario);
             alert("Usuario agregado exitosamente");
             

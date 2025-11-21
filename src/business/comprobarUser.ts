@@ -1,6 +1,6 @@
 // comprobarUser.ts
 
-import { generarUsers } from "./generarUsers.js";
+import { cargarUsers, generarUsers } from "./generarUsers.js";
 import { verifyPassword } from "./hashPassword.js";
 import { User } from "../modelo/user.js";
 
@@ -11,7 +11,7 @@ console.log("Nombre de la película o serie desde URL:", cedula);
 //Devuelve la instancia `User` si las credenciales son válidas, o `null` si no.
  
 export const comprobarUser = async (cedula: string): Promise<User | null> => {
-  const users = await generarUsers();
+  const users = await cargarUsers();
 
   // Ejemplo de recorrido: for...of
   for (const u of users) {
