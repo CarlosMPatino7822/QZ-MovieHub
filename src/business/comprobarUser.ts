@@ -1,12 +1,8 @@
 // comprobarUser.ts
 
-import { cargarUsers, generarUsers } from "./generarUsers.js";
-import { verifyPassword } from "./hashPassword.js";
+import { cargarUsers} from "./generarUsers.js";
 import { User } from "../modelo/user.js";
 
-const params = new URLSearchParams(window.location.search);
-const cedula = params.get("cedula");
-console.log("Nombre de la película o serie desde URL:", cedula);
 
 //Devuelve la instancia `User` si las credenciales son válidas, o `null` si no.
  
@@ -24,9 +20,9 @@ export const comprobarUser = async (cedula: string): Promise<User | null> => {
 };
 // Verificar si hay sesión activa
 export const verificarSesion = async (): Promise<void> => {
-
+  const cedula = localStorage.getItem("sessionCedula");
   if (!cedula) {
-    alert("Hola BRO INICIE SESIÓN MKON");
+    alert("Sesión inválida. Por favor, inicie sesión nuevamente.");
     window.location.href = "../index.html";
     return; // Detener la función, porque no hay cedula válida
   }
@@ -34,7 +30,7 @@ export const verificarSesion = async (): Promise<void> => {
   const usuarioActivo = await comprobarUser(cedula as string);
 
   if (!usuarioActivo) {
-    alert("Hola BRO INICIE SESIÓN MKON");
+    alert("Sesión inválida. Por favor, inicie sesión nuevamente.");
     window.location.href = "../index.html";
   }
 

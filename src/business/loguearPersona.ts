@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem("sessionType", "user");
             localStorage.setItem("sessionCedula", user.cedula);
             alert("Bienvenido Usuario");
-            window.location.href = `fronted/index.html?cedula=${encodeURIComponent(user.cedula)}`;
+            window.location.href = "fronted/index.html";
             return;
         }
 
