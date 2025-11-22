@@ -43,13 +43,25 @@
         <div class="welcome" id="Welcome">
             <h3>¡Bienvenido a MovieHub 🎬!</h3>
             <p>Encuentra información sobre series y peliculas. Podrás conocer los proximos lanzamientos.</p>
-            <button id="btn-ToSignUp">Comenzar</button>
+            <button id="btn-ToStart">Comenzar</button>
         </div>
     </section>
 
     <script>
+        document.getElementById("btn-ToLogin")?.addEventListener("click", function () {
+            window.location.href = "../index.html";
+        });
+    </script>
+
+    <script>
         document.getElementById("btn-ToSignUp")?.addEventListener("click", function () {
-            window.location.href = "reg.html";
+            window.location.href = "registro.html";
+        });
+    </script>
+
+    <script>
+        document.getElementById("btn-ToStart")?.addEventListener("click", function () {
+            window.location.href = "../index.html";
         });
     </script>
 
